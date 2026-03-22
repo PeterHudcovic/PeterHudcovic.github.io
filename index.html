@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Technical Sandbox</title>
+  <title>Amaterix</title>
   <style>
     :root {
-      --bg: #071523;
-      --panel: #0b1f31;
-      --panel-border: rgba(255, 255, 255, 0.05);
+      --bg: #061521;
+      --panel: #0c2133;
+      --panel-border: rgba(255,255,255,0.06);
       --text: #eef4ff;
-      --muted: #b8c6d8;
-      --accent: #7d63ff;
-      --accent-hover: #9a86ff;
+      --muted: #b7c5d6;
+      --accent: #7d5cff;
+      --accent-hover: #9a84ff;
+      --footer: #04101a;
     }
 
     * {
@@ -28,116 +29,158 @@
     }
 
     body {
-      padding: 28px 18px 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .container {
-      max-width: 1320px;
+    .page {
+      width: 100%;
+      max-width: 1180px;
       margin: 0 auto;
+      padding: 34px 18px 40px;
+      flex: 1;
     }
 
-    .hero {
-      margin-bottom: 26px;
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 1220px;
+    .topline {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
       color: var(--muted);
-      font-size: 1.06rem;
-      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      max-width: 1080px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 38px;
     }
 
     h2 {
-      margin: 42px 0 20px;
-      font-size: clamp(2rem, 3vw, 2.7rem);
-      line-height: 1.1;
+      margin: 0 0 26px;
+      font-size: clamp(2.1rem, 4vw, 3rem);
       letter-spacing: -0.03em;
     }
 
     .pdf-link {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .pdf-link a,
-    .footer a {
+    .footer-link,
+    .api-links a {
       color: var(--accent);
       text-decoration: none;
       font-weight: 700;
-      font-size: 1rem;
     }
 
     .pdf-link a:hover,
-    .footer a:hover {
+    .footer-link:hover,
+    .api-links a:hover {
       color: var(--accent-hover);
       text-decoration: underline;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
+      gap: 22px;
+      margin-bottom: 38px;
     }
 
     .card {
       background: var(--panel);
       border: 1px solid var(--panel-border);
-      border-radius: 24px;
-      padding: 30px 30px 32px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.01) inset;
+      border-radius: 22px;
+      padding: 26px 22px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.015) inset;
     }
 
     .card h3 {
-      margin: 0 0 16px;
-      font-size: clamp(1.55rem, 2.2vw, 2rem);
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      font-weight: 700;
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
     .card p {
       margin: 0;
       color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.8;
+      font-size: 1.03rem;
+      line-height: 1.75;
     }
 
-    .footer {
-      margin-top: 42px;
-      padding-bottom: 10px;
+    .api-links {
+      margin-top: 8px;
+      font-size: 0.98rem;
     }
 
-    @media (max-width: 720px) {
-      body {
-        padding: 20px 14px 40px;
+    .api-links span {
+      color: var(--muted);
+      margin-right: 8px;
+    }
+
+    .footer-link-wrap {
+      margin-top: 10px;
+    }
+
+    footer {
+      background: var(--footer);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+    }
+
+    .footer-left {
+      text-align: left;
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    @media (max-width: 760px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 8px;
       }
 
-      .card {
-        padding: 24px 22px 26px;
+      .footer-left,
+      .footer-center,
+      .footer-right {
+        text-align: left;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="hero">
-      <h1>Technical Sandbox</h1>
-      <p>
-        This is my hands-on technical sandbox where I build, deploy, secure, and troubleshoot real services.
-        What started as a Linux and web server environment has expanded into a broader infrastructure lab that now
-        includes Kubernetes on DigitalOcean, Helm-based deployments, NGINX Ingress, Cloudflare-managed DNS and TLS,
-        a Python FastAPI service, and a Java Spring Boot API connected to PostgreSQL through JDBC. I use this setup
-        to practice real deployment flows, infrastructure hardening, API publishing, and application troubleshooting.
-      </p>
-    </section>
+  <main class="page">
+    <div class="topline">
+      DevOps • Linux • Cloudflare • Infrastructure Security • NGINX • Docker • Kubernetes • Apache
+    </div>
+
+    <p class="intro">
+      This is my technical sandbox where I test server configurations, security settings, deployment workflows,
+      and performance optimizations. What started as a Linux, Apache, and Cloudflare setup has grown into a broader
+      hands-on lab that now includes Kubernetes on DigitalOcean, Helm-based deployments, NGINX Ingress, secure API
+      publishing, a Python FastAPI service, and a Java Spring Boot API connected to PostgreSQL through JDBC.
+      I also moved website versioning and deployment into GitHub, so changes are now tracked, versioned, and deployed
+      automatically instead of being edited manually on the server.
+    </p>
 
     <h2>Projects</h2>
 
@@ -149,41 +192,91 @@
 
     <section class="cards">
       <article class="card">
+        <h3>Cloudflare + Origin Lockdown</h3>
+        <p>
+          Full (Strict) TLS, origin certificates, DNS protection, and secure traffic flow through Cloudflare-managed
+          ingress paths. This environment gives me a practical lab for certificate validation, protected origin exposure,
+          WAF-related controls, and secure service publishing.
+        </p>
+      </article>
+
+      <article class="card">
         <h3>Kubernetes + Secure API Delivery</h3>
         <p>
-          I deployed containerized workloads on DigitalOcean Kubernetes, exposed services through NGINX Ingress,
-          connected custom subdomains with Cloudflare DNS, and published secure HTTPS endpoints through strict TLS
-          validation. This part of the sandbox gives me a realistic environment for testing routing, ingress behavior,
-          domain integration, and production-style API exposure.
+          I deployed workloads on DigitalOcean Kubernetes, exposed services through NGINX Ingress, connected custom
+          subdomains through Cloudflare, and published secure HTTPS endpoints with strict TLS validation.
         </p>
+        <div class="api-links">
+          <span>Live endpoints:</span>
+          <a href="https://api.amaterix.com" target="_blank" rel="noopener noreferrer">api.amaterix.com</a>
+          &nbsp;•&nbsp;
+          <a href="https://java-api.amaterix.com" target="_blank" rel="noopener noreferrer">java-api.amaterix.com</a>
+        </div>
       </article>
 
       <article class="card">
         <h3>Python FastAPI Service</h3>
         <p>
-          I built and deployed a FastAPI application behind a custom domain with health checks, API endpoints,
-          containerized delivery, and Helm-based rollout management. This service serves as a practical lab for
-          deployment testing, DNS and TLS validation, ingress troubleshooting, and secure API publishing in a live
-          hosted environment.
+          Built and deployed a FastAPI application behind a custom domain with health checks, API endpoints,
+          containerized delivery, and Helm-based rollout management. This gives me a working sandbox for ingress,
+          DNS, TLS, and deployment troubleshooting.
         </p>
       </article>
 
       <article class="card">
         <h3>Java JDBC + PostgreSQL Lab</h3>
         <p>
-          I also built and deployed a Spring Boot application connected to PostgreSQL through JDBC, giving me a working
-          lab for database connectivity, backend integration, SQL execution, and troubleshooting across both the
-          application and data layers. This environment is especially useful for testing connection behavior,
-          configuration issues, and real deployment workflows for Java-based services.
+          Built and deployed a Spring Boot application connected to PostgreSQL through JDBC for database integration,
+          backend connectivity testing, SQL execution, and troubleshooting across both the application and data layers.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Apache HTTP/2 + MPM Event</h3>
+        <p>
+          Optimized Apache with HTTP/2, HTTPS enforcement, and hardened web server settings. This remains part of the
+          core Linux hosting layer behind the broader lab environment and helped form the base for later automation
+          and deployment improvements.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>GitHub Versioning + Automated Deployments</h3>
+        <p>
+          The website is now versioned through GitHub, with changes tracked through commit history and deployed
+          automatically through GitHub Actions. This replaced manual server-side editing and gives me a cleaner,
+          repeatable deployment flow for future site updates.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>SSH Hardening</h3>
+        <p>
+          Key-based authentication, disabled root login, controlled firewall rules, and hardened SSH access for safer
+          remote administration. This is one of the security foundations of the entire sandbox.
         </p>
       </article>
     </section>
 
-    <div class="footer">
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+    <div class="footer-link-wrap">
+      <a class="footer-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
         Connect with me on LinkedIn
       </a>
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">© 2026 Peter Hudcovic</div>
+      <div class="footer-center" id="footer-time">--</div>
+      <div class="footer-right">Visitors: 7</div>
+    </div>
+  </footer>
+
+  <script>
+    const el = document.getElementById("footer-time");
+    const now = new Date();
+    el.textContent = now.toLocaleString();
+  </script>
 </body>
 </html>
