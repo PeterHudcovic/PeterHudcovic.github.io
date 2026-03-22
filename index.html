@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amaterix</title>
+  <title>Technical Sandbox</title>
   <style>
     :root {
       --bg: #071523;
-      --panel: #0d2133;
-      --panel-border: rgba(255, 255, 255, 0.06);
-      --text: #eaf2ff;
+      --card: #0b1d2d;
+      --card-border: rgba(255,255,255,0.05);
+      --text: #eef4ff;
       --muted: #b9c7d8;
-      --accent: #7c5cff;
-      --accent-hover: #9278ff;
+      --accent: #7b61ff;
+      --accent-hover: #937dff;
     }
 
     * {
@@ -28,7 +28,7 @@
     }
 
     body {
-      padding: 32px 20px 64px;
+      padding: 26px 18px 60px;
     }
 
     .container {
@@ -37,64 +37,57 @@
     }
 
     .hero {
-      margin-bottom: 42px;
-    }
-
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      margin-bottom: 34px;
     }
 
     .hero .stack {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
       color: var(--muted);
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      margin-bottom: 14px;
-    }
-
-    .hero p {
-      max-width: 1100px;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      margin: 38px 0 22px;
+      margin-bottom: 10px;
       letter-spacing: -0.02em;
     }
 
-    .link-row {
-      margin: 0 0 28px;
+    .hero p {
+      margin: 0;
+      max-width: 1180px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    .link-row a,
-    .footer-link {
+    h2 {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      margin: 42px 0 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .pdf-link {
+      margin-bottom: 28px;
+    }
+
+    .pdf-link a,
+    .footer a {
       color: var(--accent);
       text-decoration: none;
       font-weight: 700;
       font-size: 1rem;
     }
 
-    .link-row a:hover,
-    .footer-link:hover {
+    .pdf-link a:hover,
+    .footer a:hover {
       color: var(--accent-hover);
       text-decoration: underline;
     }
 
-    .grid {
+    .cards {
       display: grid;
       grid-template-columns: 1fr;
       gap: 28px;
     }
 
     .card {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
+      background: var(--card);
+      border: 1px solid var(--card-border);
       border-radius: 22px;
       padding: 30px 28px;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.01) inset;
@@ -102,9 +95,9 @@
 
     .card h3 {
       margin: 0 0 16px;
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
-      line-height: 1.2;
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .card p {
@@ -115,12 +108,12 @@
     }
 
     .footer {
-      margin-top: 48px;
+      margin-top: 42px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 720px) {
       body {
-        padding: 22px 14px 44px;
+        padding: 20px 14px 40px;
       }
 
       .card {
@@ -132,73 +125,52 @@
 <body>
   <div class="container">
     <section class="hero">
-      <div class="stack">DevOps • Linux • Cloudflare • Kubernetes • Docker • NGINX • FastAPI • Spring Boot • PostgreSQL • JDBC</div>
-      <h1>Technical Sandbox & Infrastructure Lab</h1>
+      <div class="stack">DevOps • Linux • Cloudflare • Infrastructure Security • NGINX • Docker</div>
       <p>
-        This is my hands-on lab environment where I build, deploy, secure, and troubleshoot real services.
-        What started as a Linux and web server setup has evolved into a broader platform engineering sandbox
-        covering Kubernetes on DigitalOcean, containerized workloads, ingress routing, Cloudflare-managed DNS
-        and TLS, secure API delivery, and database-connected applications.
+        This is my technical sandbox where I test server configurations, security settings, and performance optimization.
+        It has grown beyond a traditional Linux web server setup and now includes Kubernetes on DigitalOcean, Helm-based
+        deployments, NGINX Ingress, Cloudflare-managed DNS and TLS, a Python FastAPI service, and a Java Spring Boot API
+        connected to PostgreSQL through JDBC. I use this environment for real hands-on deployment work, troubleshooting,
+        API delivery, and infrastructure hardening practice.
       </p>
     </section>
 
     <h2>Projects</h2>
 
-    <div class="link-row">
-      <a href="#">Download Deployment & Security Setup (PDF)</a>
+    <div class="pdf-link">
+      <a href="/deployment-security-setup.pdf" target="_blank" rel="noopener noreferrer">
+        Download Deployment &amp; Security Setup (PDF)
+      </a>
     </div>
 
-    <div class="grid">
-      <article class="card">
-        <h3>Kubernetes + Secure API Delivery</h3>
-        <p>
-          I deployed Kubernetes workloads on DigitalOcean, configured NGINX Ingress, connected custom subdomains
-          through Cloudflare, and enabled HTTPS with strict origin validation. This setup now publishes working APIs
-          on custom domains and gives me a practical environment for deployment testing, traffic routing, and
-          infrastructure troubleshooting.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>Python FastAPI Service</h3>
-        <p>
-          I built and deployed a FastAPI application exposed through a secured subdomain with health checks,
-          API endpoints, containerized deployment, and Helm-based rollout management. This service gives me a clean
-          foundation for testing API delivery, ingress behavior, DNS, TLS, and day-to-day operational workflows.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>Java + JDBC + PostgreSQL</h3>
-        <p>
-          I also deployed a Spring Boot application connected to PostgreSQL through JDBC, using it as a practical
-          lab for database connectivity, troubleshooting, authentication testing, and backend service integration.
-          This gives me a working environment for testing real connection flows, query execution, and deployment
-          behavior across both application and database layers.
-        </p>
-      </article>
-
+    <section class="cards">
       <article class="card">
         <h3>Cloudflare + Origin Lockdown</h3>
         <p>
-          Full (Strict) TLS, origin certificates, controlled exposure through Cloudflare, and traffic flowing through
-          protected ingress paths. I use this setup to validate secure delivery patterns, certificate behavior,
-          and origin-side hardening in a real hosted environment.
+          Full (Strict) TLS, origin certificates, DNS protection, and secure traffic flow through Cloudflare-managed ingress paths.
+          This setup gives me a practical lab for certificate validation, protected origin exposure, and secure service publishing.
         </p>
       </article>
 
       <article class="card">
-        <h3>Linux, Apache, and SSH Hardening</h3>
+        <h3>Kubernetes + Secure API Delivery</h3>
         <p>
-          The underlying environment includes Linux server administration, Apache configuration, SSH key-based access,
-          controlled firewall rules, and staged automation improvements. It is the base layer that ties together the
-          web platform, DNS, certificates, deployment flow, and infrastructure security testing.
+          I deployed Kubernetes workloads on DigitalOcean, exposed services through NGINX Ingress, connected custom subdomains,
+          and published HTTPS-secured APIs for both Python FastAPI and Java Spring Boot applications.
         </p>
       </article>
-    </div>
+
+      <article class="card">
+        <h3>Java JDBC + PostgreSQL Lab</h3>
+        <p>
+          I built and deployed a Spring Boot service connected to PostgreSQL through JDBC for database integration,
+          connectivity testing, query execution, and troubleshooting across both application and database layers.
+        </p>
+      </article>
+    </section>
 
     <div class="footer">
-      <a class="footer-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
         Connect with me on LinkedIn
       </a>
     </div>
