@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1320" viewBox="0 0 1800 1320">
+  <defs>
+    <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#157ec6"/>
+      <stop offset="100%" stop-color="#0d5f9f"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.16"/>
+    </filter>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0d6fb8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8bad47"/>
+    </marker>
+    <style>
+      .bg { fill: #f3f5f7; }
+      .box { fill: url(#boxGrad); rx: 18; ry: 18; filter: url(#shadow); }
+      .light { fill: #edf1f4; stroke: #cfd7df; stroke-width: 1.3; rx: 12; ry: 12; }
+      .panel { fill: #ffffff; stroke: #d8dee6; stroke-width: 1.3; rx: 12; ry: 12; }
+      .dashed { fill: none; stroke: #8da1b4; stroke-width: 2; stroke-dasharray: 8 6; rx: 12; ry: 12; }
+      .title { font: 700 22px Inter, Segoe UI, Arial, sans-serif; fill: white; text-anchor: middle; }
+      .subtitle { font: 400 13px Inter, Segoe UI, Arial, sans-serif; fill: #dce9f6; text-anchor: middle; }
+      .label { font: 600 14px Inter, Segoe UI, Arial, sans-serif; fill: #637184; }
+      .smallTitle { font: 700 18px Inter, Segoe UI, Arial, sans-serif; fill: #344255; }
+      .smallText { font: 500 14px Inter, Segoe UI, Arial, sans-serif; fill: #4c5a6b; }
+      .tiny { font: 500 12px Inter, Segoe UI, Arial, sans-serif; fill: #5b6777; }
+      .legendTitle { font: 700 18px Inter, Segoe UI, Arial, sans-serif; fill: #213547; }
+      .legendText { font: 500 13px Inter, Segoe UI, Arial, sans-serif; fill: #334155; }
+      .whiteLabelBg { fill: #f3f5f7; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1800" height="1320"/>
+
+  <g transform="translate(1450,36)">
+    <rect class="panel" width="300" height="145"/>
+    <text x="24" y="36" class="legendTitle">Legend</text>
+    <rect x="24" y="58" width="22" height="14" fill="#157ec6"/>
+    <text x="62" y="70" class="legendText">Box = component</text>
+    <rect x="24" y="92" width="22" height="14" fill="#b7d36b"/>
+    <text x="62" y="104" class="legendText">Arrow = flow / deploy</text>
+    <line x1="24" y1="128" x2="49" y2="128" stroke="#6b7280" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="62" y="132" class="legendText">Dotted = web routing</text>
+  </g>
+
+  <rect x="650" y="18" width="220" height="82" class="box"/>
+  <text x="760" y="54" class="title">IONOS</text>
+  <text x="760" y="78" class="subtitle">domain registration</text>
+
+  <rect x="650" y="140" width="220" height="82" class="box"/>
+  <text x="760" y="176" class="title">Cloudflare</text>
+  <text x="760" y="200" class="subtitle">DNS + Proxy + TLS</text>
+
+  <line x1="760" y1="100" x2="760" y2="140" stroke="#0d6fb8" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+
+  <rect x="120" y="140" width="250" height="82" class="box"/>
+  <text x="245" y="176" class="title">GitHub</text>
+  <text x="245" y="200" class="subtitle">website repo + actions</text>
+
+  <rect x="90" y="315" width="320" height="96" class="box"/>
+  <text x="250" y="355" class="title">Linux Server + Apache</text>
+  <text x="250" y="379" class="subtitle">amaterix.com / var/www/html</text>
+
+  <line x1="245" y1="222" x2="245" y2="315" stroke="#8bad47" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <rect x="258" y="258" width="150" height="22" class="whiteLabelBg"/>
+  <text x="270" y="274" class="label">GitHub Actions deploy</text>
+
+  <path d="M 650 180 C 535 180, 450 235, 405 315" fill="none" stroke="#6b7280" stroke-width="2.2" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+  <rect x="475" y="210" width="100" height="20" class="whiteLabelBg"/>
+  <text x="485" y="225" class="label">amaterix.com</text>
+
+  <rect x="100" y="740" width="330" height="260" class="dashed"/>
+  <text x="115" y="778" class="smallTitle">Local PC</text>
+  <text x="115" y="822" class="smallText">VS Code</text>
+  <text x="115" y="864" class="smallText">PowerShell</text>
+  <text x="115" y="906" class="smallText">Docker Desktop</text>
+  <text x="115" y="948" class="smallText">kubectl</text>
+  <text x="115" y="988" class="smallText">Helm</text>
+
+  <rect x="100" y="510" width="320" height="82" class="box"/>
+  <text x="250" y="545" class="title">Docker Hub</text>
+<line x1="420" y1="556" x2="560" y2="556" stroke="#0d6fb8" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+  <text x="250" y="575" class="subtitle">FastAPI + Spring Boot images</text>
+
+  <line x1="250" y1="740" x2="250" y2="600" stroke="#8bad47" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <rect x="372" y="676" width="150" height="22" class="whiteLabelBg"/>
+  <text x="282" y="692" class="label">build / push images</text>
+
+  <rect x="560" y="500" width="700" height="105" class="box"/>
+  <text x="910" y="542" class="title" style="font-size:25px">DigitalOcean Kubernetes</text>
+  <text x="910" y="572" class="subtitle" style="font-size:15px">3-node cluster</text>
+
+  <line x1="760" y1="222" x2="760" y2="500" stroke="#0d6fb8" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+  <text x="775" y="360" class="label">DNS / TLS / routing</text>
+
+  <rect x="995" y="412" width="80" height="22" class="whiteLabelBg"/>
+  <text x="450" y="528" class="label">image pull</text>
+
+<line x1="460" y1="815" x2="640" y2="590" stroke="#0d6fb8" stroke-width="2.8" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>  <rect x="395" y="805" width="115" height="22" class="whiteLabelBg"/>
+  <text x="405" y="821" class="label">kubectl / Helm</text>
+
+  <rect x="620" y="710" width="250" height="62" class="light"/>
+  <text x="745" y="745" class="smallTitle" text-anchor="middle" style="font-size:17px">NGINX Ingress + LB</text>
+  <text x="745" y="765" class="tiny" text-anchor="middle">installed via Helm</text>
+  <line x1="745" y1="605" x2="745" y2="710" stroke="#0d6fb8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="920" y="835" width="240" height="50" class="light"/>
+  <text x="1040" y="866" class="smallText" text-anchor="middle">api.amaterix.com</text>
+
+  <rect x="1220" y="835" width="240" height="50" class="light"/>
+  <text x="1340" y="866" class="smallText" text-anchor="middle">java-api.amaterix.com</text>
+
+  <path d="M 745 772 C 840 790, 950 805, 1030 835" fill="none" stroke="#6b7280" stroke-width="2.2" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+  <path d="M 745 772 C 930 790, 1120 805, 1330 835" fill="none" stroke="#6b7280" stroke-width="2.2" stroke-dasharray="8 6" marker-end="url(#arrowBlue)"/>
+
+  <rect x="920" y="940" width="240" height="48" class="light"/>
+  <text x="1040" y="970" class="smallText" text-anchor="middle">FastAPI Service</text>
+
+  <rect x="1220" y="940" width="240" height="48" class="light"/>
+  <text x="1340" y="970" class="smallText" text-anchor="middle">java-api Service</text>
+
+  <line x1="1040" y1="885" x2="1040" y2="940" stroke="#0d6fb8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <line x1="1340" y1="885" x2="1340" y2="940" stroke="#0d6fb8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="920" y="1030" width="240" height="88" class="box"/>
+  <text x="1040" y="1068" class="title" style="font-size:20px">FastAPI Pod</text>
+  <text x="1040" y="1092" class="subtitle">application container</text>
+
+  <rect x="1220" y="1030" width="240" height="88" class="box"/>
+  <text x="1340" y="1068" class="title" style="font-size:20px">Spring Boot Pod</text>
+  <text x="1340" y="1092" class="subtitle">Java API container</text>
+
+  <line x1="1040" y1="988" x2="1040" y2="1030" stroke="#0d6fb8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <line x1="1340" y1="988" x2="1340" y2="1030" stroke="#0d6fb8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="1500" y="1038" width="170" height="42" class="light"/>
+  <text x="1585" y="1064" class="smallText" text-anchor="middle">postgres Service</text>
+
+  <line x1="1459" y1="1068" x2="1497" y2="1068" stroke="#8bad47" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <text x="1470" y="1095" class="label">JDBC</text>
+
+  <rect x="1500" y="1110" width="210" height="42" class="light"/>
+  <text x="1605" y="1136" class="smallText" text-anchor="middle">PostgreSQL StatefulSet</text>
+
+  <rect x="1520" y="1170" width="170" height="42" class="light"/>
+  <text x="1605" y="1196" class="smallText" text-anchor="middle">PVC (5Gi)</text>
+
+  <rect x="1450" y="1230" width="310" height="46" class="light"/>
+  <text x="1605" y="1259" class="smallText" text-anchor="middle">DigitalOcean Block Storage PV</text>
+
+  <line x1="1605" y1="1080" x2="1605" y2="1110" stroke="#0d6fb8" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <line x1="1605" y1="1152" x2="1605" y2="1170" stroke="#0d6fb8" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <line x1="1605" y1="1212" x2="1605" y2="1230" stroke="#0d6fb8" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+</svg>
