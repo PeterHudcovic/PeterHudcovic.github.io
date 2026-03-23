@@ -6,19 +6,17 @@
   <title>Amaterix</title>
   <style>
     :root {
-      --bg: #061521;
-      --panel: #0c2133;
-      --panel-border: rgba(255,255,255,0.06);
+      --bg: #061522;
+      --card: #0b1f30;
+      --card-border: rgba(255,255,255,0.06);
       --text: #eef4ff;
-      --muted: #b7c5d6;
-      --accent: #7d5cff;
-      --accent-hover: #9a84ff;
+      --muted: #b8c5d6;
+      --accent: #7b5cff;
+      --accent-hover: #9c86ff;
       --footer: #04101a;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -26,6 +24,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100%;
     }
 
     body {
@@ -35,42 +34,42 @@
     }
 
     .page {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 34px 18px 40px;
       flex: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 34px 18px 48px;
     }
 
     .topline {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-size: clamp(1.7rem, 2.8vw, 2.35rem);
       line-height: 1.2;
-      letter-spacing: -0.02em;
       color: var(--muted);
       margin-bottom: 10px;
+      letter-spacing: -0.02em;
     }
 
     .intro {
-      max-width: 1080px;
-      font-size: 1.05rem;
-      line-height: 1.7;
+      margin: 0 0 44px;
+      max-width: 1050px;
       color: var(--muted);
-      margin: 0 0 38px;
+      font-size: 1.02rem;
+      line-height: 1.7;
     }
 
     h2 {
       margin: 0 0 26px;
-      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-size: clamp(2rem, 3vw, 2.8rem);
       letter-spacing: -0.03em;
     }
 
     .pdf-link {
-      margin-bottom: 28px;
+      margin-bottom: 34px;
     }
 
     .pdf-link a,
     .footer-link,
-    .api-links a {
+    .inline-links a {
       color: var(--accent);
       text-decoration: none;
       font-weight: 700;
@@ -78,7 +77,7 @@
 
     .pdf-link a:hover,
     .footer-link:hover,
-    .api-links a:hover {
+    .inline-links a:hover {
       color: var(--accent-hover);
       text-decoration: underline;
     }
@@ -86,20 +85,18 @@
     .cards {
       display: grid;
       gap: 22px;
-      margin-bottom: 38px;
     }
 
     .card {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
-      border-radius: 22px;
-      padding: 26px 22px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.015) inset;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 22px 26px;
     }
 
     .card h3 {
       margin: 0 0 14px;
-      font-size: clamp(1.5rem, 2vw, 2rem);
+      font-size: clamp(1.45rem, 2vw, 1.95rem);
       line-height: 1.2;
       letter-spacing: -0.02em;
     }
@@ -107,22 +104,49 @@
     .card p {
       margin: 0;
       color: var(--muted);
-      font-size: 1.03rem;
+      font-size: 1rem;
       line-height: 1.75;
     }
 
-    .api-links {
-      margin-top: 8px;
+    .inline-links {
+      margin-top: 12px;
+      color: var(--muted);
       font-size: 0.98rem;
     }
 
-    .api-links span {
-      color: var(--muted);
-      margin-right: 8px;
+    .diagram-wrap {
+      margin-top: 34px;
+      margin-bottom: 18px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 18px;
     }
 
-    .footer-link-wrap {
-      margin-top: 10px;
+    .diagram-wrap h3 {
+      margin: 0 0 14px;
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .diagram-wrap p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .diagram-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      background: #f4f6f8;
+    }
+
+    .bottom-link {
+      margin-top: 42px;
     }
 
     footer {
@@ -133,35 +157,24 @@
     }
 
     .footer-inner {
-      max-width: 1180px;
-      margin: 0 auto;
+      max-width: 100%;
       padding: 12px 18px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
     }
 
-    .footer-left {
-      text-align: left;
-    }
+    .footer-left { text-align: left; }
+    .footer-center { text-align: center; }
+    .footer-right { text-align: right; }
 
-    .footer-center {
-      text-align: center;
-    }
-
-    .footer-right {
-      text-align: right;
-    }
-
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
+      .page { padding: 22px 14px 36px; }
       .footer-inner {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
       }
-
-      .footer-left,
-      .footer-center,
-      .footer-right {
+      .footer-left, .footer-center, .footer-right {
         text-align: left;
       }
     }
@@ -175,11 +188,12 @@
 
     <p class="intro">
       This is my technical sandbox where I test server configurations, security settings, deployment workflows,
-      and performance optimizations. What started as a Linux, Apache, and Cloudflare setup has grown into a broader
-      hands-on lab that now includes Kubernetes on DigitalOcean, Helm-based deployments, NGINX Ingress, secure API
-      publishing, a Python FastAPI service, and a Java Spring Boot API connected to PostgreSQL through JDBC.
-      I also moved website versioning and deployment into GitHub, so changes are now tracked, versioned, and deployed
-      automatically instead of being edited manually on the server.
+      failover behavior, and performance optimizations. What started as a Linux, Apache, and Cloudflare setup has
+      expanded into a broader hands-on environment that now includes a three-node Kubernetes cluster on DigitalOcean,
+      secure API publishing through NGINX Ingress, a Python FastAPI service, a Java Spring Boot API connected to
+      PostgreSQL through JDBC, and persistent PostgreSQL storage backed by DigitalOcean Block Storage. Website changes
+      are now versioned in GitHub and deployed automatically through GitHub Actions instead of being edited manually
+      on the server.
     </p>
 
     <h2>Projects</h2>
@@ -194,20 +208,21 @@
       <article class="card">
         <h3>Cloudflare + Origin Lockdown</h3>
         <p>
-          Full (Strict) TLS, origin certificates, DNS protection, and secure traffic flow through Cloudflare-managed
-          ingress paths. This environment gives me a practical lab for certificate validation, protected origin exposure,
-          WAF-related controls, and secure service publishing.
+          Full (Strict) TLS, origin certificates, Cloudflare-managed DNS, and protected origin exposure. This setup is
+          used to validate certificate behavior, TLS routing, ingress access, and secure service publishing across the
+          website and Kubernetes-hosted APIs.
         </p>
       </article>
 
       <article class="card">
         <h3>Kubernetes + Secure API Delivery</h3>
         <p>
-          I deployed workloads on DigitalOcean Kubernetes, exposed services through NGINX Ingress, connected custom
-          subdomains through Cloudflare, and published secure HTTPS endpoints with strict TLS validation.
+          Containerized services deployed on DigitalOcean Kubernetes, exposed through NGINX Ingress and secured with
+          Cloudflare-managed subdomains and TLS. This gives me a practical lab for ingress routing, service exposure,
+          hostname-based traffic handling, and failover testing.
         </p>
-        <div class="api-links">
-          <span>Live endpoints:</span>
+        <div class="inline-links">
+          Links:
           <a href="https://api.amaterix.com" target="_blank" rel="noopener noreferrer">api.amaterix.com</a>
           &nbsp;•&nbsp;
           <a href="https://java-api.amaterix.com" target="_blank" rel="noopener noreferrer">java-api.amaterix.com</a>
@@ -215,51 +230,62 @@
       </article>
 
       <article class="card">
-        <h3>Python FastAPI Service</h3>
+        <h3>Python FastAPI + Java JDBC Lab</h3>
         <p>
-          Built and deployed a FastAPI application behind a custom domain with health checks, API endpoints,
-          containerized delivery, and Helm-based rollout management. This gives me a working sandbox for ingress,
-          DNS, TLS, and deployment troubleshooting.
+          Built and deployed a FastAPI service for secure API delivery and a Spring Boot service connected to PostgreSQL
+          through JDBC for database integration, query execution, backend troubleshooting, and real deployment testing
+          across both the application and data layers.
         </p>
       </article>
 
       <article class="card">
-        <h3>Java JDBC + PostgreSQL Lab</h3>
+        <h3>Persistent PostgreSQL Storage</h3>
         <p>
-          Built and deployed a Spring Boot application connected to PostgreSQL through JDBC for database integration,
-          backend connectivity testing, SQL execution, and troubleshooting across both the application and data layers.
+          Migrated PostgreSQL from a temporary pod-based setup to persistent storage backed by DigitalOcean Block Storage.
+          The database now runs as a StatefulSet with a PersistentVolumeClaim, restored data, and storage that survives
+          pod recreation and restart events.
         </p>
       </article>
 
       <article class="card">
-        <h3>Apache HTTP/2 + MPM Event</h3>
+        <h3>Apache HTTP/2 + GitHub Versioning</h3>
         <p>
-          Optimized Apache with HTTP/2, HTTPS enforcement, and hardened web server settings. This remains part of the
-          core Linux hosting layer behind the broader lab environment and helped form the base for later automation
-          and deployment improvements.
+          Apache remains part of the Linux hosting layer and was used for HTTPS enforcement, HTTP/2, and web server
+          hardening. The website itself is now versioned through GitHub, with updates tracked through commit history and
+          deployed automatically through GitHub Actions.
         </p>
       </article>
 
       <article class="card">
-        <h3>GitHub Versioning + Automated Deployments</h3>
+        <h3>Kubernetes Failover Testing</h3>
         <p>
-          The website is now versioned through GitHub, with changes tracked through commit history and deployed
-          automatically through GitHub Actions. This replaced manual server-side editing and gives me a cleaner,
-          repeatable deployment flow for future site updates.
+          Tested both controlled node draining and a full node power-off scenario. Kubernetes successfully rescheduled
+          workloads onto other nodes, updated endpoints, restored ingress, and recovered API access after temporary
+          interruptions. This lab now includes practical failover validation rather than only static deployment.
         </p>
       </article>
 
       <article class="card">
         <h3>SSH Hardening</h3>
         <p>
-          Key-based authentication, disabled root login, controlled firewall rules, and hardened SSH access for safer
-          remote administration. This is one of the security foundations of the entire sandbox.
+          Key-based authentication, controlled firewall rules, and hardened remote access for safer server administration
+          and deployment operations across the Linux hosting layer and the wider lab environment.
         </p>
       </article>
     </section>
 
-    <div class="footer-link-wrap">
-      <a class="footer-link" href="www.linkedin.com/in/peter-hudcovic" target="_blank" rel="noopener noreferrer">
+    <section class="diagram-wrap">
+      <h3>Current Architecture</h3>
+      <p>
+        Main website traffic is served by Apache on a Linux server, while API traffic is routed through Cloudflare into
+        a DigitalOcean Kubernetes cluster. The Java API connects to PostgreSQL through JDBC, and the PostgreSQL layer now
+        uses persistent block storage.
+      </p>
+      <img src="/amaterix_architecture_diagram_aligned.svg" alt="Amaterix architecture diagram" />
+    </section>
+
+    <div class="bottom-link">
+      <a class="footer-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
         Connect with me on LinkedIn
       </a>
     </div>
@@ -274,9 +300,8 @@
   </footer>
 
   <script>
-    const el = document.getElementById("footer-time");
-    const now = new Date();
-    el.textContent = now.toLocaleString();
+    const footerTime = document.getElementById("footer-time");
+    footerTime.textContent = new Date().toLocaleString();
   </script>
 </body>
 </html>
