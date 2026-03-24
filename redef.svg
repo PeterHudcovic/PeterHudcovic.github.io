@@ -146,8 +146,12 @@
   <rect x="1520" y="1170" width="170" height="42" class="light"/>
   <text x="1605" y="1196" class="smallText" text-anchor="middle">PVC (5Gi)</text>
 
-  <rect x="1450" y="1230" width="310" height="46" class="light"/>
-  <text x="1605" y="1259" class="smallText" text-anchor="middle">DigitalOcean Block Storage PV</text>
+<rect x="1450" y="1230" width="310" height="62" class="light"/>
+<text x="1605" y="1252" class="smallText" text-anchor="middle">
+  <tspan x="1605" dy="0">DigitalOcean Block Storage PV</tspan>
+  <tspan x="1605" dy="18">(Kubernetes representation)</tspan>
+</text>
+  
 
   <line x1="1605" y1="1080" x2="1605" y2="1110" stroke="#0d6fb8" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
   <line x1="1605" y1="1152" x2="1605" y2="1170" stroke="#0d6fb8" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
