@@ -195,7 +195,16 @@
       are now versioned in GitHub and deployed automatically through GitHub Actions instead of being edited manually
       on the server.
     </p>
-
+    <section class="diagram-wrap">
+      <h3>Current Architecture</h3>
+      <p>
+        Main website traffic is served by Apache on a Linux server, while API traffic is routed through Cloudflare into
+        a DigitalOcean Kubernetes cluster. The Java API connects to PostgreSQL through JDBC, and the PostgreSQL layer now
+        uses persistent block storage.
+      </p>
+      <img src="/redef.svg" alt="Amaterix architecture diagram" />
+    </section>
+    
     <h2>Projects</h2>
 
     <div class="pdf-link">
@@ -274,15 +283,7 @@
       </article>
     </section>
 
-    <section class="diagram-wrap">
-      <h3>Current Architecture</h3>
-      <p>
-        Main website traffic is served by Apache on a Linux server, while API traffic is routed through Cloudflare into
-        a DigitalOcean Kubernetes cluster. The Java API connects to PostgreSQL through JDBC, and the PostgreSQL layer now
-        uses persistent block storage.
-      </p>
-      <img src="/redef.svg" alt="Amaterix architecture diagram" />
-    </section>
+
 
     <div class="bottom-link">
       <a class="footer-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
