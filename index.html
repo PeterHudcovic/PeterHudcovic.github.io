@@ -1,308 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amaterix</title>
-  <style>
-    :root {
-      --bg: #061522;
-      --card: #0b1f30;
-      --card-border: rgba(255,255,255,0.06);
-      --text: #eef4ff;
-      --muted: #b8c5d6;
-      --accent: #7b5cff;
-      --accent-hover: #9c86ff;
-      --footer: #04101a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peter Hudcovic — Cloud, Kubernetes &amp; DevOps</title>
+<meta property="og:title" content="Peter Hudcovic — Cloud, Kubernetes & DevOps" />
+<meta property="og:description" content="Hands-on infrastructure engineering across Azure, Kubernetes, Terraform, Helm, GitHub Actions and PostgreSQL — featuring the Azure Migration Lab and its live Operations Console." />
+<meta property="og:url" content="https://peterhudcovic.tech" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://peterhudcovic.tech/preview.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0a0e1a;
+  --bg2:      #0f1526;
+  --bg3:      #141c30;
+  --border:   #1e2d4a;
+  --accent:   #3b82f6;
+  --accent2:  #22d3ee;
+  --green:    #4ade80;
+  --text:     #e2e8f0;
+  --muted:    #64748b;
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'Inter', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
-    * { box-sizing: border-box; }
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100%;
-    }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 clamp(20px, 5vw, 60px);
+  height: 56px;
+  background: rgba(10,14,26,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+  background: #000; color: #00ff41;
+  padding: 5px 12px; border-radius: 4px;
+  border: 1px solid #00ff4133;
+  display: flex; align-items: center;
+}
+.nav-logo .cursor {
+  display: inline-block; width: 8px; height: 14px;
+  background: #00ff41; margin-left: 3px; vertical-align: middle;
+  animation: blink 1.1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+@media(max-width:600px){ .nav-links { display:none; } }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(80px,12vh,140px) clamp(20px,8vw,120px) 60px;
+  position: relative; overflow: hidden;
+}
+#matrix-canvas {
+  position: absolute; inset: 0; z-index: 0;
+  opacity: 1; pointer-events: none;
+  background: #000;
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  opacity: 0.2;
+}
+.hero-glow {
+  position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, #3b82f618 0%, transparent 70%);
+  top: -100px; right: -100px; pointer-events: none; z-index: 0;
+}
+.hero-content {
+  position: relative; z-index: 1; max-width: 720px;
+  background: rgba(0,0,0,0.55);
+  padding: 36px 40px;
+  border-radius: 12px;
+  border: 1px solid #00ff4122;
+  backdrop-filter: blur(2px);
+}
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 11px; color: #22d3ee;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.hero-eyebrow::before { display:none; }
+.hero-name {
+  font-size: clamp(34px, 4.8vw, 52px);
+  font-weight: 500; line-height: 1.1;
+  color: #cbd5e1; margin-bottom: 12px;
+  font-family: var(--mono);
+}
+.hero-title {
+  font-size: clamp(17px, 2vw, 22px);
+  font-weight: 400; color: #7f8ea3; margin-bottom: 28px;
+  font-family: var(--mono);
+}
+.hero-title span { color: var(--accent); }
+.hero-desc {
+  font-size: 14px; color: var(--muted); max-width: 560px;
+  line-height: 1.8; margin-bottom: 16px; font-family: var(--mono);
+}
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  background: rgba(34, 197, 94, 0.14); color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  padding: 11px 26px; font-size: 14px; font-family: var(--sans);
+  font-weight: 500; border-radius: 6px; cursor: pointer;
+  text-decoration: none; transition: background 0.2s, transform 0.1s;
+  display: inline-block;
+}
+.btn-primary:hover { background: rgba(34, 197, 94, 0.25); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; color: var(--text); border: 1px solid var(--border);
+  padding: 11px 26px; font-size: 14px; font-family: var(--sans);
+  font-weight: 500; border-radius: 6px; cursor: pointer;
+  text-decoration: none; transition: border-color 0.2s, transform 0.1s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--accent); transform: translateY(-1px); }
 
-    .page {
-      flex: 1;
-      max-width: 1120px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 34px 18px 48px;
-    }
+/* STATS BAR */
+.stats-bar {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.stat {
+  flex: 1; min-width: 160px;
+  padding: 28px clamp(20px,4vw,48px);
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--mono); font-size: clamp(24px,4vw,36px);
+  font-weight: 700; color: var(--accent2); line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
-    .topline {
-      font-size: clamp(1.7rem, 2.8vw, 2.35rem);
-      line-height: 1.2;
-      color: var(--muted);
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-    }
+/* SECTIONS */
+section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
+.section-eyebrow {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+.section-title {
+  font-size: clamp(26px,4vw,40px); font-weight: 600;
+  letter-spacing: -0.02em; color: var(--text); margin-bottom: 48px;
+}
 
-    .intro {
-      margin: 0 0 44px;
-      max-width: 1050px;
-      color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.7;
-    }
+/* ARCH */
+.arch-section { background: var(--bg2); }
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; }
+@media(max-width:700px){ .arch-grid { grid-template-columns: 1fr; } }
+.arch-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 22px 24px;
+  transition: border-color 0.2s;
+}
+.arch-card:hover { border-color: var(--accent); }
+.arch-card-icon { font-size: 22px; margin-bottom: 10px; }
+.arch-card-title { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent2); margin-bottom: 8px; }
+.arch-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.arch-diagram {
+  margin-top: 48px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 24px;
+  font-family: var(--mono); font-size: 12px; color: #64748b;
+  line-height: 1.9;
+}
+.arch-diagram .hl { color: var(--accent2); }
+.arch-diagram .hl2 { color: var(--green); }
+.arch-diagram .hl3 { color: var(--accent); }
 
-    h2 {
-      margin: 0 0 26px;
-      font-size: clamp(2rem, 3vw, 2.8rem);
-      letter-spacing: -0.03em;
-    }
+/* PROJECTS */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.project-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.project-card-header {
+  padding: 24px 24px 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.project-badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em;
+}
+.badge-live { background: #16a34a22; color: #4ade80; border: 1px solid #16a34a44; }
+.badge-infra { background: #1d4ed822; color: #60a5fa; border: 1px solid #1d4ed844; }
+.badge-warn { background: #f59e0b22; color: #fbbf24; border: 1px solid #f59e0b44; }
+.badge-legacy { background: #64748b22; color: #94a3b8; border: 1px solid #64748b44; }
+.project-icon { font-size: 28px; }
+.project-card-body { padding: 16px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+.project-title { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.tag {
+  font-family: var(--mono); font-size: 11px;
+  padding: 3px 9px; border-radius: 4px;
+  background: var(--bg3); color: var(--muted); border: 1px solid var(--border);
+}
+.project-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px; font-size: 13px; color: var(--accent);
+  text-decoration: none; font-weight: 500;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 10px; }
+.project-featured { grid-column: 1 / -1; }
+.project-featured .project-title { font-size: 22px; }
 
-    .pdf-link {
-      margin-bottom: 34px;
-    }
+/* STACK */
+.stack-section { background: var(--bg2); }
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; max-width: 900px; }
+.stack-item {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.stack-item:hover { border-color: var(--accent2); color: var(--text); }
+.stack-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
-    .pdf-link a,
-    .footer-link,
-    .inline-links a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-    }
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px clamp(20px,8vw,120px);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  background: var(--bg2);
+}
+.footer-left { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent2); }
 
-    .pdf-link a:hover,
-    .footer-link:hover,
-    .inline-links a:hover {
-      color: var(--accent-hover);
-      text-decoration: underline;
-    }
+/* ONLINE INDICATOR */
+.online { display: inline-flex; align-items: center; gap: 6px; }
+.online-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 0 #4ade8066;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 #4ade8066; }
+  70%  { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
 
-    .cards {
-      display: grid;
-      gap: 22px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 24px 22px 26px;
-    }
-
-    .card h3 {
-      margin: 0 0 14px;
-      font-size: clamp(1.45rem, 2vw, 1.95rem);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
-    .inline-links {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .diagram-wrap {
-      margin-top: 34px;
-      margin-bottom: 18px;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 18px;
-    }
-
-    .diagram-wrap h3 {
-      margin: 0 0 14px;
-      font-size: clamp(1.35rem, 2vw, 1.75rem);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .diagram-wrap p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.7;
-    }
-
-    .diagram-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      background: #f4f6f8;
-    }
-
-    .bottom-link {
-      margin-top: 42px;
-    }
-
-    footer {
-      background: var(--footer);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .footer-inner {
-      max-width: 100%;
-      padding: 12px 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
-    }
-
-    .footer-left { text-align: left; }
-    .footer-center { text-align: center; }
-    .footer-right { text-align: right; }
-
-    @media (max-width: 720px) {
-      .page { padding: 22px 14px 36px; }
-      .footer-inner {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-      .footer-left, .footer-center, .footer-right {
-        text-align: left;
-      }
-    }
-  </style>
+/* FADE IN */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+</style>
 </head>
 <body>
-  <main class="page">
-    <div class="topline">
-      DevOps • Linux • Cloudflare • Infrastructure Security • NGINX • Docker • Kubernetes • Apache
-    </div>
 
-    <p class="intro">
-      This is my technical sandbox where I test server configurations, security settings, deployment workflows,
-      failover behavior, and performance optimizations. What started as a Linux, Apache, and Cloudflare setup has
-      expanded into a broader hands-on environment that now includes a three-node Kubernetes cluster on DigitalOcean,
-      secure API publishing through NGINX Ingress, a Python FastAPI service, a Java Spring Boot API connected to
-      PostgreSQL through JDBC, and persistent PostgreSQL storage backed by DigitalOcean Block Storage. Website changes
-      are now versioned in GitHub and deployed automatically through GitHub Actions instead of being edited manually
-      on the server.
+<nav>
+  <div class="nav-logo">peter@aks:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
+  <div class="nav-links">
+    <a href="#architecture">Architecture</a>
+    <a href="#projects">Projects</a>
+    <a href="#stack">Stack</a>
+    <a href="#status">Status</a>
+    <a href="#connect">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="matrix-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">CLOUD · KUBERNETES · DEVOPS · SRE</div>
+    <h1 class="hero-name">Peter Hudcovic</h1>
+    <p class="hero-title">Azure · Kubernetes · Terraform · <span>DevOps &amp; SRE</span></p>
+    <p class="hero-desc">
+      Hands-on infrastructure engineering across Azure, Kubernetes, Terraform,
+      Helm, CI/CD, Linux, PostgreSQL and production-style troubleshooting.
     </p>
-    <section class="diagram-wrap">
-      <h3>Current Architecture</h3>
-      <p>
-        Main website traffic is served by Apache on a Linux server, while API traffic is routed through Cloudflare into
-        a DigitalOcean Kubernetes cluster. The Java API connects to PostgreSQL through JDBC, and the PostgreSQL layer now
-        uses persistent block storage.
-      </p>
-      <img src="/redef.svg" alt="Amaterix architecture diagram" />
-    </section>
-    
-    <h2>Projects</h2>
-
-    <div class="pdf-link">
-      <a href="/deployment-security-setup.pdf" target="_blank" rel="noopener noreferrer">
-        Download Deployment &amp; Security Setup (PDF)
-      </a>
+    <p class="hero-desc" style="margin-bottom:32px;">
+      <span style="color:#22d3ee;">Current build:</span><br>
+      Azure Migration Lab · AKS · Terraform · Helm · GitHub Actions · Key Vault · PostgreSQL
+    </p>
+    <div class="hero-cta">
+      <a href="#azure-project" class="btn-primary">View Azure Project</a>
+      <a href="https://ops.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Live Operations Console</a>
+      <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
+  </div>
+</section>
 
-    <section class="cards">
-      <article class="card">
-        <h3>Cloudflare + Origin Lockdown</h3>
-        <p>
-          Full (Strict) TLS, origin certificates, Cloudflare-managed DNS, and protected origin exposure. This setup is
-          used to validate certificate behavior, TLS routing, ingress access, and secure service publishing across the
-          website and Kubernetes-hosted APIs.
-        </p>
-      </article>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat fade-in">
+    <div class="stat-num">AKS</div>
+    <div class="stat-label">Managed Kubernetes · Azure</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-num">IaC</div>
+    <div class="stat-label">Terraform-Provisioned Infra</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-num"><span class="online"><span class="online-dot"></span>Live</span></div>
+    <div class="stat-label">Operations Console Online</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-num">HTTPS</div>
+    <div class="stat-label">cert-manager + Let's Encrypt</div>
+  </div>
+</div>
 
-      <article class="card">
-        <h3>Kubernetes + Secure API Delivery</h3>
-        <p>
-          Containerized services deployed on DigitalOcean Kubernetes, exposed through NGINX Ingress and secured with
-          Cloudflare-managed subdomains and TLS. This gives me a practical lab for ingress routing, service exposure,
-          hostname-based traffic handling, and failover testing.
-        </p>
-        <div class="inline-links">
-          Links:
-          <a href="https://api.amaterix.com" target="_blank" rel="noopener noreferrer">api.amaterix.com</a>
-          &nbsp;•&nbsp;
-          <a href="https://java-api.amaterix.com" target="_blank" rel="noopener noreferrer">java-api.amaterix.com</a>
+<!-- ARCHITECTURE -->
+<section class="arch-section" id="architecture">
+  <div class="section-eyebrow">Infrastructure</div>
+  <h2 class="section-title">Azure Migration Lab — Platform Architecture</h2>
+
+  <div class="arch-grid fade-in">
+    <div class="arch-card">
+      <div class="arch-card-icon">🏗️</div>
+      <div class="arch-card-title">Terraform — Infrastructure as Code</div>
+      <div class="arch-card-desc">Provisions the Azure Resource Group, Virtual Network, Subnet, AKS cluster, Container Registry, and Key Vault. Remote state is stored in Azure Storage for shared, locked state management.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">☸️</div>
+      <div class="arch-card-title">Azure Kubernetes Service (AKS)</div>
+      <div class="arch-card-desc">Managed Kubernetes control plane running Deployments, a StatefulSet, Services and Ingress across separate dev/test/prod namespaces, networked with Azure CNI Overlay.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">📦</div>
+      <div class="arch-card-title">Azure Container Registry (ACR)</div>
+      <div class="arch-card-desc">Private registry for the Operations Console and Pong demo images. AKS pulls images using the node pool's managed identity — no registry credentials stored in the cluster.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">🔐</div>
+      <div class="arch-card-title">Key Vault · Workload Identity · OIDC</div>
+      <div class="arch-card-desc">The PostgreSQL password lives in Azure Key Vault and reaches Pods through Workload Identity and OIDC federation via the Secrets Store CSI driver — never committed to Git.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">⛵</div>
+      <div class="arch-card-title">Helm — migration-app &amp; pong-app</div>
+      <div class="arch-card-desc">Two charts with dev/test/prod values files, deployed via helm upgrade --install. A real rollback was tested and verified against a previous revision.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">🗄️</div>
+      <div class="arch-card-title">PostgreSQL StatefulSet</div>
+      <div class="arch-card-desc">Runs as a StatefulSet with a PersistentVolumeClaim for durable storage. A real pg_dump → pg_restore migration was performed and verified end-to-end.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">🌐</div>
+      <div class="arch-card-title">NGINX Ingress · cert-manager · Cloudflare</div>
+      <div class="arch-card-desc">NGINX Ingress routes traffic to the Console and Pong by path. cert-manager issues a Let's Encrypt certificate for ops.peterhudcovic.tech, with DNS managed in Cloudflare.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">🖥️</div>
+      <div class="arch-card-title">Operations Console — FastAPI</div>
+      <div class="arch-card-desc">A live dashboard with guest/user/admin roles, a restricted read-only command interface, live pod events over SSE, controlled scaling/restarts, and a Demo Mode.</div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-icon">🗺️</div>
+      <div class="arch-card-title">Multi-Cloud Lab Experience</div>
+      <div class="arch-card-desc">Azure is the current primary focus. Earlier hands-on work includes a Google Cloud / GKE Autopilot SRE platform and a DigitalOcean Kubernetes environment used for FastAPI and Spring Boot applications, PostgreSQL, scheduled scraping workloads, ingress, persistent storage and failover testing.</div>
+    </div>
+  </div>
+
+  <div class="arch-diagram fade-in">
+    <span class="hl">Developer</span><br>
+    &nbsp;&nbsp;↓ git push<br>
+    <span class="hl">GitHub</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl2">GitHub Actions</span><br>
+    &nbsp;&nbsp;↓ docker build<br>
+    <span class="hl3">Azure Container Registry</span><br>
+    &nbsp;&nbsp;↓ helm upgrade --install<br>
+    <span class="hl2">Helm</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl">Azure Kubernetes Service</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├─ Operations Console<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├─ Pong<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;└─ PostgreSQL<br>
+    <br>
+    <span style="color:#ffffff55;font-size:11px"># Terraform provisions the platform underneath</span><br>
+    <span class="hl3">Terraform</span> → Resource Group · VNet/Subnet · AKS · ACR · Key Vault · Storage
+  </div>
+
+  <div class="arch-diagram fade-in" style="margin-top:24px">
+    <span style="color:#ffffff55;font-size:11px"># Secret delivery — no password stored in Git</span><br>
+    <span class="hl">Pod</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl2">ServiceAccount</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl3">Workload Identity</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl2">OIDC</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl3">Managed Identity</span><br>
+    &nbsp;&nbsp;↓<br>
+    <span class="hl">Azure Key Vault</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow">Projects</div>
+  <h2 class="section-title">Engineering Projects</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card project-featured fade-in" id="azure-project">
+      <div class="project-card-header">
+        <div class="project-icon">☁️</div>
+        <span class="project-badge badge-live">LIVE</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Azure Migration Lab — AKS Platform &amp; Operations Console</div>
+        <div class="project-desc">
+          End-to-end Azure Kubernetes platform. Terraform provisions the Resource Group, Virtual Network, Subnet, AKS cluster, Container Registry and Key Vault, with remote state stored in Azure Storage. GitHub Actions builds the Docker image, pushes it to Azure Container Registry, fetches AKS credentials, and runs a Helm upgrade against separate dev/test/prod releases — a real rollback was tested and verified. A Jenkins pipeline and an Ansible reproducibility check are also part of the setup.
+          <br><br>
+          PostgreSQL runs as a StatefulSet with persistent storage; a real <code>pg_dump</code> → <code>pg_restore</code> migration was performed and verified. Pod identity flows through ServiceAccount → Workload Identity → OIDC → Managed Identity → Azure Key Vault, so the database password never touches Git. RBAC is split between a namespace-scoped Role and a cluster-scoped ClusterRole limited to reading Nodes — no wildcard verbs anywhere.
+          <br><br>
+          The FastAPI-based Operations Console is live at <strong>ops.peterhudcovic.tech</strong>: guest/user/admin roles enforced server-side, a restricted read-only kubectl-style command interface (no shell, no subprocess), live pod events over Server-Sent Events, controlled scaling and rolling restarts, a 15-minute Demo Mode, and a built-in Project Guide documenting the whole stack. NGINX Ingress and cert-manager issue a Let's Encrypt certificate for the domain, with DNS managed in Cloudflare.
         </div>
-      </article>
-
-      <article class="card">
-        <h3>Python FastAPI + Java JDBC Lab</h3>
-        <p>
-          Built and deployed a FastAPI service for secure API delivery and a Spring Boot service connected to PostgreSQL
-          through JDBC for database integration, query execution, backend troubleshooting, and real deployment testing
-          across both the application and data layers.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>Persistent PostgreSQL Storage</h3>
-        <p>
-          Migrated PostgreSQL from a temporary pod-based setup to persistent storage backed by DigitalOcean Block Storage.
-          The database now runs as a StatefulSet with a PersistentVolumeClaim, restored data, and storage that survives
-          pod recreation and restart events.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>Apache HTTP/2 + GitHub Versioning</h3>
-        <p>
-          Apache remains part of the Linux hosting layer and was used for HTTPS enforcement, HTTP/2, and web server
-          hardening. The website itself is now versioned through GitHub, with updates tracked through commit history and
-          deployed automatically through GitHub Actions.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>Kubernetes Failover Testing</h3>
-        <p>
-          Tested both controlled node draining and a full node power-off scenario. Kubernetes successfully rescheduled
-          workloads onto other nodes, updated endpoints, restored ingress, and recovered API access after temporary
-          interruptions. This lab now includes practical failover validation rather than only static deployment.
-        </p>
-      </article>
-
-      <article class="card">
-        <h3>SSH Hardening</h3>
-        <p>
-          Key-based authentication, controlled firewall rules, and hardened remote access for safer server administration
-          and deployment operations across the Linux hosting layer and the wider lab environment.
-        </p>
-      </article>
-    </section>
-
-
-
-    <div class="bottom-link">
-      <a class="footer-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-        Connect with me on LinkedIn
-      </a>
+        <div class="project-tags">
+          <span class="tag">Azure</span><span class="tag">AKS</span><span class="tag">Terraform</span><span class="tag">ACR</span>
+          <span class="tag">Key Vault</span><span class="tag">Workload Identity</span><span class="tag">OIDC</span><span class="tag">Helm</span>
+          <span class="tag">GitHub Actions</span><span class="tag">Jenkins</span><span class="tag">Ansible</span><span class="tag">PostgreSQL</span>
+          <span class="tag">RBAC</span><span class="tag">FastAPI</span><span class="tag">cert-manager</span><span class="tag">NGINX Ingress</span>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
+          <a href="https://ops.peterhudcovic.tech/" class="btn-primary" target="_blank" rel="noopener noreferrer">Live Operations Console →</a>
+          <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        </div>
+      </div>
     </div>
-  </main>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-left">© 2026 Peter Hudcovic</div>
-      <div class="footer-center" id="footer-time">--</div>
-      <div class="footer-right">Visitors: 7</div>
+    <div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">🔁</div>
+        <span class="project-badge badge-infra">GCP · CI/CD</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">GCP SRE Platform Lab — Jenkins CI/CD &amp; GitOps</div>
+        <div class="project-desc">
+          Built and validated an end-to-end SRE platform on Google Cloud. Terraform provisions the network, Cloud NAT, Artifact Registry, IAM, and a regional GKE Autopilot cluster. Jenkins runs Pytest, builds a versioned Docker image, pushes it to Artifact Registry, and commits the updated Helm image tag. ArgoCD then synchronizes the change and performs a rolling deployment to GKE.
+          <br><br>
+          The lab also includes readiness and liveness probes, HPA, restrictive NetworkPolicy rules, non-root container security, custom Prometheus metrics, GKE Managed Prometheus, and tested ArgoCD self-healing and pruning.
+        </div>
+        <div class="project-tags">
+          <span class="tag">GCP</span><span class="tag">Terraform</span><span class="tag">GKE Autopilot</span>
+          <span class="tag">Jenkins</span><span class="tag">ArgoCD</span><span class="tag">Helm</span>
+          <span class="tag">Artifact Registry</span><span class="tag">Prometheus</span>
+        </div>
+        <a class="project-link" href="https://github.com/PeterHudcovic/gcp-sre-platform-lab" target="_blank" rel="noopener noreferrer">View GitHub repository →</a>
+      </div>
     </div>
-  </footer>
 
-  <script>
-    const footerTime = document.getElementById("footer-time");
-    footerTime.textContent = new Date().toLocaleString();
-  </script>
+    <div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">📞</div>
+        <span class="project-badge badge-infra">INFRA</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Self-Hosted SIP / VoIP Server</div>
+        <div class="project-desc">
+          Self-hosted SIP/VoIP setup on a DigitalOcean Ubuntu droplet, built and debugged from scratch: resolved chan_sip/res_pjsip port conflicts, fixed RTP audio silence caused by firewall mismatches, diagnosed and solved NAT traversal failures, and hardened the server against automated SIP scanner floods with fail2ban.
+          A successful transatlantic test call was completed and verified end-to-end with Wireshark, confirming zero packet loss.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Asterisk</span><span class="tag">SIP</span><span class="tag">RTP</span><span class="tag">NAT Traversal</span>
+          <span class="tag">fail2ban</span><span class="tag">Wireshark</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">🔁</div>
+        <span class="project-badge badge-infra">INFRA</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Kubernetes Failover Lab</div>
+        <div class="project-desc">
+          Tested controlled node drain on a live 3-node cluster. Workloads were rescheduled, PostgreSQL recovered through its PVC, and the API workload recovered after a short restart window. Next step: improve readiness probes and startup retry logic for smoother database recovery.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Kubernetes</span><span class="tag">kubectl drain</span><span class="tag">StatefulSet</span><span class="tag">PVC</span>
+        </div>
+        <button onclick="document.getElementById('failover-modal').style.display='flex'" style="margin-top:16px;background:transparent;border:1px solid var(--border);color:var(--accent2);font-family:var(--mono);font-size:12px;padding:8px 16px;border-radius:6px;cursor:pointer;">View failover test</button>
+      </div>
+    </div>
+
+<!-- FAILOVER MODAL -->
+<div id="failover-modal" style="display:none;position:fixed;inset:0;background:#000000cc;z-index:999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0a0e1a;border:1px solid var(--border);border-radius:12px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--border);">
+      <span style="font-family:var(--mono);font-size:13px;color:var(--accent2)">Kubernetes Failover — Terminal Output</span>
+      <button onclick="document.getElementById('failover-modal').style.display='none'" style="background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer;">×</button>
+    </div>
+    <div style="padding:24px;display:flex;flex-direction:column;gap:20px;">
+
+      <!-- Terminal 1 -->
+      <div style="background:#080c18;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--bg3);padding:8px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#4ade80;display:inline-block"></span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 1 — drain + verify</span>
+        </div>
+        <pre style="padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;color:#64748b;overflow-x:auto;margin:0;white-space:pre-wrap">$ kubectl get pod postgres-0 -o wide
+NAME         READY   STATUS    RESTARTS   AGE   NODE
+postgres-0   1/1     Running   0          12d   pool-node-3
+
+$ kubectl drain pool-node-3 --ignore-daemonsets --delete-emptydir-data
+node/pool-node-3 cordoned
+evicting pod default/postgres-0
+evicting pod default/api-7b7b9d566b-mdg7m
+pod/api-7b7b9d566b-mdg7m evicted
+pod/postgres-0 evicted
+<span style="color:#4ade80">node/pool-node-3 drained</span>
+
+$ curl https://&lt;api-endpoint&gt;/api/status
+StatusCode        : 200
+Content           : <span style="color:#4ade80">{"database":"connected","status":"ok"}</span>
+
+$ kubectl uncordon pool-node-3
+<span style="color:#4ade80">node/pool-node-3 uncordoned</span></pre>
+      </div>
+
+      <!-- Terminal 2 -->
+      <div style="background:#080c18;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--bg3);padding:8px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#4ade80;display:inline-block"></span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 2 — kubectl get pods -w</span>
+        </div>
+        <pre style="padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;color:#64748b;overflow-x:auto;margin:0;white-space:pre-wrap">$ kubectl get pods -w
+NAME                    READY   STATUS        RESTARTS   AGE
+postgres-0              1/1     <span style="color:#f87171">Terminating</span>   0          12d
+api-7b7b9d566b-mdg7m    1/1     <span style="color:#f87171">Terminating</span>   0          9d
+postgres-0              0/1     <span style="color:#fbbf24">Pending</span>       0          0s
+api-678z4               0/1     <span style="color:#fbbf24">ContainerCreating</span>   0    0s
+postgres-0              1/1     <span style="color:#4ade80">Running</span>       0          39s
+api-678z4               1/1     <span style="color:#4ade80">Running</span>       0          41s</pre>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">🥑</div>
+        <span class="project-badge badge-legacy">LEGACY · KUBERNETES PLATFORM</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">GuacAlert / DigitalOcean Kubernetes Platform</div>
+        <div class="project-desc">
+          An earlier multi-service application platform on a multi-node DigitalOcean Kubernetes cluster — not just a single scraper. Two independent backends ran as separate Kubernetes Deployments behind NGINX Ingress with hostname-based routing: a Python API built with FastAPI, and a Java API built with Spring Boot (historically routed as api.amaterix.com and java-api.amaterix.com). PostgreSQL 16 ran as a StatefulSet with persistent volume storage shared across the platform's services.
+          <br><br>
+          Scheduled Kubernetes CronJobs handled price-data automation: a Billa scraper and a Tesco scraper parsed retailer price data with Python and stored results in PostgreSQL, served through a dedicated API (historically ceny-api.amaterix.com) under the GuacAlert name. The same cluster was also used for hands-on multi-node Kubernetes operations — node drain, pod rescheduling, and recovery testing (see Kubernetes Failover Lab).
+          <br><br>
+          This platform is no longer actively maintained and its historical hostnames are not currently online — it remains here to show earlier hands-on experience running multiple real services, scheduled automation, and stateful storage on Kubernetes.
+        </div>
+        <div class="project-tags">
+          <span class="tag">DigitalOcean Kubernetes</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span>
+          <span class="tag">PostgreSQL 16</span><span class="tag">StatefulSet</span><span class="tag">Billa scraper</span>
+          <span class="tag">Tesco scraper</span><span class="tag">K8s CronJob</span><span class="tag">NGINX Ingress</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack-section" id="stack">
+  <div class="section-eyebrow">Tech Stack</div>
+  <h2 class="section-title">Tools &amp; Technologies</h2>
+
+  <div class="stack-grid fade-in">
+    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div>
+  </div>
+</section>
+
+<!-- LIVE STATUS -->
+<section style="background:var(--bg2);" id="status">
+  <div class="section-eyebrow">Live Status</div>
+  <h2 class="section-title">System Status</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:900px">
+
+    <div class="arch-card fade-in">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="arch-card-title" style="margin:0">☁️ Azure Migration Lab</div>
+        <span id="status-badge" style="font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:20px;background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b44">checking...</span>
+      </div>
+      <div id="status-detail" style="font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.7">
+        FastAPI Operations Console running on Azure Kubernetes Service.
+      </div>
+    </div>
+
+    <div class="arch-card fade-in">
+      <div class="arch-card-title" style="margin-bottom:12px">🌐 Public Links</div>
+      <div style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:2">
+        <div><span id="dot-ops" style="display:inline-block;margin-right:8px;width:10px;height:10px;border-radius:50%;background:#64748b;vertical-align:middle"></span>Operations Console — ops.peterhudcovic.tech</div>
+        <div><span class="online-dot" style="display:inline-block;margin-right:8px;width:10px;height:10px"></span>GitHub — azure-migration-lab</div>
+      </div>
+    </div>
+
+    <div class="arch-card fade-in">
+      <div class="arch-card-title" style="margin-bottom:12px">🔒 HTTPS</div>
+      <div style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.8">
+        Public demo endpoint · Let's Encrypt certificate via cert-manager · DNS managed in Cloudflare · hostname ops.peterhudcovic.tech
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="connect">
+  <div class="section-eyebrow">Contact</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <p style="color:var(--muted);max-width:480px;margin-bottom:32px;font-size:15px">
+    Open to DevOps, SRE, Cloud Infrastructure, Kubernetes, Linux and application/platform operations roles.
+  </p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap">
+    <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
+    <a href="https://github.com/PeterHudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Peter Hudcovic · peterhudcovic.tech</div>
+  <div class="footer-links">
+    <a href="https://github.com/PeterHudcovic" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/peter-hudcovic" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+// Typewriter nav intro (no external API dependency)
+(function() {
+  const el = document.getElementById('visitor-count');
+  const lines = [
+    'welcome to my lab...',
+    'session initialized...',
+    'aks :: online',
+  ];
+
+  function typeText(text, callback) {
+    let i = 0;
+    el.textContent = '';
+    const interval = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        if (callback) setTimeout(callback, 400);
+      }
+    }, 38);
+  }
+
+  function runLine(index) {
+    if (index >= lines.length) return;
+    typeText(lines[index], () => setTimeout(() => runLine(index + 1), 600));
+  }
+
+  setTimeout(() => runLine(0), 800);
+})();
+
+// Live reachability check for the Operations Console (real public /healthz endpoint)
+(function() {
+  const badge = document.getElementById('status-badge');
+  const detail = document.getElementById('status-detail');
+  const dot = document.getElementById('dot-ops');
+
+  fetch('https://ops.peterhudcovic.tech/healthz', { mode: 'no-cors', cache: 'no-cache' })
+    .then(() => {
+      if (badge) {
+        badge.textContent = 'online';
+        badge.style.background = '#16a34a22';
+        badge.style.color = '#4ade80';
+        badge.style.borderColor = '#16a34a44';
+      }
+      if (detail) {
+        detail.textContent = 'FastAPI Operations Console reachable on Azure Kubernetes Service (AKS).';
+      }
+      if (dot) {
+        dot.style.background = '#4ade80';
+        dot.style.boxShadow = '0 0 0 0 #4ade8066';
+        dot.style.animation = 'pulse 2s infinite';
+      }
+    })
+    .catch(() => {
+      if (badge) {
+        badge.textContent = 'unreachable';
+        badge.style.background = '#ef444422';
+        badge.style.color = '#f87171';
+        badge.style.borderColor = '#ef444444';
+      }
+      if (detail) {
+        detail.textContent = 'The Operations Console could not be reached from this browser.';
+      }
+      if (dot) {
+        dot.style.background = '#ef4444';
+        dot.style.animation = 'none';
+      }
+    });
+})();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Matrix rain
+(function() {
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  const hero = canvas.parentElement;
+
+  function resize() {
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); drops.length = 0; init(); });
+
+  // Tech stack words + binary + hex fragments
+  const wordPool = [
+    'AZURE','AKS','TERRAFORM','KUBERNETES','HELM','DOCKER','GITHUB ACTIONS','JENKINS','ANSIBLE',
+    'KEY VAULT','WORKLOAD IDENTITY','OIDC','ACR','NGINX','CERT-MANAGER','CLOUDFLARE',
+    'POSTGRESQL','PYTHON','FASTAPI','LINUX','GIT','RBAC','STATEFULSET','INGRESS','ROLLOUT',
+    'GKE','GCP','ARGOCD','PROMETHEUS','GITOPS','DIGITALOCEAN','TLS','SSH','PVC',
+    '0','1','0','1','1','0','0','1','1','0','1','0',
+    'FF','00','A3','4E','B2','7F','C0','DE','AD','BE','EF',
+    '>_','{}','[]','//','/*','*/','&&','||','!=','==',
+  ];
+  // Flatten into single char/token array weighted toward short items
+  const chars = [];
+  wordPool.forEach(w => {
+    // Short tokens repeat more — keeps density reasonable
+    const reps = w.length <= 2 ? 6 : w.length <= 4 ? 3 : 1;
+    for (let r = 0; r < reps; r++) chars.push(w);
+  });
+  const fontSize = 12;
+  let cols, drops;
+
+  function init() {
+    cols = Math.floor(canvas.width / (fontSize * 1.1));
+    drops = Array(cols).fill(0).map(() => Math.random() * -canvas.height / fontSize);
+  }
+  init();
+
+  function draw() {
+    // Black fade trail — slower fade = longer green tails
+    ctx.fillStyle = 'rgba(0,0,0,0.055)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = fontSize + 'px JetBrains Mono, monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const word = chars[Math.floor(Math.random() * chars.length)];
+      const y = drops[i] * fontSize;
+      const x = i * (fontSize * 1.1);
+
+      // Classic Matrix: bright white head, #00ff41 body
+      if (drops[i] > 0 && drops[i] < 3) {
+        ctx.fillStyle = '#ffffff'; // bright white leading char
+      } else {
+        ctx.fillStyle = '#00ff41'; // classic terminal green
+      }
+
+      ctx.fillText(word, x, y);
+
+      if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      // Slower — was 0.35-0.6, now 0.18-0.28
+      drops[i] += 0.18 + Math.random() * 0.10;
+    }
+  }
+
+  // Only animate when hero is visible
+  let animId;
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      animId = setInterval(draw, 50);
+    } else {
+      clearInterval(animId);
+    }
+  }, { threshold: 0.1 });
+  heroObs.observe(hero);
+})();
+</script>
 </body>
 </html>
