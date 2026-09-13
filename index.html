@@ -245,6 +245,10 @@ section { padding: clamp(60px,8vh,100px) var(--gutter); }
 .project-link:hover { gap: 10px; }
 .project-featured { grid-column: 1 / -1; }
 .project-featured .project-title { font-size: 22px; }
+.project-current { border-color: #22d3ee66; box-shadow: inset 3px 0 0 var(--accent2); }
+.badge-current { background: #22d3ee18; color: var(--accent2); border: 1px solid #22d3ee55; }
+.project-architecture { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--accent2); }
+.project-note { margin-top: 12px; font-size: 12px; color: var(--muted); }
 
 /* STACK */
 .stack-section { background: var(--bg2); }
@@ -293,7 +297,7 @@ footer {
 <body>
 
 <nav>
-  <div class="nav-logo">peter@aks:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
+  <div class="nav-logo">peter@lab:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
   <div class="nav-links">
     <a href="#architecture">Architecture</a>
     <a href="#projects">Projects</a>
@@ -317,12 +321,12 @@ footer {
       Helm, CI/CD, Linux, PostgreSQL and production-style troubleshooting.
     </p>
     <p class="hero-desc" style="margin-bottom:32px;">
-      <span style="color:#22d3ee;">Current build:</span><br>
-      Azure Migration Lab · AKS · Terraform · Helm · GitHub Actions · Key Vault · PostgreSQL
+      <span style="color:#22d3ee;">Current project:</span><br>
+      OpenShift + JBoss/WildFly Application Administration &amp; Troubleshooting Lab
     </p>
     <div class="hero-cta">
-      <a href="#azure-project" class="btn-primary">View Azure Project</a>
-      <a href="https://ops.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Live Operations Console</a>
+      <a href="#openshift-project" class="btn-primary">View Current Project</a>
+      <a href="#azure-project" class="btn-secondary">Azure Migration Lab</a>
       <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>
@@ -444,10 +448,37 @@ footer {
 
   <div class="projects-grid">
 
-    <div class="project-card project-featured fade-in" id="azure-project">
+    <div class="project-card project-featured project-current fade-in" id="openshift-project">
+      <div class="project-card-header">
+        <div class="project-icon">🔓</div>
+        <span class="project-badge badge-current">CURRENT PROJECT</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">OpenShift + JBoss/WildFly Application Administration &amp; Troubleshooting Lab</div>
+        <div class="project-desc">
+          Hands-on application administration in Red Hat OpenShift Developer Sandbox, running WildFly <strong>41.0.1.Final</strong> on <strong>JDK 21</strong>.
+          <br><br>
+          <strong>Deployed:</strong> <code>donation-app.war</code>, a Java / Jakarta EE application, successfully deployed using the WildFly deployment scanner and verified through JBoss CLI. Deployment monitored through WildFly <code>server.log</code> and OpenShift logs, with an OpenShift Deployment, Pod, Service and public HTTPS Route.
+          <br><br>
+          <strong>Next:</strong> PostgreSQL, JDBC datasource, connection pools, health/readiness probes and deliberate failure scenarios for troubleshooting practice. Diagnose incidents through JBoss CLI, logs, OpenShift CLI and each application layer.
+        </div>
+        <div class="project-architecture">OpenShift Route | Service | Pod | WildFly | Java WAR</div>
+        <div class="project-tags">
+          <span class="tag">OpenShift Developer Sandbox</span><span class="tag">WildFly 41.0.1.Final</span><span class="tag">JDK 21</span>
+          <span class="tag">Jakarta EE</span><span class="tag">Java WAR</span><span class="tag">JBoss CLI</span>
+          <span class="tag">Deployment Scanner</span><span class="tag">Logs</span><span class="tag">HTTPS Route</span>
+        </div>
+        <div style="margin-top:20px">
+          <a href="https://wildfly-peter-hudcovic-dev.apps.rm2.thpm.p1.openshiftapps.com/donation-app/" class="btn-primary" target="_blank" rel="noopener noreferrer">Live Donation App</a>
+        </div>
+        <p class="project-note">Live demo availability may be limited as the lab environment is only running during selected hours.</p>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" id="azure-project">
       <div class="project-card-header">
         <div class="project-icon">☁️</div>
-        <span class="project-badge badge-live">LIVE</span>
+        <span class="project-badge badge-infra">AZURE LAB</span>
       </div>
       <div class="project-card-body">
         <div class="project-title">Azure Migration Lab — AKS Platform &amp; Operations Console</div>
@@ -471,30 +502,6 @@ footer {
         <div style="margin-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6">
           Live lab availability: approximately 08:00–20:00 Europe/Prague.<br>
           The AKS cluster is automatically stopped outside these hours to reduce cloud costs.
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card fade-in">
-      <div class="project-card-header">
-        <div class="project-icon">🔓</div>
-        <span class="project-badge badge-infra">CONTAINER PLATFORM</span>
-      </div>
-      <div class="project-card-body">
-        <div class="project-title">Red Hat OpenShift — WildFly &amp; Java Application Stack</div>
-        <div class="project-desc">
-          Hands-on OpenShift platform work leveraging Red Hat Developer Sandbox for live testing. WildFly application server deployed and running under HTTPS OpenShift Routes with automatic TLS termination.
-          <br><br>
-          <strong>Architecture:</strong> Browser → OpenShift Route (TLS) → Service → WildFly/JBoss → Java WAR → PostgreSQL. The Route provides public HTTPS endpoint with automatic certificate management and traffic routing to the underlying Service.
-          <br><br>
-          <strong>Active Work:</strong> Java application integration, PostgreSQL database connectivity via JDBC datasource configuration within WildFly, health probes (readiness and liveness) for automatic pod recovery and rolling updates, comprehensive troubleshooting and debugging workflows for container-native Java operations.
-          <br><br>
-          <strong>Next Steps:</strong> Complete Java WAR deployment pipeline, production-ready datasource pooling, container resource optimization, and platform scaling strategies.
-        </div>
-        <div class="project-tags">
-          <span class="tag">OpenShift</span><span class="tag">Red Hat</span><span class="tag">WildFly</span><span class="tag">JBoss</span>
-          <span class="tag">Java</span><span class="tag">WAR</span><span class="tag">PostgreSQL</span><span class="tag">JDBC</span>
-          <span class="tag">Route</span><span class="tag">Service</span><span class="tag">HTTPS</span>
         </div>
       </div>
     </div>
@@ -767,7 +774,7 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   const lines = [
     'welcome to my lab...',
     'session initialized...',
-    'aks :: online',
+    'openshift :: active lab',
   ];
 
   function typeText(text, callback) {
