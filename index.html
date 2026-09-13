@@ -23,10 +23,12 @@
   --text:     #e2e8f0;
   --muted:    #64748b;
   --mono:     'JetBrains Mono', monospace;
+  --gutter: max(20px, calc((100vw - 1440px) / 2));
   --sans:     'Inter', sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 80px; }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
 /* SCROLLBAR */
@@ -38,7 +40,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); font
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 clamp(20px, 5vw, 60px);
+  padding: 0 var(--gutter);
   height: 56px;
   background: rgba(10,14,26,0.85);
   backdrop-filter: blur(12px);
@@ -60,13 +62,19 @@ nav {
 .nav-links { display: flex; gap: 28px; }
 .nav-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--text); }
-@media(max-width:600px){ .nav-links { display:none; } }
+@media(max-width:700px){
+  nav { height: auto; min-height: 88px; flex-direction: column; align-items: stretch; gap: 8px; padding: 8px 20px; }
+  .nav-logo { align-self: flex-start; font-size: 11px; }
+  .nav-links { gap: 20px; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
+  .nav-links a { font-size: 12px; }
+  [id] { scroll-margin-top: 112px; }
+}
 
 /* HERO */
 .hero {
-  min-height: 100vh;
+  min-height: min(780px, 85svh);
   display: flex; flex-direction: column; justify-content: center;
-  padding: clamp(80px,12vh,140px) clamp(20px,8vw,120px) 60px;
+  padding: 112px var(--gutter) 64px;
   position: relative; overflow: hidden;
 }
 #matrix-canvas {
@@ -89,9 +97,9 @@ nav {
   top: -100px; right: -100px; pointer-events: none; z-index: 0;
 }
 .hero-content {
-  position: relative; z-index: 1; max-width: 720px;
+  position: relative; z-index: 1; width: 100%; max-width: 1040px; margin-inline: auto;
   background: rgba(0,0,0,0.55);
-  padding: 36px 40px;
+  padding: clamp(24px, 4vw, 56px);
   border-radius: 12px;
   border: 1px solid #00ff4122;
   backdrop-filter: blur(2px);
@@ -115,7 +123,7 @@ nav {
 }
 .hero-title span { color: var(--accent); }
 .hero-desc {
-  font-size: 14px; color: var(--muted); max-width: 560px;
+  font-size: 14px; color: var(--muted); max-width: 760px;
   line-height: 1.8; margin-bottom: 16px; font-family: var(--mono);
 }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -158,7 +166,8 @@ nav {
 .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* SECTIONS */
-section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
+section { padding: clamp(60px,8vh,100px) var(--gutter); }
+@media(max-width:700px){ .hero { min-height: auto; padding-top: 124px; } .hero-eyebrow { letter-spacing: 0.1em; font-size: 10px; } }
 .section-eyebrow {
   font-family: var(--mono); font-size: 11px; color: var(--accent);
   letter-spacing: 0.15em; text-transform: uppercase;
@@ -172,7 +181,7 @@ section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
 
 /* ARCH */
 .arch-section { background: var(--bg2); }
-.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; }
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
 @media(max-width:700px){ .arch-grid { grid-template-columns: 1fr; } }
 .arch-card {
   background: var(--bg3); border: 1px solid var(--border);
@@ -195,8 +204,10 @@ section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
 .arch-diagram .hl3 { color: var(--accent); }
 
 /* PROJECTS */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media(max-width:700px){ .projects-grid { grid-template-columns: minmax(0, 1fr); } }
 .project-card {
+  min-width: 0; overflow-wrap: anywhere;
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: 12px; overflow: hidden;
   transition: border-color 0.2s, transform 0.2s;
@@ -237,7 +248,7 @@ section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
 
 /* STACK */
 .stack-section { background: var(--bg2); }
-.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; max-width: 900px; }
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; width: 100%; }
 .stack-item {
   background: var(--bg3); border: 1px solid var(--border);
   border-radius: 8px; padding: 14px 16px;
@@ -251,7 +262,7 @@ section { padding: clamp(60px,8vh,100px) clamp(20px,8vw,120px); }
 /* FOOTER */
 footer {
   border-top: 1px solid var(--border);
-  padding: 40px clamp(20px,8vw,120px);
+  padding: 40px var(--gutter);
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 16px;
   background: var(--bg2);
@@ -466,6 +477,30 @@ footer {
 
     <div class="project-card fade-in">
       <div class="project-card-header">
+        <div class="project-icon">🔓</div>
+        <span class="project-badge badge-infra">CONTAINER PLATFORM</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Red Hat OpenShift — WildFly &amp; Java Application Stack</div>
+        <div class="project-desc">
+          Hands-on OpenShift platform work leveraging Red Hat Developer Sandbox for live testing. WildFly application server deployed and running under HTTPS OpenShift Routes with automatic TLS termination.
+          <br><br>
+          <strong>Architecture:</strong> Browser → OpenShift Route (TLS) → Service → WildFly/JBoss → Java WAR → PostgreSQL. The Route provides public HTTPS endpoint with automatic certificate management and traffic routing to the underlying Service.
+          <br><br>
+          <strong>Active Work:</strong> Java application integration, PostgreSQL database connectivity via JDBC datasource configuration within WildFly, health probes (readiness and liveness) for automatic pod recovery and rolling updates, comprehensive troubleshooting and debugging workflows for container-native Java operations.
+          <br><br>
+          <strong>Next Steps:</strong> Complete Java WAR deployment pipeline, production-ready datasource pooling, container resource optimization, and platform scaling strategies.
+        </div>
+        <div class="project-tags">
+          <span class="tag">OpenShift</span><span class="tag">Red Hat</span><span class="tag">WildFly</span><span class="tag">JBoss</span>
+          <span class="tag">Java</span><span class="tag">WAR</span><span class="tag">PostgreSQL</span><span class="tag">JDBC</span>
+          <span class="tag">Route</span><span class="tag">Service</span><span class="tag">HTTPS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-card-header">
         <div class="project-icon">☁️↔️</div>
         <span class="project-badge badge-infra">MIGRATION</span>
       </div>
@@ -486,30 +521,6 @@ footer {
           <span class="tag">PostgreSQL</span><span class="tag">ingress-nginx</span><span class="tag">RBAC</span>
         </div>
         <a class="project-link" href="https://github.com/PeterHudcovic/azure-migration-lab/tree/gcp-exact-clone" target="_blank" rel="noopener noreferrer">View migration branch →</a>
-      </div>
-    </div>
-
-    <div class="project-card fade-in">
-      <div class="project-card-header">
-        <div class="project-icon">🔓</div>
-        <span class="project-badge badge-infra">CONTAINER PLATFORM</span>
-      </div>
-      <div class="project-card-body">
-        <div class="project-title">Red Hat OpenShift — WildFly &amp; Java Application Stack</div>
-        <div class="project-desc">
-          Hands-on OpenShift platform work leveraging Red Hat Developer Sandbox for live testing. WildFly application server deployed and running under HTTPS OpenShift Routes with automatic TLS termination.
-          <br><br>
-          <strong>Architecture:</strong> Browser → OpenShift Route (TLS) → Service → WildFly/JBoss → Java WAR → PostgreSQL. The Route provides public HTTPS endpoint with automatic certificate management and traffic routing to the underlying Service.
-          <br><br>
-          <strong>Active Work:</strong> Java application integration, PostgreSQL database connectivity via JDBC datasource configuration within WildFly, health probes (readiness and liveness) for automatic pod recovery and rolling updates, comprehensive troubleshooting and debugging workflows for container-native Java operations.
-          <br><br>
-          <strong>Next Steps:</strong> Complete Java WAR deployment pipeline, production-ready datasource pooling, container resource optimization, and platform scaling strategies.
-        </div>
-        <div class="project-tags">
-          <span class="tag">OpenShift</span><span class="tag">Red Hat</span><span class="tag">WildFly</span><span class="tag">JBoss</span>
-          <span class="tag">Java</span><span class="tag">WAR</span><span class="tag">PostgreSQL</span><span class="tag">JDBC</span>
-          <span class="tag">Route</span><span class="tag">Service</span><span class="tag">HTTPS</span>
-        </div>
       </div>
     </div>
 
@@ -699,22 +710,22 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   <div class="section-eyebrow">Live Status</div>
   <h2 class="section-title">System Status</h2>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:900px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px">
 
     <div class="arch-card fade-in">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
         <div class="arch-card-title" style="margin:0">☁️ Azure Migration Lab</div>
-        <span id="status-badge" style="font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:20px;background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b44">checking...</span>
+        <span id="status-badge" style="font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:20px;background:#1d4ed822;color:#60a5fa;border:1px solid #1d4ed844">Sleeping / Cost-saving mode</span>
       </div>
       <div id="status-detail" style="font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.7">
-        FastAPI Operations Console running on Azure Kubernetes Service.
+        The lab runs only during scheduled demonstrations to reduce cloud costs. It can be started on demand.
       </div>
     </div>
 
     <div class="arch-card fade-in">
       <div class="arch-card-title" style="margin-bottom:12px">🌐 Public Links</div>
       <div style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:2">
-        <div><span id="dot-ops" style="display:inline-block;margin-right:8px;width:10px;height:10px;border-radius:50%;background:#64748b;vertical-align:middle"></span>Operations Console — ops.peterhudcovic.tech</div>
+        <div><span id="dot-ops" style="display:inline-block;margin-right:8px;width:10px;height:10px;border-radius:50%;background:#64748b;vertical-align:middle"></span>Operations Console — <wbr>ops.peterhudcovic.tech</div>
         <div><span class="online-dot" style="display:inline-block;margin-right:8px;width:10px;height:10px"></span>GitHub — azure-migration-lab</div>
       </div>
     </div>
@@ -780,45 +791,8 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   setTimeout(() => runLine(0), 800);
 })();
 
-// Live reachability check for the Operations Console (real public /healthz endpoint)
-(function() {
-  const badge = document.getElementById('status-badge');
-  const detail = document.getElementById('status-detail');
-  const dot = document.getElementById('dot-ops');
-
-  fetch('https://ops.peterhudcovic.tech/healthz', { mode: 'no-cors', cache: 'no-cache' })
-    .then(() => {
-      if (badge) {
-        badge.textContent = 'online';
-        badge.style.background = '#16a34a22';
-        badge.style.color = '#4ade80';
-        badge.style.borderColor = '#16a34a44';
-      }
-      if (detail) {
-        detail.textContent = 'FastAPI Operations Console reachable on Azure Kubernetes Service (AKS).';
-      }
-      if (dot) {
-        dot.style.background = '#4ade80';
-        dot.style.boxShadow = '0 0 0 0 #4ade8066';
-        dot.style.animation = 'pulse 2s infinite';
-      }
-    })
-    .catch(() => {
-      if (badge) {
-        badge.textContent = 'unreachable';
-        badge.style.background = '#ef444422';
-        badge.style.color = '#f87171';
-        badge.style.borderColor = '#ef444444';
-      }
-      if (detail) {
-        detail.textContent = 'The Operations Console could not be reached from this browser.';
-      }
-      if (dot) {
-        dot.style.background = '#ef4444';
-        dot.style.animation = 'none';
-      }
-    });
-})();
+// The lab is intentionally sleeping between scheduled demonstrations.
+// A cross-origin reachability check cannot reliably establish its health.
 
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
