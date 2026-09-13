@@ -466,6 +466,55 @@ footer {
 
     <div class="project-card fade-in">
       <div class="project-card-header">
+        <div class="project-icon">☁️↔️</div>
+        <span class="project-badge badge-infra">MIGRATION</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Azure → Google Cloud Migration Lab</div>
+        <div class="project-desc">
+          Executed a complete infrastructure migration from Azure Kubernetes Service (AKS) to Google Kubernetes Engine (GKE) with minimal manual intervention. The migration was primarily autonomous, coordinated through Claude Code with ChatGPT support: infrastructure goal defined, architecture reviewed and approved, sensitive operations controlled and verified.
+          <br><br>
+          <strong>Components Migrated:</strong> AKS cluster → GKE Standard, Azure Container Registry (ACR) → Google Artifact Registry, Azure Managed Disks → Google Persistent Disks. Infrastructure provisioned with Terraform, workloads deployed via Helm, CI/CD via GitHub Actions. PostgreSQL database migrated end-to-end with verified data integrity.
+          <br><br>
+          <strong>RBAC, Security & Observability:</strong> Role-Based Access Control configured across namespaces, Secret management via Google Secret Manager, ingress-nginx for traffic routing, TLS termination. The lab implements a complete shutdown/wake cycle: cluster can be stopped to 0 GKE nodes, manually awakened via GitHub Actions workflow, reducing operational costs while maintaining reproducibility.
+          <br><br>
+          <strong>Current Status:</strong> Lab is sleeping with 0 active nodes. Can be manually triggered to wake and resume operations.
+        </div>
+        <div class="project-tags">
+          <span class="tag">GCP</span><span class="tag">GKE</span><span class="tag">Terraform</span><span class="tag">Migration</span>
+          <span class="tag">Artifact Registry</span><span class="tag">Helm</span><span class="tag">GitHub Actions</span>
+          <span class="tag">PostgreSQL</span><span class="tag">ingress-nginx</span><span class="tag">RBAC</span>
+        </div>
+        <a class="project-link" href="https://github.com/PeterHudcovic/azure-migration-lab/tree/gcp-exact-clone" target="_blank" rel="noopener noreferrer">View migration branch →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">🔓</div>
+        <span class="project-badge badge-infra">CONTAINER PLATFORM</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Red Hat OpenShift — WildFly &amp; Java Application Stack</div>
+        <div class="project-desc">
+          Hands-on OpenShift platform work leveraging Red Hat Developer Sandbox for live testing. WildFly application server deployed and running under HTTPS OpenShift Routes with automatic TLS termination.
+          <br><br>
+          <strong>Architecture:</strong> Browser → OpenShift Route (TLS) → Service → WildFly/JBoss → Java WAR → PostgreSQL. The Route provides public HTTPS endpoint with automatic certificate management and traffic routing to the underlying Service.
+          <br><br>
+          <strong>Active Work:</strong> Java application integration, PostgreSQL database connectivity via JDBC datasource configuration within WildFly, health probes (readiness and liveness) for automatic pod recovery and rolling updates, comprehensive troubleshooting and debugging workflows for container-native Java operations.
+          <br><br>
+          <strong>Next Steps:</strong> Complete Java WAR deployment pipeline, production-ready datasource pooling, container resource optimization, and platform scaling strategies.
+        </div>
+        <div class="project-tags">
+          <span class="tag">OpenShift</span><span class="tag">Red Hat</span><span class="tag">WildFly</span><span class="tag">JBoss</span>
+          <span class="tag">Java</span><span class="tag">WAR</span><span class="tag">PostgreSQL</span><span class="tag">JDBC</span>
+          <span class="tag">Route</span><span class="tag">Service</span><span class="tag">HTTPS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-card-header">
         <div class="project-icon">🔁</div>
         <span class="project-badge badge-infra">GCP · CI/CD</span>
       </div>
@@ -638,6 +687,10 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div>
     <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div>
     <div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div>
   </div>
 </section>
 
