@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Peter Hudcovic — Cloud, Kubernetes &amp; DevOps</title>
 <meta property="og:title" content="Peter Hudcovic — Cloud, Kubernetes & DevOps" />
-<meta property="og:description" content="Hands-on infrastructure engineering across Azure, Kubernetes, Terraform, Helm, GitHub Actions and PostgreSQL — featuring the Azure Migration Lab and its live Operations Console." />
+<meta property="og:description" content="Hands-on infrastructure engineering across IBM AIX, PowerHA, Azure and Kubernetes — featuring the Old School AIX Live Lab on IBM PowerVS and the Azure Migration Lab." />
 <meta property="og:url" content="https://peterhudcovic.tech" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://peterhudcovic.tech/preview.png" />
@@ -325,10 +325,11 @@ footer {
     </p>
     <p class="hero-desc" style="margin-bottom:32px;">
       <span style="color:#22d3ee;">Current project:</span><br>
-      OpenShift + JBoss/WildFly Application Administration &amp; Troubleshooting Lab
+      Old School AIX — IBM AIX 7.3 + PowerHA SystemMirror
     </p>
     <div class="hero-cta">
-      <a href="#openshift-project" class="btn-primary">View Current Project</a>
+      <a href="http://161.156.163.114/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open AIX Live Lab →</a>
+      <a href="#aix-project" class="btn-secondary">About the AIX Lab</a>
       <a href="#azure-project" class="btn-secondary">Azure Migration Lab</a>
       <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
@@ -451,10 +452,43 @@ footer {
 
   <div class="projects-grid">
 
-    <div class="project-card project-featured project-current fade-in" id="openshift-project">
+    <div class="project-card project-featured project-current fade-in" id="aix-project">
+      <div class="project-card-header">
+        <div class="project-icon">🖥️</div>
+        <span class="project-badge badge-current">CURRENT PROJECT · AIX LAB</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Old School AIX</div>
+        <div class="project-architecture" style="margin-top:0;margin-bottom:16px">IBM AIX 7.3 · PowerHA SystemMirror 7.2.10 SP1 · IBM PowerVS</div>
+        <div class="project-desc">
+          A real two-node IBM AIX high-availability lab provisioned with Terraform on IBM Cloud PowerVS. Built <code>old_school_cluster</code> across <code>aix01</code> and <code>aix02</code> with dedicated heartbeat networking, shared repository and application disks, a movable service IP, shared VG / JFS2 filesystem and a PowerHA application controller.
+          <br><br>
+          <strong>Failover validated:</strong> Moved <code>old_school_rg</code> from aix01 to aix02 and back. The service IP, shared VG, filesystem and application controller followed correctly, with data preserved and clean final cluster health. Both nodes passed AIX TL/SP, PowerHA version, <code>lppchk -v</code>, disk and heartbeat checks. Includes a rolling maintenance / patching runbook.
+          <br><br>
+          <strong>Troubleshooting:</strong> Resolved storage-pool and anti-affinity placement issues, Terraform state/import recovery, root filesystem sizing, PowerHA Automation / IAM configuration, Windows CRLF contamination and clcomd issues.
+          <br><br>
+          <strong>Live demo:</strong> A separate public interface provides nine allowlisted read-only commands against aix01, live PowerHA status, a REAL MODE indicator and shared output over WebSocket. Access uses a restricted demo account, a forced-command SSH wrapper, strict host-key verification and rate limiting, with no interactive shell or arbitrary commands.
+        </div>
+        <div class="project-tags">
+          <span class="tag">IBM AIX 7.3</span><span class="tag">PowerHA SystemMirror</span><span class="tag">IBM PowerVS</span>
+          <span class="tag">UNIX</span><span class="tag">High Availability</span><span class="tag">Terraform</span>
+          <span class="tag">LVM</span><span class="tag">JFS2</span><span class="tag">SSH</span><span class="tag">Infrastructure</span>
+        </div>
+        <div style="margin-top:20px">
+          <a href="http://161.156.163.114/" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a>
+        </div>
+        <p class="project-note">Public read-only demo, HTTP for now.</p>
+        <figure class="project-screenshot">
+          <a href="http://161.156.163.114/" target="_blank" rel="noopener noreferrer"><img src="aix-lab.jpg" alt="Old School AIX Live Lab showing REAL MODE, read-only command buttons, PowerHA node status and real terminal output" width="1518" height="1130" loading="lazy"></a>
+          <figcaption>AIX lab snapshot: PowerHA cluster status and shared terminal output.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="project-card project-featured fade-in" id="openshift-project">
       <div class="project-card-header">
         <div class="project-icon">🔓</div>
-        <span class="project-badge badge-current">CURRENT PROJECT</span>
+        <span class="project-badge badge-infra">OPENSHIFT LAB</span>
       </div>
       <div class="project-card-body">
         <div class="project-title">OpenShift + JBoss/WildFly Application Administration &amp; Troubleshooting Lab</div>
@@ -684,6 +718,9 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   <h2 class="section-title">Tools &amp; Technologies</h2>
 
   <div class="stack-grid fade-in">
+    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div>
+    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM PowerVS</div>
     <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div>
     <div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div>
     <div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div>
@@ -781,7 +818,7 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   const lines = [
     'welcome to my lab...',
     'session initialized...',
-    'openshift :: active lab',
+    'aix :: latest lab',
   ];
 
   function typeText(text, callback) {

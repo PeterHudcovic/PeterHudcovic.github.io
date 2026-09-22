@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.PORT }}
-          source: "index.html,redef.svg"
+          source: "index.html,redef.svg,aix-lab.jpg"
           target: "/var/www/html"
 
       - name: Reload Apache
