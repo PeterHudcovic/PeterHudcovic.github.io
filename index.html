@@ -66,11 +66,11 @@ nav {
 .nav-links .nav-button { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); white-space: nowrap; }
 .nav-links .nav-button:hover { border-color: var(--accent); }
 @media(max-width:1050px){
-  nav { height: auto; min-height: 88px; flex-direction: column; align-items: stretch; gap: 8px; padding: 8px 20px; }
+  nav { position: sticky; height: auto; min-height: 88px; flex-direction: column; align-items: stretch; gap: 8px; padding: 8px 20px; }
   .nav-logo { align-self: flex-start; font-size: 11px; }
-  .nav-links { gap: 20px; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
+  .nav-links { flex-wrap: wrap; gap: 8px; padding-bottom: 2px; }
   .nav-links a { font-size: 12px; }
-  [id] { scroll-margin-top: 112px; }
+  [id] { scroll-margin-top: 180px; }
 }
 
 @media(min-width:1051px) {
@@ -204,7 +204,8 @@ nav {
 
 /* SECTIONS */
 section { padding: clamp(60px,8vh,100px) var(--gutter); }
-@media(max-width:700px){ .hero { min-height: auto; padding-top: 124px; } .hero-eyebrow { letter-spacing: 0.1em; font-size: 10px; } }
+@media(max-width:1050px){ .hero { padding-top: 36px; } }
+@media(max-width:700px){ .hero { min-height: auto; } .hero-eyebrow { letter-spacing: 0.1em; font-size: 10px; } }
 .section-eyebrow {
   font-family: var(--mono); font-size: 11px; color: var(--accent);
   letter-spacing: 0.15em; text-transform: uppercase;
