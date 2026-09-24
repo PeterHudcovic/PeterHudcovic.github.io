@@ -40,7 +40,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); font
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 var(--gutter);
+  padding: 0 max(var(--gutter), calc((100% - 1040px) / 2));
+  gap: 16px;
   height: 56px;
   background: rgba(10,14,26,0.85);
   backdrop-filter: blur(12px);
@@ -59,10 +60,12 @@ nav {
   animation: blink 1.1s step-end infinite;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.nav-links { display: flex; gap: 28px; }
+.nav-links { display: flex; align-items: center; gap: 16px; }
 .nav-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--text); }
-@media(max-width:700px){
+.nav-links .nav-button { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); white-space: nowrap; }
+.nav-links .nav-button:hover { border-color: var(--accent); }
+@media(max-width:1050px){
   nav { height: auto; min-height: 88px; flex-direction: column; align-items: stretch; gap: 8px; padding: 8px 20px; }
   .nav-logo { align-self: flex-start; font-size: 11px; }
   .nav-links { gap: 20px; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
@@ -395,8 +398,8 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <nav>
   <div class="nav-logo">peter@lab:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
   <div class="nav-links">
-    <a href="#projects">Projects</a>
-    <a href="#labs">More Labs</a>
+    <a class="nav-button" href="#projects">Projects</a>
+    <a class="nav-button" href="#labs">More Labs</a>
     <a href="#playbooks">Project Thinking</a>
     <a href="#experience">Where I have built</a>
     <a href="#stack">Stack</a>
@@ -932,10 +935,10 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     Open to DevOps, SRE, Cloud Infrastructure, Kubernetes, Linux and application/platform operations roles.
   </p>
   <div style="display:flex;gap:14px;flex-wrap:wrap">
-    <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
-    <a href="https://github.com/PeterHudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     <button type="button" class="btn-secondary" id="cv-open">Download CV</button>
+    <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://www.credly.com/users/peter-hudcovic.286eaa50/badges/credly" class="btn-secondary" target="_blank" rel="noopener noreferrer">Credly</a>
+    <a href="https://github.com/PeterHudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
 
     </div>
