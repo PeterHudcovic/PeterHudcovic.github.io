@@ -333,6 +333,16 @@ footer {
 /* FADE IN */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
+/* GROUPED TOOLS AND TECHNOLOGIES */
+#stack .section-title { margin-bottom: 28px; }
+#stack .technology-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+#stack .technology-group { min-width: 0; }
+#stack .technology-group h3 { font: 12px/1.5 var(--mono); color: var(--accent2); margin-bottom: 14px; }
+#stack .stack-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+#stack .stack-item { padding: 8px 10px; font-size: 11px; color: #94a3b8; }
+@media(max-width:1050px) { #stack .technology-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width:700px) { #stack .technology-groups { grid-template-columns: minmax(0, 1fr); } }
+/* END GROUPED TOOLS AND TECHNOLOGIES */
 </style>
 </head>
 <body>
@@ -775,47 +785,9 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 
 <!-- STACK -->
 <section class="stack-section" id="stack">
-  <div class="section-eyebrow">Tech Stack</div>
-  <h2 class="section-title">Tools &amp; Technologies</h2>
-
-  <div class="stack-grid fade-in">
-    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM PowerVS</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div>
-    <div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div>
-  </div>
-</section>
+<div class="section-eyebrow">Tech Stack</div>
+<h2 class="section-title">Tools &amp; Technologies</h2>
+<div class="technology-groups"><div class="technology-group"><h3>Cloud &amp; platforms</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM Cloud / PowerVS</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div><div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div><div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div></div></div><div class="technology-group"><h3>Containers &amp; infrastructure as code</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div><div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div><div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div><div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div></div></div><div class="technology-group"><h3>Automation &amp; delivery</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div><div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div><div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div><div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div><div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div></div></div><div class="technology-group"><h3>Application &amp; data</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div><div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div><div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div><div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div><div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div><div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div></div></div><div class="technology-group"><h3>Operations &amp; networking</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div><div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div><div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div><div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div><div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div></div></div></div></section>
 
 <!-- LIVE STATUS -->
 <section style="background:var(--bg2);" id="status">
