@@ -71,7 +71,7 @@ nav {
 }
 
 /* PROJECT TAKEOVER PLAYBOOK */
-.takeover-section { padding: 88px var(--gutter) 32px; background: var(--bg2); }
+.takeover-section { position: relative; z-index: 1; width: 100%; padding: 0; margin-top: 32px; }
 .takeover-preview { max-width: 1200px; margin-inline: auto; }
 .takeover-download {
   display: block; width: 50%; margin-inline: auto; text-decoration: none;
@@ -87,7 +87,6 @@ nav {
 }
 .takeover-action { color: var(--accent2); font-size: 13px; text-decoration: underline; }
 @media(max-width:700px) {
-  .takeover-section { padding-top: 112px; }
   .takeover-caption { padding: 12px 16px; }
 }
 
@@ -332,20 +331,6 @@ footer {
   </div>
 </nav>
 
-<!-- PROJECT TAKEOVER PLAYBOOK -->
-<section class="takeover-section" id="takeover" aria-label="Project takeover playbook">
-  <div class="takeover-preview">
-    <a class="takeover-download" href="it-takeover-playbook.pdf" download="IT-Takeover-Playbook.pdf">
-      <img src="project_takeover.jpg" width="2238" height="1638" fetchpriority="high"
-        alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service.">
-      <span class="takeover-caption">
-        <strong>IT Takeover Playbook</strong>
-        <span class="takeover-action" lang="sk">Celý dokument je tu — stiahnuť PDF &#8595;</span>
-      </span>
-    </a>
-  </div>
-</section>
-
 <!-- HERO -->
 <section class="hero">
   <canvas id="matrix-canvas"></canvas>
@@ -370,6 +355,20 @@ footer {
       <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>
+
+<!-- PROJECT TAKEOVER PLAYBOOK -->
+<section class="takeover-section" id="takeover" aria-label="Project takeover playbook">
+  <div class="takeover-preview">
+    <a class="takeover-download" href="it-takeover-playbook.pdf" download="IT-Takeover-Playbook.pdf">
+      <img src="project_takeover.jpg" width="2238" height="1638" fetchpriority="high"
+        alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service.">
+      <span class="takeover-caption">
+        <strong>IT Takeover Playbook</strong>
+        <span class="takeover-action" lang="sk">Celý dokument je tu — stiahnuť PDF &#8595;</span>
+      </span>
+    </a>
+  </div>
+</section>
 </section>
 
 <!-- STATS -->
