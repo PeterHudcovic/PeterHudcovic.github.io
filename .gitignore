@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# Private CV files and configurations must stay outside this repository.
+Peter_Hudcovic_CV_*.pdf
+*cv-private*.json

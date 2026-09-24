@@ -13,6 +13,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Copy private download endpoint
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          source: "cv-download.php"
+          target: "/var/www/html"
+
+      - name: Verify private endpoint before publishing the form
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -eu
+            php -l /var/www/html/cv-download.php >/dev/null
+            status=$(curl --silent --show-error --max-time 20 --output /dev/null --write-out '%{http_code}' https://peterhudcovic.tech/cv-download.php -H 'Origin: https://peterhudcovic.tech' -H 'Content-Type: application/json' --data '{"code":"deployment-readiness-check"}')
+            test "$status" = 403
+            echo 'Private CV endpoint ready; invalid code rejected'
+
       - name: Copy website file to server
         uses: appleboy/scp-action@v1.0.0
         with:
@@ -21,7 +47,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.PORT }}
-          source: "index.html,redef.svg,aix-lab.jpg,project_takeover.jpg,it-takeover-playbook.pdf"
+          source: "index.html,redef.svg,aix-lab.jpg,project_takeover.jpg,it-takeover-playbook.pdf,simple-project-roadmap.png,simple-project-roadmap.pdf"
           target: "/var/www/html"
 
       - name: Reload Apache
@@ -33,4 +59,6 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.PORT }}
           script: |
+            set -eu
+            rm -f /var/www/html/cv-setup.php
             sudo systemctl reload apache2

@@ -72,21 +72,28 @@ nav {
 
 /* PROJECT TAKEOVER PLAYBOOK */
 .takeover-section { position: relative; z-index: 1; width: 100%; padding: 0; margin-top: 32px; }
-.takeover-preview { max-width: 1200px; margin-inline: auto; }
+.takeover-preview {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+  max-width: 1200px; margin-inline: auto;
+}
 .takeover-download {
-  display: block; width: 50%; margin-inline: auto; text-decoration: none;
+  display: flex; flex-direction: column; min-width: 0; text-decoration: none;
   border: 1px solid var(--border); border-radius: 12px;
   overflow: hidden; background: var(--bg3);
 }
 .takeover-download:hover { border-color: var(--accent2); }
 .takeover-download:focus-visible { outline: 3px solid var(--accent2); outline-offset: 5px; }
-.takeover-preview img { display: block; width: 100%; height: auto; background: #fff; }
+.takeover-preview img {
+  display: block; width: 100%; height: auto; aspect-ratio: 2238 / 1638;
+  object-fit: contain; background: #fff;
+}
 .takeover-caption {
   display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 8px 20px; padding: 16px 20px; color: var(--text);
+  flex-wrap: wrap; flex: 1; gap: 8px 20px; padding: 16px 20px; color: var(--text);
 }
 .takeover-action { color: var(--accent2); font-size: 13px; text-decoration: underline; }
 @media(max-width:700px) {
+  .takeover-preview { grid-template-columns: minmax(0, 1fr); }
   .takeover-caption { padding: 12px 16px; }
 }
 
@@ -312,6 +319,17 @@ footer {
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
+/* PRIVATE CV DOWNLOAD */
+.cv-dialog { margin: auto; width: min(440px, calc(100% - 40px)); padding: 28px; color: var(--text); background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; }
+.cv-dialog::backdrop { background: #000b; }
+.cv-dialog h2 { font-size: 24px; margin-bottom: 8px; }
+.cv-dialog p { color: #94a3b8; margin-bottom: 20px; }
+.cv-dialog label { display: block; margin-bottom: 8px; }
+.cv-dialog input { width: 100%; padding: 12px; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.cv-dialog input:focus-visible { outline: 2px solid var(--accent2); }
+.cv-dialog .cv-message { margin: 12px 0; min-height: 1.7em; color: #fca5a5; }
+.cv-actions { display: flex; gap: 12px; justify-content: flex-end; }
+
 /* FADE IN */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
@@ -357,13 +375,21 @@ footer {
   </div>
 
 <!-- PROJECT TAKEOVER PLAYBOOK -->
-<section class="takeover-section" id="takeover" aria-label="Project takeover playbook">
+<section class="takeover-section" id="takeover" aria-label="Project playbooks">
   <div class="takeover-preview">
     <a class="takeover-download" href="it-takeover-playbook.pdf" download="IT-Takeover-Playbook.pdf">
       <img src="project_takeover.jpg" width="2238" height="1638" fetchpriority="high"
         alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service.">
       <span class="takeover-caption">
         <strong>IT Takeover Playbook</strong>
+        <span class="takeover-action">Download the full document here &#8595;</span>
+      </span>
+    </a>
+    <a class="takeover-download" href="simple-project-roadmap.pdf" download="Simple-Project-Roadmap.pdf">
+      <img src="simple-project-roadmap.png" width="1800" height="1275" loading="lazy"
+        alt="How I structure and deliver projects: a ten-step roadmap covering objectives, scope, people, resources, risks, planning, delivery, checks and closure.">
+      <span class="takeover-caption">
+        <strong>Simple Project Roadmap</strong>
         <span class="takeover-action">Download the full document here &#8595;</span>
       </span>
     </a>
@@ -835,8 +861,23 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   <div style="display:flex;gap:14px;flex-wrap:wrap">
     <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
     <a href="https://github.com/PeterHudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <button type="button" class="btn-secondary" id="cv-open">Download CV</button>
   </div>
 </section>
+
+<dialog class="cv-dialog" id="cv-dialog" aria-labelledby="cv-title" aria-describedby="cv-description">
+  <form id="cv-form">
+    <h2 id="cv-title">Download CV</h2>
+    <p id="cv-description">Enter the code you received from me on LinkedIn.</p>
+    <label for="cv-code">Enter code</label>
+    <input id="cv-code" name="code" type="password" required maxlength="128" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="cv-message">
+    <p id="cv-message" class="cv-message" role="status" aria-live="polite"></p>
+    <div class="cv-actions">
+      <button type="button" class="btn-secondary" id="cv-cancel">Cancel</button>
+      <button type="submit" class="btn-primary" id="cv-submit">OK</button>
+    </div>
+  </form>
+</dialog>
 
 <footer>
   <div class="footer-left">© 2026 Peter Hudcovic · peterhudcovic.tech</div>
@@ -847,6 +888,50 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 </footer>
 
 <script>
+// The server checks the code and returns only the matching document.
+(function() {
+  const dialog = document.getElementById('cv-dialog');
+  const form = document.getElementById('cv-form');
+  const code = document.getElementById('cv-code');
+  const message = document.getElementById('cv-message');
+  const submit = document.getElementById('cv-submit');
+  let request;
+  document.getElementById('cv-open').addEventListener('click', () => {
+    form.reset(); message.textContent = ''; dialog.showModal(); code.focus();
+  });
+  document.getElementById('cv-cancel').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => { if (request) request.abort(); form.reset(); });
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (request) return;
+    const controller = new AbortController(); request = controller;
+    submit.disabled = true; submit.textContent = 'Downloading…'; message.textContent = '';
+    try {
+      const response = await fetch('/cv-download.php', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code.value }), signal: controller.signal, cache: 'no-store'
+      });
+      if (!response.ok) {
+        message.textContent = response.status === 403 ? 'Invalid code. Please try again.' :
+          response.status === 429 ? 'Too many attempts. Please try again in 15 minutes.' :
+          'Download is unavailable right now. Please contact me on LinkedIn.';
+        code.value = ''; code.focus(); return;
+      }
+      if (!(response.headers.get('Content-Type') || '').startsWith('application/pdf')) throw new Error('Unexpected response');
+      const blob = await response.blob();
+      if (controller.signal.aborted) return;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = 'Peter_Hudcovic_CV.pdf';
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      dialog.close();
+    } catch (error) {
+      if (error.name !== 'AbortError') message.textContent = 'Download is unavailable right now. Please contact me on LinkedIn.';
+    } finally { request = null; submit.disabled = false; submit.textContent = 'OK'; }
+  });
+})();
+
 // Typewriter nav intro (no external API dependency)
 (function() {
   const el = document.getElementById('visitor-count');
