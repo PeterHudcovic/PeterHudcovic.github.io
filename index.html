@@ -363,7 +363,10 @@ footer {
 .takeover-section .section-title { margin-bottom: 28px; }
 .takeover-section .section-intro { color: #94a3b8; margin: -12px 0 28px; max-width: 760px; }
 .playbook-item { min-width: 0; }
-.playbook-item .takeover-download { height: calc(100% - 32px); }
+.playbook-item { display: flex; flex-direction: column; align-items: flex-start; }
+.playbook-title { font-size: 16px; font-weight: 400; margin-bottom: 16px; }
+.playbook-item .takeover-download { width: 100%; margin-top: auto; }
+.playbook-download-button { margin-top: 16px; }
 .image-preview-button { border: 0; background: transparent; color: var(--accent2); cursor: pointer; font: 12px var(--sans); padding: 12px 0 0; text-decoration: underline; }
 .image-preview-button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
 .image-dialog { margin: auto; width: min(1280px, 96vw); height: 90vh; max-height: 90svh; padding: 0; background: var(--bg2); color: var(--text); border: 1px solid var(--border); border-radius: 12px; }
@@ -425,6 +428,33 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 
 </section>
 
+<!-- PROJECT THINKING -->
+<section aria-label="How I approach delivery" class="takeover-section" id="takeover">
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Project thinking</span></summary>
+    <div class="section-content">
+      <h2 class="section-title">How I approach delivery</h2><p class="section-intro">Practical frameworks for taking over services and turning an objective into a validated result.</p>
+<div class="takeover-preview">
+<div class="playbook-item">
+<h3 class="playbook-title">How I structure and deliver projects</h3>
+<div class="takeover-download">
+<img alt="How I structure and deliver projects: a ten-step roadmap covering objectives, scope, people, resources, risks, planning, delivery, checks and closure." height="1275" id="evidence-image-3" loading="lazy" src="simple-project-roadmap.png" width="1800"/>
+</div>
+<a class="btn-secondary playbook-download-button" download="Simple-Project-Roadmap.pdf" href="simple-project-roadmap.pdf">DOWNLOAD</a>
+</div>
+<div class="playbook-item">
+<h3 class="playbook-title">IT Takeover Playbook</h3>
+<div class="takeover-download">
+<img alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service." fetchpriority="high" height="1638" id="evidence-image-2" src="project_takeover.jpg" width="2238"/>
+</div>
+<a class="btn-secondary playbook-download-button" download="IT-Takeover-Playbook.pdf" href="it-takeover-playbook.pdf">DOWNLOAD</a>
+</div>
+</div>
+
+    </div>
+  </details>
+</section>
+
 <!-- PLATFORM OVERVIEW -->
 <section class="platform-section" id="platforms" aria-labelledby="platform-title">
   <details class="platform-disclosure">
@@ -448,33 +478,6 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 
 
 <div class="technology-groups"><div class="technology-group"><h3>Cloud &amp; platforms</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM Cloud / PowerVS</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div><div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div><div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div></div></div><div class="technology-group"><h3>Containers &amp; infrastructure as code</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div><div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div><div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div><div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div></div></div><div class="technology-group"><h3>Automation &amp; delivery</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div><div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div><div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div><div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div><div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div></div></div><div class="technology-group"><h3>Application &amp; data</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div><div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div><div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div><div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div><div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div><div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div></div></div><div class="technology-group"><h3>Operations &amp; networking</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div><div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div><div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div><div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div><div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div></div></div></div>
-    </div>
-  </details>
-</section>
-
-<!-- PROJECT THINKING -->
-<section aria-label="How I approach delivery" class="takeover-section" id="takeover">
-  <details class="section-disclosure">
-    <summary><span class="section-eyebrow">Project thinking</span></summary>
-    <div class="section-content">
-      <h2 class="section-title">How I approach delivery</h2><p class="section-intro">Practical frameworks for taking over services and turning an objective into a validated result.</p>
-<div class="takeover-preview">
-<div class="playbook-item"><a class="takeover-download" download="IT-Takeover-Playbook.pdf" href="it-takeover-playbook.pdf">
-<img alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service." fetchpriority="high" height="1638" id="evidence-image-2" src="project_takeover.jpg" width="2238"/>
-<span class="takeover-caption">
-<strong>IT Takeover Playbook</strong>
-<span class="takeover-action">Download the full document here ↓</span>
-</span>
-</a><button class="image-preview-button" data-preview-target="evidence-image-2" type="button">Enlarge image</button></div>
-<div class="playbook-item"><a class="takeover-download" download="Simple-Project-Roadmap.pdf" href="simple-project-roadmap.pdf">
-<img alt="How I structure and deliver projects: a ten-step roadmap covering objectives, scope, people, resources, risks, planning, delivery, checks and closure." height="1275" id="evidence-image-3" loading="lazy" src="simple-project-roadmap.png" width="1800"/>
-<span class="takeover-caption">
-<strong>How I structure and deliver projects</strong>
-<span class="takeover-action">Download the full document here ↓</span>
-</span>
-</a><button class="image-preview-button" data-preview-target="evidence-image-3" type="button">Enlarge image</button></div>
-</div>
-
     </div>
   </details>
 </section>
