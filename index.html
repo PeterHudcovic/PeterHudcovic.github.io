@@ -298,11 +298,11 @@ section { padding: clamp(60px,8vh,100px) var(--gutter); }
 footer {
   border-top: 1px solid var(--border);
   padding: 40px var(--gutter);
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: center; align-items: center;
   flex-wrap: wrap; gap: 16px;
   background: var(--bg2);
 }
-.footer-left { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.footer-left { text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .footer-links { display: flex; gap: 20px; }
 .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent2); }
@@ -959,10 +959,6 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 
 <footer>
   <div class="footer-left">© 2026 Peter Hudcovic · peterhudcovic.tech</div>
-  <div class="footer-links">
-    <a href="https://github.com/PeterHudcovic" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://www.linkedin.com/in/peter-hudcovic" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  </div>
 </footer>
 
 <script>
