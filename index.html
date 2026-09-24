@@ -481,6 +481,8 @@ footer {
   </div>
 
   <div class="arch-diagram fade-in">
+    <h3 style="font-size:13px;margin-bottom:6px">Deployment flow</h3>
+    <p style="margin-bottom:16px">Code is built in GitHub Actions, pushed to ACR and deployed to AKS via Helm.</p>
     <span class="hl">Developer</span><br>
     &nbsp;&nbsp;↓ git push<br>
     <span class="hl">GitHub</span><br>
@@ -501,7 +503,9 @@ footer {
   </div>
 
   <div class="arch-diagram fade-in" style="margin-top:24px">
-    <span style="color:#ffffff55;font-size:11px"># Secret delivery — no password stored in Git</span><br>
+    <h3 style="font-size:13px;margin-bottom:6px">Secret delivery flow</h3>
+    <p style="margin-bottom:16px">Pods access Azure Key Vault through Workload Identity and OIDC, without storing credentials in Git.</p>
+    <span style="color:#ffffff55;font-size:11px"># Secret delivery - no password stored in Git</span><br>
     <span class="hl">Pod</span><br>
     &nbsp;&nbsp;↓<br>
     <span class="hl2">ServiceAccount</span><br>
