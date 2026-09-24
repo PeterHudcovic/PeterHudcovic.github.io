@@ -201,7 +201,7 @@ section { padding: clamp(60px,8vh,100px) var(--gutter); }
   letter-spacing: 0.15em; text-transform: uppercase;
   margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
 }
-.section-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--accent); }
+.section-eyebrow::before { display: none; }
 .section-title {
   font-size: clamp(26px,4vw,40px); font-weight: 600;
   letter-spacing: -0.02em; color: var(--text); margin-bottom: 48px;
@@ -349,8 +349,6 @@ footer {
 .platform-disclosure > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; }
 .platform-disclosure > summary::-webkit-details-marker { display: none; }
 .platform-disclosure > summary .section-eyebrow { margin-bottom: 0; }
-.platform-disclosure > summary::after { content: '+'; color: var(--accent2); font: 20px var(--mono); }
-.platform-disclosure[open] > summary::after { content: '-'; }
 .platform-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
 .platform-disclosure[open] > summary { margin-bottom: 18px; }
 .platform-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
@@ -377,10 +375,8 @@ footer {
 /* Collapsible page sections */
 .platform-disclosure, .section-disclosure { width: 100%; max-width: 1040px; margin-inline: auto; }
 section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
-.section-disclosure > summary { position: relative; padding-right: 40px; cursor: pointer; list-style: none; }
+.section-disclosure > summary { position: relative; cursor: pointer; list-style: none; }
 .section-disclosure > summary::-webkit-details-marker { display: none; }
-.section-disclosure > summary::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--accent2); font: 24px var(--mono); }
-.section-disclosure[open] > summary::after { content: '-'; }
 .section-disclosure > summary .section-eyebrow { margin-bottom: 0; }
 .section-disclosure > .section-content > .section-title { font-size: 16px; font-weight: 400; letter-spacing: normal; margin-bottom: 28px; }
 .section-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
@@ -419,7 +415,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
       Old School AIX — IBM AIX 7.3 + PowerHA SystemMirror
     </p>
     <div class="hero-cta">
-      <a href="http://161.156.163.114/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open AIX Live Lab →</a>
+      <a href="https://aix.peterhudcovic.tech/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open AIX Live Lab →</a>
       <a href="#aix-project" class="btn-secondary">About the AIX Lab</a>
       <a href="#azure-project" class="btn-secondary">Azure Migration Lab</a>
       <a href="https://github.com/PeterHudcovic/azure-migration-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -617,11 +613,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <span class="tag">LVM</span><span class="tag">JFS2</span><span class="tag">SSH</span><span class="tag">Infrastructure</span>
         </div>
         <div style="margin-top:20px">
-          <a href="http://161.156.163.114/" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a>
+          <a href="https://aix.peterhudcovic.tech/" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a>
         </div>
         <p class="project-note">Public read-only demo, HTTP for now.</p>
         <figure class="project-screenshot">
-          <a href="http://161.156.163.114/" target="_blank" rel="noopener noreferrer"><img src="aix-lab.jpg" alt="Old School AIX Live Lab showing REAL MODE, read-only command buttons, PowerHA node status and real terminal output" width="1518" height="1130" loading="lazy"></a>
+          <a href="https://aix.peterhudcovic.tech/" target="_blank" rel="noopener noreferrer"><img src="aix-lab.jpg" alt="Old School AIX Live Lab showing REAL MODE, read-only command buttons, PowerHA node status and real terminal output" width="1518" height="1130" loading="lazy"></a>
           <figcaption>AIX lab snapshot: PowerHA cluster status and shared terminal output.</figcaption>
         </figure>
       </div>
