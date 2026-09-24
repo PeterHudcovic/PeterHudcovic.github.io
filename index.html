@@ -385,6 +385,9 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .section-disclosure > .section-content > .section-title { font-size: 16px; font-weight: 400; letter-spacing: normal; margin-bottom: 28px; }
 .section-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
 .section-disclosure[open] > .section-content { margin-top: 28px; }
+.platform-disclosure > summary, .section-disclosure > summary { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
+.platform-disclosure > summary::after, .section-disclosure > summary::after { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--accent); flex-shrink: 0; }
+.platform-disclosure[open] > summary::after, .section-disclosure[open] > summary::after { transform: rotate(90deg); }
 </style>
 </head>
 <body>
@@ -427,7 +430,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 
 <!-- PROJECTS -->
 <section id="projects">
-  <details class="section-disclosure" open>
+  <details class="section-disclosure">
     <summary><span class="section-eyebrow">Projects</span></summary>
     <div class="section-content">
       <h2 class="section-title">Engineering Projects</h2>
@@ -931,7 +934,7 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
     <a href="https://github.com/PeterHudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
     <button type="button" class="btn-secondary" id="cv-open">Download CV</button>
-    <a href="https://www.credly.com/users/peter-hudcovic.286eaa50/badges/credly" class="btn-secondary" target="_blank" rel="noopener noreferrer">Certifications — Credly</a>
+    <a href="https://www.credly.com/users/peter-hudcovic.286eaa50/badges/credly" class="btn-secondary" target="_blank" rel="noopener noreferrer">Credly</a>
   </div>
 
     </div>
