@@ -40,7 +40,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); font
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 max(var(--gutter), calc((100% - 1040px) / 2));
+  padding: 0 max(var(--gutter), calc((100% - 880px) / 2));
   gap: 16px;
   height: 56px;
   background: rgba(10,14,26,0.85);
@@ -71,6 +71,12 @@ nav {
   .nav-links { gap: 20px; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
   .nav-links a { font-size: 12px; }
   [id] { scroll-margin-top: 112px; }
+}
+
+@media(min-width:1051px) {
+  nav { height: auto; flex-direction: column; align-items: stretch; gap: 8px; padding-block: 8px; }
+  .nav-logo { align-self: flex-start; }
+  .nav-links { justify-content: space-between; gap: 8px; }
 }
 
 /* PROJECT TAKEOVER PLAYBOOK */
@@ -128,7 +134,7 @@ nav {
   top: -100px; right: -100px; pointer-events: none; z-index: 0;
 }
 .hero-content {
-  position: relative; z-index: 1; width: 100%; max-width: 1040px; margin-inline: auto;
+  position: relative; z-index: 1; width: 100%; max-width: 880px; margin-inline: auto;
   background: rgba(0,0,0,0.55);
   padding: clamp(24px, 4vw, 56px);
   border-radius: 12px;
@@ -380,7 +386,7 @@ footer {
 @media(max-width:700px) { .takeover-section { padding-block: 40px; } }
 /* Collapsible page sections */
 .project-subsection { margin-top: 28px; }
-.platform-disclosure, .section-disclosure { width: 100%; max-width: 1040px; margin-inline: auto; }
+.platform-disclosure, .section-disclosure { width: 100%; max-width: 880px; margin-inline: auto; }
 section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .section-disclosure > summary { position: relative; cursor: pointer; list-style: none; }
 .section-disclosure > summary::-webkit-details-marker { display: none; }
@@ -415,13 +421,13 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
   <div class="hero-content">
     <div class="hero-eyebrow">CLOUD · KUBERNETES · DEVOPS · SRE</div>
     <h1 class="hero-name">Peter Hudcovic</h1>
-    <p class="hero-title">Azure · Kubernetes · Terraform · Linux · Platform Operations</p>
+    <p class="hero-title">CI/CD · Kubernetes · Terraform · Linux · Platform Operations</p>
     <p class="hero-desc">
       Hands-on infrastructure engineering across cloud, Kubernetes, automation, Linux, databases and production-style troubleshooting.
     </p>
     <p class="hero-desc" style="margin-bottom:32px;">
       <span style="color:#22d3ee;">Current project:</span><br>
-      Old School AIX · IBM AIX 7.3 + PowerHA SystemMirror
+      Old School AIX · IBM AIX 7.3 + PowerHA SystemMirror · IBM Cloud
     </p>
     <div class="hero-cta">
       <a href="https://aix.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">AIX Live Lab</a>
@@ -468,7 +474,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <div style="margin-top:20px">
           <a href="https://aix.peterhudcovic.tech/" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a>
         </div>
-        <p class="project-note">Public read-only demo, HTTP for now.</p>
+        <p class="project-note">Public read-only demo over HTTPS.</p>
         <figure class="project-screenshot">
           <a href="https://aix.peterhudcovic.tech/" target="_blank" rel="noopener noreferrer"><img src="aix-lab.jpg" alt="Old School AIX Live Lab showing REAL MODE, read-only command buttons, PowerHA node status and real terminal output" width="1518" height="1130" loading="lazy"></a>
           <figcaption>AIX lab snapshot: PowerHA cluster status and shared terminal output.</figcaption>
