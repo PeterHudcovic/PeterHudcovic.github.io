@@ -386,8 +386,8 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .section-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
 .section-disclosure[open] > .section-content { margin-top: 28px; }
 .platform-disclosure > summary, .section-disclosure > summary { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
-.platform-disclosure > summary::after, .section-disclosure > summary::after { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--accent); flex-shrink: 0; }
-.platform-disclosure[open] > summary::after, .section-disclosure[open] > summary::after { transform: rotate(90deg); }
+.platform-disclosure > summary::before, .section-disclosure > summary::before { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--accent); flex-shrink: 0; }
+.platform-disclosure[open] > summary::before, .section-disclosure[open] > summary::before { transform: rotate(90deg); }
 </style>
 </head>
 <body>
