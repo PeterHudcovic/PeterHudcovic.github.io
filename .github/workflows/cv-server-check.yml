@@ -1,0 +1,37 @@
+name: Check CV server prerequisites
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/cv-server-check.yml
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect existing web server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -eu
+            python3 -c 'import hashlib, http.server; assert hasattr(hashlib, "scrypt")'
+            echo 'Python runtime: OK'
+            sudo -n true
+            echo 'Service setup permission: OK'
+            sudo -n apache2ctl configtest >/dev/null 2>&1
+            echo 'Apache configuration: valid'
+            test -d /etc/apache2/sites-enabled
+            test -d /var/www/html
+            echo 'Expected hosting layout: OK'
+            if sudo -n ss -ltn | grep -q ':8766 '; then
+              echo 'CV service port: already occupied'
+              exit 1
+            fi
+            echo 'CV service port: available'
