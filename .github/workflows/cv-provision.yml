@@ -1,0 +1,30 @@
+name: Prepare private CV installation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare one-use authenticated installer
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          CV_BOOTSTRAP_B64: ${{ secrets.CV_BOOTSTRAP_B64 }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          envs: CV_BOOTSTRAP_B64
+          script: |
+            set -eu
+            test -n "$CV_BOOTSTRAP_B64"
+            umask 077
+            tmp=$(mktemp)
+            trap 'rm -f "$tmp"' EXIT
+            printf '%s' "$CV_BOOTSTRAP_B64" | base64 -d > "$tmp"
+            php -l "$tmp" >/dev/null
+            install -m 644 "$tmp" /var/www/html/cv-setup.php
+            echo 'One-use installer ready'
