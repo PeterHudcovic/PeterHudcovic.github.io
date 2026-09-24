@@ -346,6 +346,13 @@ footer {
 /* END GROUPED TOOLS AND TECHNOLOGIES */
 /* PLATFORM OVERVIEW */
 .platform-section { padding: 28px var(--gutter); background: var(--bg2); border-block: 1px solid var(--border); }
+.platform-disclosure > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; }
+.platform-disclosure > summary::-webkit-details-marker { display: none; }
+.platform-disclosure > summary .section-eyebrow { margin-bottom: 0; }
+.platform-disclosure > summary::after { content: '+'; color: var(--accent2); font: 20px var(--mono); }
+.platform-disclosure[open] > summary::after { content: '-'; }
+.platform-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
+.platform-disclosure[open] > summary { margin-bottom: 18px; }
 .platform-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
 .platform-grid a { display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; background: var(--bg3); }
 .platform-grid a:hover { border-color: var(--accent2); }
@@ -367,6 +374,15 @@ footer {
 .image-dialog-scroll { overflow: auto; height: calc(100% - 76px); background: #fff; }
 .image-dialog-scroll img { display: block; width: 100%; min-width: 900px; height: auto; }
 @media(max-width:700px) { .takeover-section { padding-block: 40px; } }
+/* Collapsible page sections */
+section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
+.section-disclosure > summary { position: relative; padding-right: 40px; cursor: pointer; list-style: none; }
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+.section-disclosure > summary::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--accent2); font: 24px var(--mono); }
+.section-disclosure[open] > summary::after { content: '-'; }
+.section-disclosure > summary .section-title, #stack .section-disclosure > summary .section-title, #takeover .section-disclosure > summary .section-title { margin-bottom: 0; }
+.section-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 6px; border-radius: 4px; }
+.section-disclosure[open] > .section-content { margin-top: 28px; }
 </style>
 </head>
 <body>
@@ -413,7 +429,8 @@ footer {
 
 <!-- PLATFORM OVERVIEW -->
 <section class="platform-section" id="platforms" aria-labelledby="platform-title">
-  <h2 id="platform-title" class="section-eyebrow">Where I have built</h2>
+  <details class="platform-disclosure">
+    <summary><h2 id="platform-title" class="section-eyebrow">Where I have built</h2></summary>
   <div class="platform-grid">
     <a href="#azure-project"><strong>Azure</strong><span>AKS / PostgreSQL / delivery</span></a>
     <a href="#migration-project"><strong>Google Cloud</strong><span>Migration / GKE / GitOps</span></a>
@@ -421,16 +438,26 @@ footer {
     <a href="#openshift-project"><strong>Red Hat OpenShift</strong><span>WildFly / Java / operations</span></a>
     <a href="#digitalocean-project"><strong>DigitalOcean</strong><span>Kubernetes / APIs / resilience</span></a>
   </div>
+  </details>
 </section>
 
 <!-- STACK -->
 <section class="stack-section" id="stack">
-<div class="section-eyebrow">Tech Stack</div>
-<h2 class="section-title">Tools &amp; Technologies</h2>
-<div class="technology-groups"><div class="technology-group"><h3>Cloud &amp; platforms</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM Cloud / PowerVS</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div><div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div><div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div></div></div><div class="technology-group"><h3>Containers &amp; infrastructure as code</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div><div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div><div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div><div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div></div></div><div class="technology-group"><h3>Automation &amp; delivery</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div><div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div><div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div><div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div><div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div></div></div><div class="technology-group"><h3>Application &amp; data</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div><div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div><div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div><div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div><div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div><div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div></div></div><div class="technology-group"><h3>Operations &amp; networking</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div><div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div><div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div><div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div><div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div></div></div></div></section>
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Tech Stack</span><h2 class="section-title">Tools &amp; Technologies</h2></summary>
+    <div class="section-content">
+
+
+<div class="technology-groups"><div class="technology-group"><h3>Cloud &amp; platforms</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM Cloud / PowerVS</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Google Cloud</div><div class="stack-item"><span class="stack-dot" style="background:#0080ff"></span>DigitalOcean</div><div class="stack-item"><span class="stack-dot" style="background:#c00000"></span>OpenShift</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Container Registry</div><div class="stack-item"><span class="stack-dot" style="background:#0078d4"></span>Azure Key Vault</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>Artifact Registry</div></div></div><div class="technology-group"><h3>Containers &amp; infrastructure as code</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>AKS</div><div class="stack-item"><span class="stack-dot" style="background:#7b42bc"></span>Terraform</div><div class="stack-item"><span class="stack-dot" style="background:#326ce5"></span>Kubernetes</div><div class="stack-item"><span class="stack-dot" style="background:#2496ed"></span>Docker</div><div class="stack-item"><span class="stack-dot" style="background:#fbbf24"></span>Helm</div><div class="stack-item"><span class="stack-dot" style="background:#4285f4"></span>GKE</div></div></div><div class="technology-group"><h3>Automation &amp; delivery</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#2088ff"></span>GitHub Actions</div><div class="stack-item"><span class="stack-dot" style="background:#d33833"></span>Jenkins</div><div class="stack-item"><span class="stack-dot" style="background:#ee0000"></span>Ansible</div><div class="stack-item"><span class="stack-dot" style="background:#f05032"></span>Git / GitHub</div><div class="stack-item"><span class="stack-dot" style="background:#ef7b4d"></span>ArgoCD</div></div></div><div class="technology-group"><h3>Application &amp; data</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#336791"></span>PostgreSQL</div><div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span>Python</div><div class="stack-item"><span class="stack-dot" style="background:#009688"></span>FastAPI</div><div class="stack-item"><span class="stack-dot" style="background:#d32f2f"></span>WildFly</div><div class="stack-item"><span class="stack-dot" style="background:#007396"></span>Java</div><div class="stack-item"><span class="stack-dot" style="background:#fd7e14"></span>JDBC</div></div></div><div class="technology-group"><h3>Operations &amp; networking</h3><div class="stack-grid"><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>IBM AIX 7.3</div><div class="stack-item"><span class="stack-dot" style="background:#22d3ee"></span>PowerHA SystemMirror</div><div class="stack-item"><span class="stack-dot" style="background:#009639"></span>NGINX</div><div class="stack-item"><span class="stack-dot" style="background:#10b981"></span>cert-manager</div><div class="stack-item"><span class="stack-dot" style="background:#f38020"></span>Cloudflare</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Linux / SSH</div><div class="stack-item"><span class="stack-dot" style="background:#e6522c"></span>Prometheus</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>Asterisk</div><div class="stack-item"><span class="stack-dot" style="background:#f97316"></span>SIP / PJSIP</div><div class="stack-item"><span class="stack-dot" style="background:#64748b"></span>Wireshark</div></div></div></div>
+    </div>
+  </details>
+</section>
 
 <!-- PROJECT THINKING -->
-<section aria-label="How I approach delivery" class="takeover-section" id="takeover"><div class="section-eyebrow">Project thinking</div><h2 class="section-title">How I approach delivery</h2><p class="section-intro">Practical frameworks for taking over services and turning an objective into a validated result.</p>
+<section aria-label="How I approach delivery" class="takeover-section" id="takeover">
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Project thinking</span><h2 class="section-title">How I approach delivery</h2></summary>
+    <div class="section-content"><p class="section-intro">Practical frameworks for taking over services and turning an objective into a validated result.</p>
 <div class="takeover-preview">
 <div class="playbook-item"><a class="takeover-download" download="IT-Takeover-Playbook.pdf" href="it-takeover-playbook.pdf">
 <img alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service." fetchpriority="high" height="1638" id="evidence-image-2" src="project_takeover.jpg" width="2238"/>
@@ -447,12 +474,18 @@ footer {
 </span>
 </a><button class="image-preview-button" data-preview-target="evidence-image-3" type="button">Enlarge image</button></div>
 </div>
+
+    </div>
+  </details>
 </section>
 
 <!-- ARCHITECTURE -->
 <section class="arch-section" id="architecture">
-  <div class="section-eyebrow">Infrastructure</div>
-  <h2 class="section-title">Azure Migration Lab — Platform Architecture</h2>
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Infrastructure</span><h2 class="section-title">Azure Migration Lab — Platform Architecture</h2></summary>
+    <div class="section-content">
+
+
 
   <div class="arch-grid fade-in">
     <div class="arch-card">
@@ -540,12 +573,18 @@ footer {
     &nbsp;&nbsp;↓<br>
     <span class="hl">Azure Key Vault</span>
   </div>
+
+    </div>
+  </details>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-eyebrow">Projects</div>
-  <h2 class="section-title">Engineering Projects</h2>
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Projects</span><h2 class="section-title">Engineering Projects</h2></summary>
+    <div class="section-content">
+
+
 
   <div class="projects-grid">
 
@@ -819,12 +858,18 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     </div>
 
   </div>
+
+    </div>
+  </details>
 </section>
 
 <!-- LIVE STATUS -->
 <section style="background:var(--bg2);" id="status">
-  <div class="section-eyebrow">Live Status</div>
-  <h2 class="section-title">System Status</h2>
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Live Status</span><h2 class="section-title">System Status</h2></summary>
+    <div class="section-content">
+
+
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px">
 
@@ -854,11 +899,17 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     </div>
 
   </div>
+
+    </div>
+  </details>
 </section>
 
 <section id="connect">
-  <div class="section-eyebrow">Contact</div>
-  <h2 class="section-title">Get in Touch</h2>
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Contact</span><h2 class="section-title">Get in Touch</h2></summary>
+    <div class="section-content">
+
+
   <p style="color:var(--muted);max-width:480px;margin-bottom:32px;font-size:15px">
     Open to DevOps, SRE, Cloud Infrastructure, Kubernetes, Linux and application/platform operations roles.
   </p>
@@ -868,6 +919,9 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     <button type="button" class="btn-secondary" id="cv-open">Download CV</button>
     <a href="https://www.credly.com/users/peter-hudcovic.286eaa50/badges/credly" class="btn-secondary" target="_blank" rel="noopener noreferrer">Certifications — Credly</a>
   </div>
+
+    </div>
+  </details>
 </section>
 
 <dialog aria-label="Evidence image" class="image-dialog" id="image-dialog"><div class="image-dialog-bar"><span>Image detail (scroll to explore)</span><button class="btn-secondary" id="image-close" type="button">Close</button></div><div class="image-dialog-scroll"><img alt="" id="image-full"/></div></dialog>
@@ -895,6 +949,30 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 </footer>
 
 <script>
+// Open the relevant collapsed section for navigation and direct links.
+(function() {
+  function reveal(hash) {
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    const ancestors = [];
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      if (parent.tagName === 'DETAILS') ancestors.push(parent);
+    }
+    ancestors.reverse().forEach(details => { details.open = true; });
+    const section = target.querySelector(':scope > details.section-disclosure, :scope > details.platform-disclosure');
+    if (section) section.open = true;
+    requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }));
+  }
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) reveal(link.hash);
+  });
+  window.addEventListener('hashchange', () => reveal(location.hash));
+  if (location.hash) reveal(location.hash);
+})();
+
 // Enlarge static evidence without leaving the page.
 (function() {
   const dialog = document.getElementById('image-dialog');
