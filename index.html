@@ -343,6 +343,16 @@ footer {
 @media(max-width:1050px) { #stack .technology-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media(max-width:700px) { #stack .technology-groups { grid-template-columns: minmax(0, 1fr); } }
 /* END GROUPED TOOLS AND TECHNOLOGIES */
+/* PLATFORM OVERVIEW */
+.platform-section { padding: 28px var(--gutter); background: var(--bg2); border-block: 1px solid var(--border); }
+.platform-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.platform-grid a { display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; background: var(--bg3); }
+.platform-grid a:hover { border-color: var(--accent2); }
+.platform-grid a:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.platform-grid strong { font-size: 14px; }
+.platform-grid span { color: #94a3b8; font-size: 11px; line-height: 1.5; }
+@media(max-width:1050px) { .platform-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media(max-width:700px) { .platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
 </head>
 <body>
@@ -405,6 +415,18 @@ footer {
     </a>
   </div>
 </section>
+</section>
+
+<!-- PLATFORM OVERVIEW -->
+<section class="platform-section" id="platforms" aria-labelledby="platform-title">
+  <h2 id="platform-title" class="section-eyebrow">Where I have built</h2>
+  <div class="platform-grid">
+    <a href="#azure-project"><strong>Azure</strong><span>AKS / PostgreSQL / delivery</span></a>
+    <a href="#migration-project"><strong>Google Cloud</strong><span>Migration / GKE / GitOps</span></a>
+    <a href="#aix-project"><strong>IBM Cloud</strong><span>PowerVS / AIX / PowerHA</span></a>
+    <a href="#openshift-project"><strong>Red Hat OpenShift</strong><span>WildFly / Java / operations</span></a>
+    <a href="#digitalocean-project"><strong>DigitalOcean</strong><span>Kubernetes / APIs / resilience</span></a>
+  </div>
 </section>
 
 <!-- STATS -->
@@ -634,7 +656,7 @@ footer {
       </div>
     </div>
 
-    <div class="project-card fade-in">
+    <div class="project-card fade-in" id="migration-project">
       <div class="project-card-header">
         <div class="project-icon">☁️↔️</div>
         <span class="project-badge badge-infra">MIGRATION</span>
@@ -774,7 +796,7 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   </div>
 </div>
 
-    <div class="project-card fade-in">
+    <div class="project-card fade-in" id="digitalocean-project">
       <div class="project-card-header">
         <div class="project-icon">🥑</div>
         <span class="project-badge badge-legacy">LEGACY · KUBERNETES PLATFORM</span>
