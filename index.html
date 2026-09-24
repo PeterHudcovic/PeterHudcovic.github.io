@@ -71,7 +71,7 @@ nav {
 }
 
 /* PROJECT TAKEOVER PLAYBOOK */
-.takeover-section { position: relative; z-index: 1; width: 100%; padding: 0; margin-top: 32px; }
+.takeover-section { padding: 56px var(--gutter); background: var(--bg2); border-block: 1px solid var(--border); }
 .takeover-preview {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
   max-width: 1200px; margin-inline: auto;
@@ -90,6 +90,7 @@ nav {
 .takeover-caption {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; flex: 1; gap: 8px 20px; padding: 16px 20px; color: var(--text);
+  flex-direction: column; align-items: flex-start;
 }
 .takeover-action { color: var(--accent2); font-size: 13px; text-decoration: underline; }
 @media(max-width:700px) {
@@ -353,6 +354,19 @@ footer {
 .platform-grid span { color: #94a3b8; font-size: 11px; line-height: 1.5; }
 @media(max-width:1050px) { .platform-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media(max-width:700px) { .platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* DELIVERY PLAYBOOK PRESENTATION */
+.takeover-section .section-title { margin-bottom: 28px; }
+.takeover-section .section-intro { color: #94a3b8; margin: -12px 0 28px; max-width: 760px; }
+.playbook-item { min-width: 0; }
+.playbook-item .takeover-download { height: calc(100% - 32px); }
+.image-preview-button { border: 0; background: transparent; color: var(--accent2); cursor: pointer; font: 12px var(--sans); padding: 12px 0 0; text-decoration: underline; }
+.image-preview-button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.image-dialog { margin: auto; width: min(1280px, 96vw); height: 90vh; max-height: 90svh; padding: 0; background: var(--bg2); color: var(--text); border: 1px solid var(--border); border-radius: 12px; }
+.image-dialog::backdrop { background: #000c; }
+.image-dialog-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; font-size: 12px; }
+.image-dialog-scroll { overflow: auto; height: calc(100% - 76px); background: #fff; }
+.image-dialog-scroll img { display: block; width: 100%; min-width: 900px; height: auto; }
+@media(max-width:700px) { .takeover-section { padding-block: 40px; } }
 </style>
 </head>
 <body>
@@ -394,27 +408,7 @@ footer {
     </div>
   </div>
 
-<!-- PROJECT TAKEOVER PLAYBOOK -->
-<section class="takeover-section" id="takeover" aria-label="Project playbooks">
-  <div class="takeover-preview">
-    <a class="takeover-download" href="it-takeover-playbook.pdf" download="IT-Takeover-Playbook.pdf">
-      <img src="project_takeover.jpg" width="2238" height="1638" fetchpriority="high"
-        alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service.">
-      <span class="takeover-caption">
-        <strong>IT Takeover Playbook</strong>
-        <span class="takeover-action">Download the full document here &#8595;</span>
-      </span>
-    </a>
-    <a class="takeover-download" href="simple-project-roadmap.pdf" download="Simple-Project-Roadmap.pdf">
-      <img src="simple-project-roadmap.png" width="1800" height="1275" loading="lazy"
-        alt="How I structure and deliver projects: a ten-step roadmap covering objectives, scope, people, resources, risks, planning, delivery, checks and closure.">
-      <span class="takeover-caption">
-        <strong>Simple Project Roadmap</strong>
-        <span class="takeover-action">Download the full document here &#8595;</span>
-      </span>
-    </a>
-  </div>
-</section>
+
 </section>
 
 <!-- PLATFORM OVERVIEW -->
@@ -448,6 +442,26 @@ footer {
     <div class="stat-label">cert-manager + Let's Encrypt</div>
   </div>
 </div>
+
+<!-- PROJECT THINKING -->
+<section aria-label="How I approach delivery" class="takeover-section" id="takeover"><div class="section-eyebrow">Project thinking</div><h2 class="section-title">How I approach delivery</h2><p class="section-intro">Practical frameworks for taking over services and turning an objective into a validated result.</p>
+<div class="takeover-preview">
+<div class="playbook-item"><a class="takeover-download" download="IT-Takeover-Playbook.pdf" href="it-takeover-playbook.pdf">
+<img alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service." fetchpriority="high" height="1638" id="evidence-image-2" src="project_takeover.jpg" width="2238"/>
+<span class="takeover-caption">
+<strong>IT Takeover Playbook</strong>
+<span class="takeover-action">Download the full document here ↓</span>
+</span>
+</a><button class="image-preview-button" data-preview-target="evidence-image-2" type="button">Enlarge image</button></div>
+<div class="playbook-item"><a class="takeover-download" download="Simple-Project-Roadmap.pdf" href="simple-project-roadmap.pdf">
+<img alt="How I structure and deliver projects: a ten-step roadmap covering objectives, scope, people, resources, risks, planning, delivery, checks and closure." height="1275" id="evidence-image-3" loading="lazy" src="simple-project-roadmap.png" width="1800"/>
+<span class="takeover-caption">
+<strong>How I structure and deliver projects</strong>
+<span class="takeover-action">Download the full document here ↓</span>
+</span>
+</a><button class="image-preview-button" data-preview-target="evidence-image-3" type="button">Enlarge image</button></div>
+</div>
+</section>
 
 <!-- ARCHITECTURE -->
 <section class="arch-section" id="architecture">
@@ -876,6 +890,8 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   </div>
 </section>
 
+<dialog aria-label="Evidence image" class="image-dialog" id="image-dialog"><div class="image-dialog-bar"><span>Image detail (scroll to explore)</span><button class="btn-secondary" id="image-close" type="button">Close</button></div><div class="image-dialog-scroll"><img alt="" id="image-full"/></div></dialog>
+
 <dialog class="cv-dialog" id="cv-dialog" aria-labelledby="cv-title" aria-describedby="cv-description">
   <form id="cv-form">
     <h2 id="cv-title">Download CV</h2>
@@ -899,6 +915,22 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 </footer>
 
 <script>
+// Enlarge static evidence without leaving the page.
+(function() {
+  const dialog = document.getElementById('image-dialog');
+  const full = document.getElementById('image-full');
+  document.querySelectorAll('[data-preview-target]').forEach(button => {
+    button.addEventListener('click', () => {
+      const source = document.getElementById(button.dataset.previewTarget);
+      full.src = source.src; full.alt = source.alt;
+      dialog.showModal();
+      dialog.querySelector('.image-dialog-scroll').scrollTo(0, 0);
+    });
+  });
+  document.getElementById('image-close').addEventListener('click', () => dialog.close());
+})();
+
+
 // The server checks the code and returns only the matching document.
 (function() {
   const dialog = document.getElementById('cv-dialog');
