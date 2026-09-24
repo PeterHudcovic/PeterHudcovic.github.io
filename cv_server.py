@@ -12,7 +12,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
-PUBLIC = {"index.html", "redef.svg", "aix-lab.jpg", "azure-lab-evidence.png", "project_takeover.jpg",
+PUBLIC = {"index.html", "redef.svg", "aix-lab.jpg", "azure-lab-evidence.png", "openshift-donation-lab.png", "project_takeover.jpg",
           "it-takeover-playbook.pdf", "simple-project-roadmap.png", "simple-project-roadmap.pdf"}
 
 
