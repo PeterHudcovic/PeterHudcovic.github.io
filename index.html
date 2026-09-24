@@ -70,6 +70,27 @@ nav {
   [id] { scroll-margin-top: 112px; }
 }
 
+/* PROJECT TAKEOVER PLAYBOOK */
+.takeover-section { padding: 88px var(--gutter) 32px; background: var(--bg2); }
+.takeover-preview { max-width: 1200px; margin-inline: auto; }
+.takeover-download {
+  display: block; width: 50%; margin-inline: auto; text-decoration: none;
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; background: var(--bg3);
+}
+.takeover-download:hover { border-color: var(--accent2); }
+.takeover-download:focus-visible { outline: 3px solid var(--accent2); outline-offset: 5px; }
+.takeover-preview img { display: block; width: 100%; height: auto; background: #fff; }
+.takeover-caption {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px 20px; padding: 16px 20px; color: var(--text);
+}
+.takeover-action { color: var(--accent2); font-size: 13px; text-decoration: underline; }
+@media(max-width:700px) {
+  .takeover-section { padding-top: 112px; }
+  .takeover-caption { padding: 12px 16px; }
+}
+
 /* HERO */
 .hero {
   min-height: min(780px, 85svh);
@@ -302,6 +323,7 @@ footer {
 <nav>
   <div class="nav-logo">peter@lab:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
   <div class="nav-links">
+    <a href="#takeover">Playbook</a>
     <a href="#architecture">Architecture</a>
     <a href="#projects">Projects</a>
     <a href="#stack">Stack</a>
@@ -309,6 +331,20 @@ footer {
     <a href="#connect">Contact</a>
   </div>
 </nav>
+
+<!-- PROJECT TAKEOVER PLAYBOOK -->
+<section class="takeover-section" id="takeover" aria-label="Project takeover playbook">
+  <div class="takeover-preview">
+    <a class="takeover-download" href="it-takeover-playbook.pdf" download="IT-Takeover-Playbook.pdf">
+      <img src="project_takeover.jpg" width="2238" height="1638" fetchpriority="high"
+        alt="Taking over an unknown project: where to start. A roadmap from stabilization and discovery to delivery and running the service.">
+      <span class="takeover-caption">
+        <strong>IT Takeover Playbook</strong>
+        <span class="takeover-action" lang="sk">Celý dokument je tu — stiahnuť PDF &#8595;</span>
+      </span>
+    </a>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
