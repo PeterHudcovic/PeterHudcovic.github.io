@@ -164,6 +164,10 @@ nav {
   line-height: 1.8; margin-bottom: 16px; font-family: var(--mono);
 }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.lab-cta { flex: 0 1 240px; max-width: 100%; }
+.lab-cta .btn-secondary { width: 100%; text-align: center; }
+.lab-status { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.lab-cta .btn-secondary:disabled { color: var(--muted); cursor: default; border-color: var(--border); transform: none; }
 .btn-primary {
   background: rgba(34, 197, 94, 0.14); color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.45);
@@ -427,11 +431,20 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
       Hands-on infrastructure engineering across cloud, Kubernetes, automation, Linux, databases and production-style troubleshooting.
     </p>
     <div class="hero-cta">
-      <a href="https://aix.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">AIX Live Lab</a>
-      <a href="https://wildfly-peter-hudcovic-dev.apps.rm2.thpm.p1.openshiftapps.com/donation-app/" class="btn-secondary" target="_blank" rel="noopener noreferrer">OpenShift Live Lab</a>
-      <a href="https://ops.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Azure Live Lab</a>
+      <div class="lab-cta">
+        <a href="https://aix.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer" aria-describedby="aix-status">AIX Live Lab</a>
+        <p class="lab-status" id="aix-status">Available until 1 October 2026.</p>
+      </div>
+      <div class="lab-cta">
+        <button type="button" class="btn-secondary" disabled aria-describedby="openshift-status">OpenShift Live Lab</button>
+        <p class="lab-status" id="openshift-status">Shut down — free-tier budget exceeded.</p>
+      </div>
+      <div class="lab-cta">
+        <button type="button" class="btn-secondary" disabled aria-describedby="azure-status">Azure Live Lab</button>
+        <p class="lab-status" id="azure-status">Shut down — free-tier budget exceeded.</p>
+      </div>
     </div>
-    <p class="project-note" style="margin-top:16px">Live demos run for limited periods and may be temporarily offline due to cloud budget limits. Screenshots and project documentation remain available below.</p>
+    <p class="project-note" style="margin-top:16px">Screenshots and project documentation remain available below.</p>
   </div>
 
 
