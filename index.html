@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peter Hudcovic — Cloud, Kubernetes &amp; DevOps</title>
+<title>Peter Hudcovic - Cloud, Kubernetes &amp; DevOps</title>
 <meta property="og:title" content="Peter Hudcovic | Platform Operations" />
-<meta property="og:description" content="Hands-on infrastructure engineering across IBM AIX, PowerHA, Azure and Kubernetes — featuring the Old School AIX Live Lab on IBM PowerVS and the Azure Migration Lab." />
+<meta property="og:description" content="Hands-on infrastructure engineering across IBM AIX, PowerHA, Azure and Kubernetes - featuring the Old School AIX Live Lab on IBM PowerVS and the Azure Migration Lab." />
 <meta property="og:url" content="https://peterhudcovic.tech" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://peterhudcovic.tech/preview.png" />
@@ -436,10 +436,12 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <p class="lab-status" id="aix-status">Available until 1 October 2026.</p>
       </div>
       <div class="lab-cta">
-        <button type="button" class="btn-secondary" disabled>OpenShift Live Lab</button>
+        <button type="button" class="btn-secondary" disabled aria-describedby="openshift-status">OpenShift Live Lab</button>
+        <p class="lab-status" id="openshift-status">Offline: free budget exceeded.</p>
       </div>
       <div class="lab-cta">
-        <button type="button" class="btn-secondary" disabled>Azure Live Lab</button>
+        <button type="button" class="btn-secondary" disabled aria-describedby="azure-status">Azure Live Lab</button>
+        <p class="lab-status" id="azure-status">Offline: free budget exceeded.</p>
       </div>
     </div>
     <p class="project-note" style="margin-top:16px">Screenshots and project documentation remain available below.</p>
@@ -451,9 +453,9 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <!-- PROJECTS -->
 <section id="new-azure-project">
   <details class="section-disclosure">
-    <summary><span class="section-eyebrow">New Project — Azure Test / Dev / Prod CI/CD Architecture</span></summary>
+    <summary><span class="section-eyebrow">New Project - Azure Test / Dev / Prod CI/CD Architecture</span></summary>
     <div class="section-content">
-      <p class="project-desc">Under construction — available approximately 1 October 2026.</p>
+      <p class="project-desc">Under construction - available approximately 1 October 2026.</p>
     </div>
   </details>
 </section>
@@ -574,11 +576,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <span class="project-badge badge-infra">AZURE LAB</span>
       </div>
       <div class="project-card-body">
-        <div class="project-title">Azure Migration Lab — AKS Platform &amp; Operations Console</div>
+        <div class="project-title">Azure Migration Lab - AKS Platform &amp; Operations Console</div>
         <div class="project-desc">
-          End-to-end Azure Kubernetes platform. Terraform provisions the Resource Group, Virtual Network, Subnet, AKS cluster, Container Registry and Key Vault, with remote state stored in Azure Storage. GitHub Actions builds the Docker image, pushes it to Azure Container Registry, fetches AKS credentials, and runs a Helm upgrade against separate dev/test/prod releases — a real rollback was tested and verified. A Jenkins pipeline and an Ansible reproducibility check are also part of the setup.
+          End-to-end Azure Kubernetes platform. Terraform provisions the Resource Group, Virtual Network, Subnet, AKS cluster, Container Registry and Key Vault, with remote state stored in Azure Storage. GitHub Actions builds the Docker image, pushes it to Azure Container Registry, fetches AKS credentials, and runs a Helm upgrade against separate dev/test/prod releases - a real rollback was tested and verified. A Jenkins pipeline and an Ansible reproducibility check are also part of the setup.
           <br><br>
-          PostgreSQL runs as a StatefulSet with persistent storage; a real <code>pg_dump</code> → <code>pg_restore</code> migration was performed and verified. Pod identity flows through ServiceAccount → Workload Identity → OIDC → Managed Identity → Azure Key Vault, so the database password never touches Git. RBAC is split between a namespace-scoped Role and a cluster-scoped ClusterRole limited to reading Nodes — no wildcard verbs anywhere.
+          PostgreSQL runs as a StatefulSet with persistent storage; a real <code>pg_dump</code> → <code>pg_restore</code> migration was performed and verified. Pod identity flows through ServiceAccount → Workload Identity → OIDC → Managed Identity → Azure Key Vault, so the database password never touches Git. RBAC is split between a namespace-scoped Role and a cluster-scoped ClusterRole limited to reading Nodes - no wildcard verbs anywhere.
           <br><br>
           The FastAPI-based Operations Console is live at <strong>ops.peterhudcovic.tech</strong>: guest/user/admin roles enforced server-side, a restricted read-only kubectl-style command interface (no shell, no subprocess), live pod events over Server-Sent Events, controlled scaling and rolling restarts, a 15-minute Demo Mode, and a built-in Project Guide documenting the whole stack. NGINX Ingress and cert-manager issue a Let's Encrypt certificate for the domain, with DNS managed in Cloudflare.
         </div>
@@ -619,7 +621,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
   <div class="arch-grid fade-in">
     <div class="arch-card">
       <div class="arch-card-icon">🏗️</div>
-      <div class="arch-card-title">Terraform — Infrastructure as Code</div>
+      <div class="arch-card-title">Terraform - Infrastructure as Code</div>
       <div class="arch-card-desc">Provisions the Azure Resource Group, Virtual Network, Subnet, AKS cluster, Container Registry, and Key Vault. Remote state is stored in Azure Storage for shared, locked state management.</div>
     </div>
     <div class="arch-card">
@@ -630,16 +632,16 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     <div class="arch-card">
       <div class="arch-card-icon">📦</div>
       <div class="arch-card-title">Azure Container Registry (ACR)</div>
-      <div class="arch-card-desc">Private registry for the Operations Console and Pong demo images. AKS pulls images using the node pool's managed identity — no registry credentials stored in the cluster.</div>
+      <div class="arch-card-desc">Private registry for the Operations Console and Pong demo images. AKS pulls images using the node pool's managed identity - no registry credentials stored in the cluster.</div>
     </div>
     <div class="arch-card">
       <div class="arch-card-icon">🔐</div>
       <div class="arch-card-title">Key Vault · Workload Identity · OIDC</div>
-      <div class="arch-card-desc">The PostgreSQL password lives in Azure Key Vault and reaches Pods through Workload Identity and OIDC federation via the Secrets Store CSI driver — never committed to Git.</div>
+      <div class="arch-card-desc">The PostgreSQL password lives in Azure Key Vault and reaches Pods through Workload Identity and OIDC federation via the Secrets Store CSI driver - never committed to Git.</div>
     </div>
     <div class="arch-card">
       <div class="arch-card-icon">⛵</div>
-      <div class="arch-card-title">Helm — migration-app &amp; pong-app</div>
+      <div class="arch-card-title">Helm - migration-app &amp; pong-app</div>
       <div class="arch-card-desc">Two charts with dev/test/prod values files, deployed via helm upgrade --install. A real rollback was tested and verified against a previous revision.</div>
     </div>
     <div class="arch-card">
@@ -654,7 +656,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     </div>
     <div class="arch-card">
       <div class="arch-card-icon">🖥️</div>
-      <div class="arch-card-title">Operations Console — FastAPI</div>
+      <div class="arch-card-title">Operations Console - FastAPI</div>
       <div class="arch-card-desc">A live dashboard with guest/user/admin roles, a restricted read-only command interface, live pod events over SSE, controlled scaling/restarts, and a Demo Mode.</div>
     </div>
     <div class="arch-card">
@@ -729,8 +731,8 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     <div class="arch-card fade-in">
       <div class="arch-card-title" style="margin-bottom:12px">🌐 Public Links</div>
       <div style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:2">
-        <div><span id="dot-ops" style="display:inline-block;margin-right:8px;width:10px;height:10px;border-radius:50%;background:#64748b;vertical-align:middle"></span>Operations Console — <wbr>ops.peterhudcovic.tech</div>
-        <div><span class="online-dot" style="display:inline-block;margin-right:8px;width:10px;height:10px"></span>GitHub — azure-migration-lab</div>
+        <div><span id="dot-ops" style="display:inline-block;margin-right:8px;width:10px;height:10px;border-radius:50%;background:#64748b;vertical-align:middle"></span>Operations Console - <wbr>ops.peterhudcovic.tech</div>
+        <div><span class="online-dot" style="display:inline-block;margin-right:8px;width:10px;height:10px"></span>GitHub - azure-migration-lab</div>
       </div>
     </div>
 
@@ -792,7 +794,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <span class="project-badge badge-infra">GCP · CI/CD</span>
       </div>
       <div class="project-card-body">
-        <div class="project-title">GCP SRE Platform Lab — Jenkins CI/CD &amp; GitOps</div>
+        <div class="project-title">GCP SRE Platform Lab - Jenkins CI/CD &amp; GitOps</div>
         <div class="project-desc">
           Built and validated an end-to-end SRE platform on Google Cloud. Terraform provisions the network, Cloud NAT, Artifact Registry, IAM, and a regional GKE Autopilot cluster. Jenkins runs Pytest, builds a versioned Docker image, pushes it to Artifact Registry, and commits the updated Helm image tag. ArgoCD then synchronizes the change and performs a rolling deployment to GKE.
           <br><br>
@@ -846,7 +848,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <div id="failover-modal" style="display:none;position:fixed;inset:0;background:#000000cc;z-index:999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#0a0e1a;border:1px solid var(--border);border-radius:12px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--border);">
-      <span style="font-family:var(--mono);font-size:13px;color:var(--accent2)">Kubernetes Failover — Terminal Output</span>
+      <span style="font-family:var(--mono);font-size:13px;color:var(--accent2)">Kubernetes Failover - Terminal Output</span>
       <button onclick="document.getElementById('failover-modal').style.display='none'" style="background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer;">×</button>
     </div>
     <div style="padding:24px;display:flex;flex-direction:column;gap:20px;">
@@ -857,7 +859,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;display:inline-block"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#4ade80;display:inline-block"></span>
-          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 1 — drain + verify</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 1 - drain + verify</span>
         </div>
         <pre style="padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;color:#64748b;overflow-x:auto;margin:0;white-space:pre-wrap">$ kubectl get pod postgres-0 -o wide
 NAME         READY   STATUS    RESTARTS   AGE   NODE
@@ -885,7 +887,7 @@ $ kubectl uncordon pool-node-3
           <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;display:inline-block"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#4ade80;display:inline-block"></span>
-          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 2 — kubectl get pods -w</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px">Terminal 2 - kubectl get pods -w</span>
         </div>
         <pre style="padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;color:#64748b;overflow-x:auto;margin:0;white-space:pre-wrap">$ kubectl get pods -w
 NAME                    READY   STATUS        RESTARTS   AGE
@@ -909,11 +911,11 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
       <div class="project-card-body">
         <div class="project-title">GuacAlert / DigitalOcean Kubernetes Platform</div>
         <div class="project-desc">
-          An earlier multi-service application platform on a multi-node DigitalOcean Kubernetes cluster — not just a single scraper. Two independent backends ran as separate Kubernetes Deployments behind NGINX Ingress with hostname-based routing: a Python API built with FastAPI, and a Java API built with Spring Boot (historically routed as api.amaterix.com and java-api.amaterix.com). PostgreSQL 16 ran as a StatefulSet with persistent volume storage shared across the platform's services.
+          An earlier multi-service application platform on a multi-node DigitalOcean Kubernetes cluster - not just a single scraper. Two independent backends ran as separate Kubernetes Deployments behind NGINX Ingress with hostname-based routing: a Python API built with FastAPI, and a Java API built with Spring Boot (historically routed as api.amaterix.com and java-api.amaterix.com). PostgreSQL 16 ran as a StatefulSet with persistent volume storage shared across the platform's services.
           <br><br>
-          Scheduled Kubernetes CronJobs handled price-data automation: a Billa scraper and a Tesco scraper parsed retailer price data with Python and stored results in PostgreSQL, served through a dedicated API (historically ceny-api.amaterix.com) under the GuacAlert name. The same cluster was also used for hands-on multi-node Kubernetes operations — node drain, pod rescheduling, and recovery testing (see Kubernetes Failover Lab).
+          Scheduled Kubernetes CronJobs handled price-data automation: a Billa scraper and a Tesco scraper parsed retailer price data with Python and stored results in PostgreSQL, served through a dedicated API (historically ceny-api.amaterix.com) under the GuacAlert name. The same cluster was also used for hands-on multi-node Kubernetes operations - node drain, pod rescheduling, and recovery testing (see Kubernetes Failover Lab).
           <br><br>
-          This platform is no longer actively maintained and its historical hostnames are not currently online — it remains here to show earlier hands-on experience running multiple real services, scheduled automation, and stateful storage on Kubernetes.
+          This platform is no longer actively maintained and its historical hostnames are not currently online - it remains here to show earlier hands-on experience running multiple real services, scheduled automation, and stateful storage on Kubernetes.
         </div>
         <div class="project-tags">
           <span class="tag">DigitalOcean Kubernetes</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span>
@@ -1176,7 +1178,7 @@ document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
   // Flatten into single char/token array weighted toward short items
   const chars = [];
   wordPool.forEach(w => {
-    // Short tokens repeat more — keeps density reasonable
+    // Short tokens repeat more - keeps density reasonable
     const reps = w.length <= 2 ? 6 : w.length <= 4 ? 3 : 1;
     for (let r = 0; r < reps; r++) chars.push(w);
   });
@@ -1190,7 +1192,7 @@ document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
   init();
 
   function draw() {
-    // Black fade trail — slower fade = longer green tails
+    // Black fade trail - slower fade = longer green tails
     ctx.fillStyle = 'rgba(0,0,0,0.055)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -1211,7 +1213,7 @@ document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
       ctx.fillText(word, x, y);
 
       if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      // Slower — was 0.35-0.6, now 0.18-0.28
+      // Slower - was 0.35-0.6, now 0.18-0.28
       drops[i] += 0.18 + Math.random() * 0.10;
     }
   }
