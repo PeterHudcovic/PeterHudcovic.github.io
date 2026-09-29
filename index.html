@@ -506,6 +506,30 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           </a>
           <figcaption>Infrastructure evidence: aix01 and aix02 active in IBM Cloud PowerVS. Click the image to view the full-size screenshot.</figcaption>
         </figure>
+        <figure class="project-screenshot">
+          <a href="aix-powerha-releasing.png" target="_blank" rel="noopener noreferrer">
+            <img src="aix-powerha-releasing.png" alt="PowerHA live output showing old_school_rg releasing on aix01 while aix02 is offline." width="2388" height="1144" loading="lazy" decoding="async">
+          </a>
+          <figcaption>1. Resource group move: old_school_rg enters RELEASING on aix01. Click the image to view it full size.</figcaption>
+        </figure>
+        <figure class="project-screenshot">
+          <a href="aix-powerha-acquiring.png" target="_blank" rel="noopener noreferrer">
+            <img src="aix-powerha-acquiring.png" alt="PowerHA live output showing old_school_rg offline on aix01 and acquiring on aix02." width="2431" height="1154" loading="lazy" decoding="async">
+          </a>
+          <figcaption>2. Resource group move: aix02 enters ACQUIRING after the group goes offline on aix01. Click the image to view it full size.</figcaption>
+        </figure>
+        <figure class="project-screenshot">
+          <a href="aix-powerha-online.png" target="_blank" rel="noopener noreferrer">
+            <img src="aix-powerha-online.png" alt="PowerHA terminal output showing old_school_rg online on aix02 and both cluster nodes in the stable state." width="2407" height="1152" loading="lazy" decoding="async">
+          </a>
+          <figcaption>3. Resource group move: terminal output confirms ONLINE on aix02 and stable cluster nodes. The status panel still shows the previous snapshot. Click the image to view it full size.</figcaption>
+        </figure>
+        <figure class="project-screenshot">
+          <a href="aix-powerha-move-success.png" target="_blank" rel="noopener noreferrer">
+            <img src="aix-powerha-move-success.png" alt="AIX command output confirming a successful move of old_school_rg to aix02, with aix01 offline and aix02 online for this resource group." width="1253" height="632" loading="lazy" decoding="async">
+          </a>
+          <figcaption>4. Command confirmation: resource group movement successful; old_school_rg is online on aix02. Click the image to view it full size.</figcaption>
+        </figure>
       </div>
     </div>
 
