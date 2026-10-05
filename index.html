@@ -476,6 +476,12 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <div class="build-status-card open-items"><h3>Open items</h3><ul class="build-checklist"><li>Test accounts app-user and app-denied: P2 licensing and usage location still required.</li><li>Trust the public WAF certificate on the operations VM alongside layer 2.</li><li>Check Traffic Analytics data in Log Analytics.</li><li>Review disabling local authentication keys in Log Analytics and Application Insights.</li><li>Remove the Gmail Owner assignment from the subscription.</li><li>Continue updating website screenshots and text; source material for Codex is prepared.</li></ul></div>
         </div>
       </div>
+      <figure class="project-screenshot" style="max-width:1011px">
+        <a href="azure-appservice-current-architecture.png" target="_blank" rel="noopener noreferrer">
+          <img src="azure-appservice-current-architecture.png" alt="Current Azure lab architecture: permanent layer 0 foundation, layer 1 networking and operations with six subnets, Bastion, NAT Gateway, private DNS and flow logs; Application Gateway and Web App are planned for layer 2." width="1011" height="754" loading="lazy">
+        </a>
+        <figcaption>Current architecture — this is how the lab looks so far. Layer 0 provides the permanent foundation, layer 1 covers networking and operations, and the dashed components are planned for layer 2. The build is still under construction. Click the diagram to view it full size.</figcaption>
+      </figure>
       <figure class="project-screenshot">
         <a href="azure-appservice-terraform-layers.png" target="_blank" rel="noopener noreferrer">
           <img src="azure-appservice-terraform-layers.png" alt="Visual Studio Code showing the development Terraform directory split into layer-0-foundation and layer-1-network-operations, with backend, policy, DNS, NAT, NSG and private endpoint configuration files." width="1089" height="1554" loading="lazy">
