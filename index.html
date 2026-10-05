@@ -451,6 +451,12 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     <div class="section-content">
       <p class="project-desc">Under construction. Follow the ongoing build through the <a href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/commits" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub commits</a>. The screenshots below show progress from the current build.</p>
       <figure class="project-screenshot">
+        <a href="azure-appservice-terraform-layers.png" target="_blank" rel="noopener noreferrer">
+          <img src="azure-appservice-terraform-layers.png" alt="Visual Studio Code showing the development Terraform directory split into layer-0-foundation and layer-1-network-operations, with backend, policy, DNS, NAT, NSG and private endpoint configuration files." width="1089" height="1554" loading="lazy">
+        </a>
+        <figcaption>Terraform development structure: separate foundation and network operations layers, with dedicated backend and configuration files. Click the image to view it full size.</figcaption>
+      </figure>
+      <figure class="project-screenshot">
         <a href="azure-appservice-resource-groups.png" target="_blank" rel="noopener noreferrer">
           <img src="azure-appservice-resource-groups.png" alt="Azure Resource Manager showing separate development resource groups for the application, foundation, Key Vault and network in Sweden Central." width="1978" height="731" loading="lazy">
         </a>
@@ -463,16 +469,22 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <figcaption>Development network resources: security groups, Bastion, private DNS, Managed DevOps Pools and NAT gateway. Click the image to view it full size.</figcaption>
       </figure>
       <figure class="project-screenshot">
+        <a href="azure-appservice-keyvault-private-dns.png" target="_blank" rel="noopener noreferrer">
+          <img src="azure-appservice-keyvault-private-dns.png" alt="Azure private DNS zone privatelink.vaultcore.azure.net showing three record sets and one virtual network link in the development network resource group." width="1854" height="859" loading="lazy">
+        </a>
+        <figcaption>Key Vault private DNS zone: privatelink.vaultcore.azure.net with three record sets and one virtual network link. Click the image to view it full size.</figcaption>
+      </figure>
+      <figure class="project-screenshot">
         <a href="azure-appservice-private-endpoint-nsg.png" target="_blank" rel="noopener noreferrer">
           <img src="azure-appservice-private-endpoint-nsg.png" alt="Azure private endpoint network security group showing targeted inbound HTTPS allow rules for the web application and Key Vault endpoints, followed by a deny-all inbound rule." width="2385" height="1267" loading="lazy">
         </a>
         <figcaption>Private endpoint NSG: targeted HTTPS access for the web application and Key Vault, followed by an explicit deny-all inbound rule. Click the image to view it full size.</figcaption>
       </figure>
       <figure class="project-screenshot">
-        <a href="azure-appservice-keyvault-private-dns.png" target="_blank" rel="noopener noreferrer">
-          <img src="azure-appservice-keyvault-private-dns.png" alt="Azure private DNS zone privatelink.vaultcore.azure.net showing three record sets and one virtual network link in the development network resource group." width="1854" height="859" loading="lazy">
+        <a href="azure-appservice-network-validation.png" target="_blank" rel="noopener noreferrer">
+          <img src="azure-appservice-network-validation.png" alt="PowerShell validation showing the certificate Key Vault resolving to private IP 10.10.5.4, a blocked HTTPS connection from the operations subnet and outbound IP 20.240.216.144 through NAT Gateway." width="757" height="681" loading="lazy">
         </a>
-        <figcaption>Key Vault private DNS zone: privatelink.vaultcore.azure.net with three record sets and one virtual network link. Click the image to view it full size.</figcaption>
+        <figcaption>Network validation: private DNS resolves to 10.10.5.4, HTTPS access from the operations subnet to the certificate vault is blocked, and outbound traffic uses the NAT Gateway IP. Click the image to view it full size.</figcaption>
       </figure>
       <figure class="project-screenshot">
         <a href="azure-appservice-devops-service-connections.png" target="_blank" rel="noopener noreferrer">
@@ -485,18 +497,6 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <img src="azure-appservice-devops-agent-pools.png" alt="Azure DevOps agent pools showing Azure Pipelines, Default, GitHub-hosted Agents and separate development pools mdp-sits-dev-app-swc and mdp-sits-dev-infra-swc." width="920" height="780" loading="lazy">
         </a>
         <figcaption>Azure DevOps agent pools: separate development pools for application and infrastructure pipelines. Click the image to view it full size.</figcaption>
-      </figure>
-      <figure class="project-screenshot">
-        <a href="azure-appservice-network-validation.png" target="_blank" rel="noopener noreferrer">
-          <img src="azure-appservice-network-validation.png" alt="PowerShell validation showing the certificate Key Vault resolving to private IP 10.10.5.4, a blocked HTTPS connection from the operations subnet and outbound IP 20.240.216.144 through NAT Gateway." width="757" height="681" loading="lazy">
-        </a>
-        <figcaption>Network validation: private DNS resolves to 10.10.5.4, HTTPS access from the operations subnet to the certificate vault is blocked, and outbound traffic uses the NAT Gateway IP. Click the image to view it full size.</figcaption>
-      </figure>
-      <figure class="project-screenshot">
-        <a href="azure-appservice-terraform-layers.png" target="_blank" rel="noopener noreferrer">
-          <img src="azure-appservice-terraform-layers.png" alt="Visual Studio Code showing the development Terraform directory split into layer-0-foundation and layer-1-network-operations, with backend, policy, DNS, NAT, NSG and private endpoint configuration files." width="1089" height="1554" loading="lazy">
-        </a>
-        <figcaption>Terraform development structure: separate foundation and network operations layers, with dedicated backend and configuration files. Click the image to view it full size.</figcaption>
       </figure>
     </div>
   </details>
