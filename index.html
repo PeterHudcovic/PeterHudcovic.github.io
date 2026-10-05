@@ -402,6 +402,24 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .platform-disclosure > summary, .section-disclosure > summary { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
 .platform-disclosure > summary::before, .section-disclosure > summary::before { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--accent); flex-shrink: 0; }
 .platform-disclosure[open] > summary::before, .section-disclosure[open] > summary::before { transform: rotate(90deg); }
+/* Azure build progress */
+.build-progress { margin: 28px 0; }
+.build-next { padding: 18px 22px; border: 1px solid var(--accent); border-radius: 10px; background: #3b82f610; margin-bottom: 18px; }
+.build-next strong { display: block; color: var(--accent); margin-bottom: 6px; }
+.build-next p { margin: 0; color: var(--text); }
+.build-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; align-items: start; }
+.build-status-card { padding: 22px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2); }
+.build-status-card h3 { margin: 0 0 16px; font-size: 18px; }
+.build-status-card.done h3 { color: #4ade80; }
+.build-status-card.planned h3 { color: var(--accent); }
+.build-status-card.open-items h3 { color: #fbbf24; }
+.build-status-card details + details { margin-top: 18px; }
+.build-status-card summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text); }
+.build-checklist { list-style: none; padding: 0; margin: 14px 0 0; }
+.build-checklist li { position: relative; padding-left: 25px; margin-bottom: 12px; font-size: 13px; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
+.build-checklist li::before { content: '☐'; position: absolute; left: 0; color: var(--accent); }
+.done .build-checklist li::before { content: '☑'; color: #4ade80; }
+.open-items .build-checklist li::before { color: #fbbf24; }
 </style>
 </head>
 <body>
@@ -450,6 +468,14 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     <summary><span class="section-eyebrow">New Project - Azure Test / Dev / Prod CI/CD Architecture</span></summary>
     <div class="section-content">
       <p class="project-desc">Under construction. Follow the ongoing build through the <a href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/commits" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub commits</a>. The screenshots below show progress from the current build.</p>
+      <div class="build-progress">
+        <div class="build-next"><strong>Under construction · Next step</strong><p>Dev layer 2: start with the application Key Vault.</p></div>
+        <div class="build-status-grid">
+          <div class="build-status-card done"><h3>Completed</h3><details open><summary>Preparation</summary><ul class="build-checklist"><li>Nonprod and prod Pay-As-You-Go subscriptions; Lab Admin and Admin Prod accounts.</li><li>Azure DevOps organization and project.</li><li>GitHub repository structured as infra/environments/{development,testing,production}/layer-0/1/2.</li></ul></details><details open><summary>Dev layer 0 · Foundation</summary><ul class="build-checklist"><li>Azure-hosted Terraform state: one container per layer, Entra ID access without storage keys.</li><li>Resource groups for all layers.</li><li>Managed identities for the application, Application Gateway and five pipelines.</li><li>Log Analytics and Application Insights monitoring.</li><li>Storage for application packages and flow logs.</li><li>Persistent public IP for NAT.</li><li>Certificate vault with the WAF certificate, plus an admin vault.</li><li>Five service connections using Workload Identity federation without secrets, with assigned roles.</li><li>Entra ID application for user sign-in, a user group and its assignment.</li><li>Budget with alerts.</li><li>Azure Policy: seven assignments and four exemptions.</li><li>Roles for the DevOpsInfrastructure service.</li><li>Temporary role for the local layer 1 build (temporary.tf).</li></ul></details><details open><summary>Dev layer 1 · Network &amp; operations</summary><ul class="build-checklist"><li>Virtual network and six subnets.</li><li>Network and application security groups (NSGs and ASGs) with a deny-all rule.</li><li>NAT Gateway, private DNS zones and private endpoints for the certificate and admin vaults.</li><li>Operations VM and Bastion Developer.</li><li>VNet flow log with Traffic Analytics.</li><li>Two Managed DevOps Pools for private agents.</li><li>Validated from the operations VM; build log 07 and AGENTS.md recorded.</li></ul></details></div>
+          <div class="build-status-card planned"><h3>Next steps</h3><details open><summary>1 · Dev layer 2 — Application</summary><ul class="build-checklist"><li>Application Key Vault with a private endpoint.</li><li>App Service plan and Web App in snet-app, with managed identity and Entra ID sign-in.</li><li>Application private endpoint and DNS records in dev.sits.internal.</li><li>Application Gateway with WAF and a certificate from the certificate vault.</li><li>Operations VM tests and build log 08.</li></ul></details><details open><summary>2 · Azure DevOps pipelines</summary><ul class="build-checklist"><li>YAML pipelines for infra-l1, infra-l2, build, deploy and destroy, running on the project pools.</li><li>Hand layer 1 over to its pipeline and remove temporary.tf.</li><li>Pipeline permissions for NetworkWatcherRG and flow log storage.</li><li>Enable package immutability after pipeline validation.</li></ul></details><details open><summary>3 · Shared Terraform modules</summary><ul class="build-checklist"><li>Move shared code to infra/modules/ so Test and Prod reuse modules instead of copying Dev.</li></ul></details><details open><summary>4 · Test environment</summary><ul class="build-checklist"><li>Build layers 0, 1 and 2 from the shared modules, following Dev.</li></ul></details><details open><summary>5 · Production environment</summary><ul class="build-checklist"><li>Build layers 0, 1 and 2.</li><li>Bastion Basic with inbound access from Dev and Test NAT addresses blocked.</li><li>Deletion lock with Lock Creator and Lock Remover roles.</li><li>Privileged Identity Management (PIM) and Conditional Access.</li></ul></details><details open><summary>6 · Final validation</summary><ul class="build-checklist"><li>Monitoring and alerts.</li><li>Acceptance tests, including destroy and rebuild.</li><li>Presentation preparation and a backup recording.</li></ul></details></div>
+          <div class="build-status-card open-items"><h3>Open items</h3><ul class="build-checklist"><li>Test accounts app-user and app-denied: P2 licensing and usage location still required.</li><li>Trust the public WAF certificate on the operations VM alongside layer 2.</li><li>Check Traffic Analytics data in Log Analytics.</li><li>Review disabling local authentication keys in Log Analytics and Application Insights.</li><li>Remove the Gmail Owner assignment from the subscription.</li><li>Continue updating website screenshots and text; source material for Codex is prepared.</li></ul></div>
+        </div>
+      </div>
       <figure class="project-screenshot">
         <a href="azure-appservice-terraform-layers.png" target="_blank" rel="noopener noreferrer">
           <img src="azure-appservice-terraform-layers.png" alt="Visual Studio Code showing the development Terraform directory split into layer-0-foundation and layer-1-network-operations, with backend, policy, DNS, NAT, NSG and private endpoint configuration files." width="1089" height="1554" loading="lazy">
