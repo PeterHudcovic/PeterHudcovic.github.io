@@ -491,6 +491,12 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         </a>
         <figcaption>Network validation: private DNS resolves to 10.10.5.4, HTTPS access from the operations subnet to the certificate vault is blocked, and outbound traffic uses the NAT Gateway IP. Click the image to view it full size.</figcaption>
       </figure>
+      <figure class="project-screenshot">
+        <a href="azure-appservice-terraform-layers.png" target="_blank" rel="noopener noreferrer">
+          <img src="azure-appservice-terraform-layers.png" alt="Visual Studio Code showing the development Terraform directory split into layer-0-foundation and layer-1-network-operations, with backend, policy, DNS, NAT, NSG and private endpoint configuration files." width="1089" height="1554" loading="lazy">
+        </a>
+        <figcaption>Terraform development structure: separate foundation and network operations layers, with dedicated backend and configuration files. Click the image to view it full size.</figcaption>
+      </figure>
     </div>
   </details>
 </section>
