@@ -47,7 +47,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.PORT }}
-          source: "index.html,redef.svg,azure-appservice-resource-groups.png,azure-appservice-network-resources.png,azure-appservice-private-endpoint-nsg.png,azure-appservice-keyvault-private-dns.png,azure-appservice-devops-service-connections.png,azure-appservice-devops-agent-pools.png,azure-appservice-network-validation.png,azure-appservice-terraform-layers.png,azure-appservice-current-architecture.png,aix-lab.jpg,aix-powervs-evidence.png,aix-powerha-releasing.png,aix-powerha-acquiring.png,aix-powerha-online.png,aix-powerha-move-success.png,azure-lab-evidence.png,azure-resources-evidence.png,openshift-donation-lab.png,project_takeover.jpg,it-takeover-playbook.pdf,simple-project-roadmap.png,simple-project-roadmap.pdf"
+          source: "azure-case-study/images,output/pdf/azure-platform-presentation.pdf,output/pdf/azure-platform-case-study.pdf,index.html,redef.svg,azure-appservice-resource-groups.png,azure-appservice-network-resources.png,azure-appservice-private-endpoint-nsg.png,azure-appservice-keyvault-private-dns.png,azure-appservice-devops-service-connections.png,azure-appservice-devops-agent-pools.png,azure-appservice-network-validation.png,azure-appservice-terraform-layers.png,azure-appservice-current-architecture.png,aix-lab.jpg,aix-powervs-evidence.png,aix-powerha-releasing.png,aix-powerha-acquiring.png,aix-powerha-online.png,aix-powerha-move-success.png,azure-lab-evidence.png,azure-resources-evidence.png,openshift-donation-lab.png,project_takeover.jpg,it-takeover-playbook.pdf,simple-project-roadmap.png,simple-project-roadmap.pdf"
           target: "/var/www/html"
 
       - name: Reload Apache
