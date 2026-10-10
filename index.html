@@ -491,7 +491,15 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 </section>
 
 <!-- PROJECTS -->
-<section id="new-azure-project"><details class="section-disclosure" open><summary><span class="section-eyebrow">Azure Platform Case Study - Dev / Test / Prod</span></summary><div class="section-content">
+
+
+<section id="projects">
+  <details class="section-disclosure">
+    <summary><span class="section-eyebrow">Projects</span></summary>
+    <div class="section-content">
+      <h2 class="section-title">Engineering Projects</h2>
+
+<div class="project-subsection" id="new-azure-project" style="margin-bottom:28px"><details class="section-disclosure"><summary><span class="section-eyebrow">Azure Platform Case Study - Dev / Test / Prod</span></summary><div class="section-content">
 <p class="az-lead">A private Azure application platform, deployed across three environments with Terraform, federated CI/CD identities and controlled production access.</p>
 <div class="az-actions"><a class="btn-primary" href="output/pdf/Azure-Lab-Guide.pdf?v=20261007-contents" download>Download Azure Lab Guide PDF</a><a class="btn-secondary" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/tree/8def9469500372b739faaf2b005bd804c3b0a9d6" target="_blank" rel="noopener">Project source</a></div>
 <p class="az-caption">Evidence captured October 2026. Educational lab. Configuration, runtime tests and build records are identified separately.</p>
@@ -685,13 +693,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <h4>Prod log analytics overview</h4><figure class="az-evidence"><a href="azure-case-study/images/prod-log-analytics-overview.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-log-analytics-overview.png" width="2208" height="703" alt="Prod log analytics overview" loading="lazy"></a><figcaption>The production Log Analytics workspace log-sits-prod-swc is Active in Sweden Central under rg-sits-prod-foundation-swc and the production subscription. It uses Pay-as-you-go pricing and the access control mode Use resource or workspace permissions. Operational issues are reported as OK. This documents workspace configuration and status; diagnostic source connections and actual log ingestion are separate evidence.</figcaption></figure>
 <h4>Prod monitor enabled alert rules</h4><figure class="az-evidence"><a href="azure-case-study/images/prod-monitor-enabled-alert-rules.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-monitor-enabled-alert-rules.png" width="2185" height="693" alt="Prod monitor enabled alert rules" loading="lazy"></a><figcaption>Filtered to sub-app-prod and Enabled status, Azure Monitor lists five production rules: App Service HealthCheckStatus below 100 and Application Gateway UnhealthyHostCount above zero at severity 1 (Error); Key Vault access-denied log search results above zero at severity 2 (Warning); WAF request-match log search results above zero at severity 3 (Informational); and Application Insights Failure Anomalies at severity 3. The log search rules target log-sits-prod-swc. This is a configured rule inventory, not a list of fired alert instances.</figcaption></figure>
 </details>
-</article></div></details></section>
-
-<section id="projects">
-  <details class="section-disclosure">
-    <summary><span class="section-eyebrow">Projects</span></summary>
-    <div class="section-content">
-      <h2 class="section-title">Engineering Projects</h2>
+</article></div></details></div>
 
 
 
@@ -1324,7 +1326,12 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) reveal(link.hash);
   });
   window.addEventListener('hashchange', () => reveal(location.hash));
-  if (location.hash) reveal(location.hash);
+  // Every page visit starts with the disclosures collapsed, including history restores.
+  function collapseSections() {
+    document.querySelectorAll('details').forEach(details => { details.open = false; });
+  }
+  collapseSections();
+  window.addEventListener('pageshow', collapseSections);
 })();
 
 // Enlarge static evidence without leaving the page.
