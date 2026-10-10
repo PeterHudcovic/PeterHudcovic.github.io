@@ -1,0 +1,42 @@
+---
+title: "01b · Backend dependencies and operations · commit 8812e085"
+config:
+  layout: elk
+---
+flowchart TB
+
+ BACK["Backend · 2 replicas"]:::app
+ CONF["ConfigMap flight-board-config<br/>+ Secret references<br/>(no secret values)"]:::ops
+ MCK["MongoDB operator 1.13.0<br/>MongoDBCommunity → StatefulSet,<br/>Service, users, Secrets"]:::ops
+ DB["MongoDB 8.0.32 replica set · 3 members<br/>user flightboard-app · readWrite<br/>headless Service :27017<br/>required anti-affinity · PDB min 2"]:::data
+ PVC["6 PVCs · standard-rwo<br/>per member: data 5 GiB + logs 2 GiB"]:::data
+ NAT["Cloud Router + Cloud NAT<br/>egress: AeroDataBox + quay.io images<br/>AUTO_ONLY IP · error-only logging"]:::ops
+ AERO["AeroDataBox via RapidAPI<br/>PRG departures<br/>window now −1 h … +11 h"]:::public
+ NODES["GKE nodes · container runtime<br/>pull all images · node identity fb-nodes"]:::ops
+ PG["Private Google Access<br/>Google APIs + Artifact Registry"]:::ops
+ AR["Artifact Registry flight-board<br/>images tagged with git SHA"]:::delivery
+ LOG["Cloud Logging<br/>workload stdout (run IDs)<br/>LB request logs · NAT errors"]:::ops
+ DNS["GKE control-plane DNS endpoint<br/>IAM authentication<br/>IP endpoints disabled"]:::delivery
+ AUTHOR["Author<br/>gcloud / kubectl / k9s"]:::delivery
+ ADMIN["Admin :8082 in backend pod<br/>127.0.0.1 only · no Service<br/>pause · resume · fetch-now"]:::ops
+ CONF -.->|ConfigMap + API key + Mongo URI| BACK
+ MCK -.->|generates connection-string Secret| CONF
+ MCK -.->|reconciles| DB
+ BACK -->|primary · majority read/write<br/>transactions: snapshot read · majority write| DB
+ DB --- PVC
+ BACK -->|one replica, every 30 min| NAT
+ NODES -->|operator + MongoDB images from quay.io| NAT
+ NODES -->|app images| PG
+ NAT --> AERO
+ PG -->|AR Reader · fb-nodes| AR
+ BACK -.->|stdout logs| LOG
+ NAT -.->|errors| LOG
+ AUTHOR -->|IAM-authenticated| DNS
+ DNS -.->|kubectl port-forward| ADMIN
+ ADMIN -.-> BACK
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;

@@ -1,0 +1,40 @@
+---
+title: "03a · Coordinated fetch and publication · commit 8812e085"
+config:
+  layout: elk
+---
+flowchart TB
+
+ A["Replica A<br/>check every 1 min"]:::app
+ B["Replica B<br/>check every 1 min"]:::app
+ CLAIM["Atomic claim · MongoDB transaction<br/>readConcern snapshot · writeConcern majority<br/>not paused · nextRunAt due · lock free<br/>new runId · fetchSeq +1 · RUNNING<br/>lock 5 min · deadline 2 min<br/>nextRunAt = claim + 30 min"]:::data
+ SKIP["No claim<br/>no provider request<br/>wait for next check"]:::ops
+ HTTP["Winner calls AeroDataBox<br/>outside the transaction<br/>GKE source = aerodatabox<br/>(default: stub)"]:::public
+ VALID["Validate whole batch<br/>1 invalid flight → reject all<br/>IATA destination override<br/>Terminal 2 · sort · first 36"]:::app
+ TX["Publication transaction<br/>readConcern snapshot · writeConcern majority<br/>check lock owner + deadline<br/>only higher fetchSeq replaces board<br/>board + SUCCESS + release lock"]:::data
+ FAIL["Failure<br/>keep last good board<br/>ERROR record · release own lock<br/>nextRunAt unchanged"]:::ops
+ CTRL["fetch_control<br/>paused · nextRunAt · lock<br/>runDeadline · fetchSeq"]:::data
+ BOARD["board_current<br/>one complete snapshot"]:::data
+ RUNS["fetch_runs<br/>RUNNING / SUCCESS / ERROR<br/>TTL 7 days"]:::data
+ A --> CLAIM
+ B --> CLAIM
+ CLAIM -->|one winner| HTTP
+ CLAIM -->|no claim| SKIP
+ HTTP -->|HTTP 200| VALID
+ HTTP -->|error / timeout| FAIL
+ VALID -->|valid, also empty| TX
+ VALID -->|invalid| FAIL
+ TX -->|guard / deadline / DB error| FAIL
+ CLAIM -.-> CTRL
+ CLAIM -.-> RUNS
+ TX --> BOARD
+ TX -.-> CTRL
+ TX -.-> RUNS
+ FAIL -.-> RUNS
+ FAIL -.->|release own lock| CTRL
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;

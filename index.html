@@ -548,6 +548,53 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <a href="flight-board-departures.png?v=20261010-065354" target="_blank" rel="noopener noreferrer"><img src="flight-board-departures.png?v=20261010-065354" alt="Flight Board showing Terminal 2 departures, flight numbers, check-in desks, boarding remarks and the last published data time." width="2573" height="1527" loading="lazy" decoding="async"></a>
           <figcaption>Departure board captured 10 October 2026, showing the updated Terminal 2 layout, boarding remarks, last update time and AeroDataBox attribution. Click the image for full size.</figcaption>
         </figure>
+        <details class="project-subsection" id="flight-board-architecture">
+          <summary>Architecture diagrams &mdash; runtime, delivery &amp; data flow</summary>
+          <p style="margin:16px 0">Six views of Flight Board, based on application commit 8812e085. Open a diagram for full size.</p>
+          <a class="btn-secondary" href="flight-board-diagrams/flight-board-diagrams.zip" download>Download all diagrams &amp; editable sources (ZIP)</a>
+          <details class="project-subsection">
+            <summary>Request path and health checks</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/01a-request-path.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/01a-request-path.png" alt="Flight Board architecture: Request path and health checks." width="3568" height="1278" loading="lazy" decoding="async"></a>
+              <figcaption>Request path and health checks. <a href="flight-board-diagrams/01a-request-path.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+          <details class="project-subsection">
+            <summary>Backend dependencies and operations</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/01b-backend-dependencies.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/01b-backend-dependencies.png" alt="Flight Board architecture: Backend dependencies and operations." width="3340" height="3586" loading="lazy" decoding="async"></a>
+              <figcaption>Backend dependencies and operations. <a href="flight-board-diagrams/01b-backend-dependencies.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+          <details class="project-subsection">
+            <summary>Development, review and CI</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/02a-development-ci.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/02a-development-ci.png" alt="Flight Board architecture: Development, review and CI." width="1706" height="3348" loading="lazy" decoding="async"></a>
+              <figcaption>Development, review and CI. <a href="flight-board-diagrams/02a-development-ci.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+          <details class="project-subsection">
+            <summary>Infrastructure and deployment</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/02b-infrastructure-deploy.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/02b-infrastructure-deploy.png" alt="Flight Board architecture: Infrastructure and deployment." width="3568" height="2096" loading="lazy" decoding="async"></a>
+              <figcaption>Infrastructure and deployment. <a href="flight-board-diagrams/02b-infrastructure-deploy.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+          <details class="project-subsection">
+            <summary>Coordinated fetch and publication</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/03a-coordinated-fetch.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/03a-coordinated-fetch.png" alt="Flight Board architecture: Coordinated fetch and publication." width="2308" height="4050" loading="lazy" decoding="async"></a>
+              <figcaption>Coordinated fetch and publication. <a href="flight-board-diagrams/03a-coordinated-fetch.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+          <details class="project-subsection">
+            <summary>Read path, admin and cleanup</summary>
+            <figure class="project-screenshot">
+              <a href="flight-board-diagrams/03b-read-path.svg" target="_blank" rel="noopener noreferrer"><img src="flight-board-diagrams/03b-read-path.png" alt="Flight Board architecture: Read path, admin and cleanup." width="3176" height="2402" loading="lazy" decoding="async"></a>
+              <figcaption>Read path, admin and cleanup. <a href="flight-board-diagrams/03b-read-path.svg" target="_blank" rel="noopener noreferrer">Open scalable diagram &rarr;</a></figcaption>
+            </figure>
+          </details>
+        </details>
         <details class="project-subsection">
           <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
           <figure class="project-screenshot">

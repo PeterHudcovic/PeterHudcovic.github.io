@@ -1,0 +1,34 @@
+---
+title: "03b · Read path, admin and cleanup · commit 8812e085"
+config:
+  layout: elk
+---
+flowchart TB
+
+ BOARD["board_current<br/>snapshot"]:::data
+ CTRL["fetch_control"]:::data
+ RUNS["fetch_runs"]:::data
+ API["Backend API<br/>/api/departures · /api/status<br/>snapshot ≤ 12 h · stale flag ≥ 75 min<br/>no-store · status has git SHA<br/>503 NO_DATA / DATABASE_UNAVAILABLE"]:::app
+ UI["Browser<br/>polls /api/departures every 30 s<br/>never calls AeroDataBox"]:::app
+ FRESH["stale = false<br/>show flights"]:::app
+ STALE["stale = true<br/>show board + warning"]:::ops
+ CACHE["API error / timeout except NO_DATA<br/>last localStorage snapshot ≤ 12 h + Connection lost<br/>no usable cache → temporarily unavailable"]:::ops
+ EXPIRED["No valid board<br/>503 NO_DATA<br/>browser clears cache"]:::ops
+ ADMIN["Admin :8082 (localhost)<br/>pause · resume<br/>fetch-now = next check"]:::ops
+ CLEAN["Cleanup on each replica<br/>after first DB init, then every 24 h<br/>removes board older than 12 h"]:::ops
+ BOARD --> API
+ CTRL -.->|status only| API
+ RUNS -.->|status only| API
+ API -->|/api/departures| UI
+ UI --> FRESH
+ UI --> STALE
+ UI --> CACHE
+ UI --> EXPIRED
+ ADMIN --> CTRL
+ CLEAN -.-> BOARD
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;

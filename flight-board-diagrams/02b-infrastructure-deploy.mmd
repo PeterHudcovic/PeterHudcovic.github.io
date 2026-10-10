@@ -1,0 +1,45 @@
+---
+title: "02b · Infrastructure and deployment · commit 8812e085"
+config:
+  layout: elk
+---
+flowchart TB
+
+ BOOT["Terraform bootstrap (author, not in CI)<br/>APIs · service accounts · WIF<br/>Artifact Registry · state bucket · budget"]:::delivery
+ TF["Main Terraform (author)<br/>VPC · subnet · router · NAT<br/>GKE · node pool · firewall · global IP"]:::delivery
+ BUDGET["Budget 1000 CZK / month<br/>alerts 50 / 90 / 100 %<br/>no automatic spending stop"]:::ops
+ OPS["Author steps (k8s/README.md)<br/>namespace → operator (Helm) → Secrets<br/>→ MongoDBCommunity + PDB → TLS Secret → RBAC"]:::ops
+ MAIN["Merge to main"]:::app
+ GATE["Deploy workflow<br/>push to main or manual dispatch<br/>infra/terraform change on push → skip<br/>(manual dispatch is not skipped)"]:::delivery
+ DEPLOY["fb-deploy via WIF<br/>only main + workflow Deploy<br/>+ push or workflow_dispatch"]:::ops
+ BUILD["Build backend + frontend images<br/>tag = full git SHA"]:::delivery
+ REG["Artifact Registry flight-board<br/>fb-deploy: Writer · fb-nodes: Reader"]:::data
+ API["GKE DNS endpoint<br/>fb-deploy: Kubernetes Engine Viewer"]:::ops
+ RBAC["Role flight-board-deployer<br/>namespace flight-board only<br/>CRUD app objects + all Secrets<br/>no MongoDB / operator rights"]:::ops
+ HELM["Check deployed version (fail-closed)<br/>helm upgrade --install · tag = SHA<br/>--wait --timeout 10m · no --atomic"]:::delivery
+ VERIFY["Public /api/status = deployed SHA<br/>60 × 10 s · else workflow fails"]:::app
+ DNSCF["Cloudflare A record → global IP<br/>(after first deploy)"]:::public
+ NODES["fb-nodes on private node VMs<br/>default node role + AR Reader<br/>no JSON key"]:::ops
+ BOOT -->|prerequisite| TF
+ BOOT --> BUDGET
+ TF --> OPS
+ BOOT -.->|creates fb-nodes| NODES
+ TF -.->|attaches to node pool| NODES
+ MAIN --> GATE
+ GATE --> DEPLOY
+ DEPLOY --> BUILD
+ BUILD --> REG
+ DEPLOY --> API
+ API --> RBAC
+ RBAC --> HELM
+ OPS -.->|prerequisites| HELM
+ REG -.->|image references| HELM
+ REG -->|image pulls| NODES
+ HELM --> VERIFY
+ DNSCF -.->|public URL| VERIFY
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;

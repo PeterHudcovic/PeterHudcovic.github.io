@@ -1,0 +1,51 @@
+---
+title: "01a · Request path and health checks · commit 8812e085"
+config:
+  layout: dagre
+---
+flowchart TB
+
+ B["Browser<br/>React UI · polls own API every 30 s"]:::app
+ CF["Cloudflare · flights.peterhudcovic.tech<br/>Proxied DNS · zone SSL Full<br/>host rule → Full (strict)"]:::public
+ subgraph GLB["Google Cloud load balancing · GCP resources, not Kubernetes objects"]
+  LB["Classic Application Load Balancer<br/>static IP flight-board-ip · HTTPS 443<br/>Cloudflare Origin cert (self-managed)"]:::public
+  NF["Frontend NEG<br/>2 pod endpoints"]:::public
+  NB["Backend NEG<br/>2 pod endpoints"]:::public
+  FALL["Default backend NEG"]:::public
+  FW["Firewall flight-board-allow-lb-hc<br/>tcp:8080 from 35.191.0.0/16 + 130.211.0.0/22<br/>target tag flight-board-node"]:::ops
+ end
+ subgraph NS["Kubernetes · namespace flight-board"]
+  ING["Ingress · configuration, not a hop<br/>/api, /api/* → backend · /* → frontend<br/>HTTP disabled · TLS Secret flight-board-tls"]:::ops
+  BCFG["BackendConfig × 2 · LB health checks<br/>backend /readyz :8080<br/>frontend /healthz :8080<br/>every 15 s · timeout 5 s"]:::ops
+  SVC["2 ClusterIP Services<br/>port 80 → 8080<br/>annotations: NEG + backend-config"]:::ops
+  FRONT["Frontend · 2 replicas<br/>nginx + React · :8080<br/>topology spread · PDB min 1"]:::app
+  BACK["Backend · 2 replicas<br/>Spring Boot · Java 25<br/>API :8080 · Actuator :8081<br/>topology spread · PDB min 1"]:::app
+  PROBES["Kubelet probes (node-local)<br/>backend: startup + liveness :8081<br/>readiness /readyz :8080<br/>frontend: /healthz :8080"]:::ops
+ end
+ subgraph KS["Kubernetes · namespace kube-system (GKE managed)"]
+  DEF["default-http-backend<br/>404 for unmatched host or path"]:::public
+ end
+ B -->|HTTPS| CF
+ CF -->|HTTPS to origin| LB
+ ING -.->|GKE builds and updates| LB
+ BCFG -.->|health checks| LB
+ FW -.->|allows Google health checks| BCFG
+ LB -->|/*| NF
+ LB -->|/api, /api/*| NB
+ LB -->|unmatched| FALL
+ NF -->|pod IP| FRONT
+ NB -->|pod IP| BACK
+ FALL --> DEF
+ SVC -.->|selector| FRONT
+ SVC -.->|selector| BACK
+ SVC -.->|endpoint membership| NF
+ SVC -.->|endpoint membership| NB
+ SVC -.->|backend-config annotation| BCFG
+ PROBES -.-> FRONT
+ PROBES -.-> BACK
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;

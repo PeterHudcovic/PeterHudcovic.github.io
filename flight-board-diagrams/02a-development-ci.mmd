@@ -1,0 +1,35 @@
+---
+title: "02a · Development, review and CI · commit 8812e085"
+config:
+  layout: elk
+---
+flowchart TB
+
+ AUTHOR["Peter · tech lead<br/>requirements · diff review<br/>approves every merge"]:::app
+ CODEX["Codex · codex/*<br/>app/backend · app/frontend<br/>tests + Dockerfiles"]:::delivery
+ CLAUDE["Claude Code · claude/*<br/>infra/ · k8s/ · .github/<br/>docs/ · root files"]:::delivery
+ PR["Pull request + cross-review<br/>other agent comments<br/>AGENTS.md · CLAUDE.md · contract.md"]:::delivery
+ CI["CI on pull_request to main<br/>ownership check · changed-area tests<br/>tsc + vite build · terraform fmt + validate<br/>no image build · no e2e"]:::delivery
+ PLANJOB["terraform plan job<br/>infra/terraform only<br/>same-repository PRs only"]:::delivery
+ MAIN["Author merges → main<br/>(branch protection not in repo)"]:::app
+ OIDC["GitHub OIDC token<br/>id-token: write"]:::ops
+ WIF["WIF pool github · provider github-actions<br/>condition: repository_id == 1412231446"]:::ops
+ PLAN["fb-tf-plan<br/>any workflow of this repo<br/>roles/viewer + state objectUser"]:::ops
+ STATE["GCS state bucket<br/>versioned · uniform access<br/>public access prevention<br/>prefixes bootstrap/ and main/"]:::data
+ AUTHOR --> CODEX
+ AUTHOR --> CLAUDE
+ CODEX --> PR
+ CLAUDE --> PR
+ PR --> CI
+ CI --> PLANJOB
+ CI -->|green checks + review| MAIN
+ PLANJOB --> OIDC
+ OIDC --> WIF
+ WIF --> PLAN
+ PLAN -->|reads state · writes lock| STATE
+
+classDef public fill:#e0f2fe,stroke:#0284c7,color:#0f172a,stroke-width:2px;
+classDef app fill:#dcfce7,stroke:#16a34a,color:#0f172a,stroke-width:2px;
+classDef data fill:#ede9fe,stroke:#7c3aed,color:#0f172a,stroke-width:2px;
+classDef ops fill:#fef3c7,stroke:#d97706,color:#0f172a,stroke-width:2px;
+classDef delivery fill:#dbeafe,stroke:#2563eb,color:#0f172a,stroke-width:2px;
