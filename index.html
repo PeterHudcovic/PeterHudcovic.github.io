@@ -478,6 +478,9 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <a href="https://github.com/PeterHudcovic/azure-appservice-platform-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">Azure Project</a>
       </div>
       <div class="lab-cta">
+        <a href="https://flights.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Flight Board</a>
+      </div>
+      <div class="lab-cta">
         <a href="https://aix.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">AIX Live Lab</a>
       </div>
     </div>
@@ -693,6 +696,41 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 
 
   <div class="projects-grid">
+
+    <div class="project-card project-featured fade-in" id="flight-board-project">
+      <div class="project-card-header">
+        <div class="project-icon" aria-hidden="true">&#9992;&#65039;</div>
+        <span class="project-badge badge-infra">AI AGENT COLLABORATION &middot; GKE</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Flight Board &mdash; Leading Two AI Agents to GKE</div>
+        <div class="project-architecture" style="margin-top:0;margin-bottom:16px">AeroDataBox &rarr; Spring Boot &rarr; MongoDB replica set &rarr; React departure board</div>
+        <div class="project-desc">
+          <strong>Leading two AI coding agents from specification to first deployment.</strong> I acted as tech lead: defined the project requirements, assigned verifiable tasks through GitHub issues, coordinated the application and infrastructure work, reviewed diffs and CI results, and approved every merge.
+          <br><br>
+          <strong>Codex</strong> owned the Spring Boot backend, React + TypeScript frontend, application tests and Dockerfiles. <strong>Claude Code</strong> owned Terraform, Kubernetes and Helm, GitHub Actions, the local Docker Compose setup and documentation. Each agent worked in a separate git worktree and reviewed the other agent's pull requests. A shared application/infrastructure contract defined ports, configuration, images and health checks; CI enforced directory ownership. Changes followed issue &rarr; branch &rarr; PR &rarr; CI &rarr; peer review &rarr; my merge approval &rarr; deployment &rarr; verification. The agents explained each change and its verification so I could understand and assess it before merging.
+          <br><br>
+          <strong>The result:</strong> an airport departure board using real Prague Airport data from AeroDataBox, with a Spring Boot API, React frontend and MongoDB replica set on GKE. Terraform provisions the Google Cloud infrastructure; Helm and GitHub Actions deliver the application. The screenshots below show the board and the first deployment in the cluster.
+        </div>
+        <div class="project-tags">
+          <span class="tag">AI Agent Coordination</span><span class="tag">Codex</span><span class="tag">Claude Code</span><span class="tag">Code Review</span><span class="tag">Google Cloud</span><span class="tag">GKE</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">GitHub Actions</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">AeroDataBox</span>
+        </div>
+        <a href="https://github.com/PeterHudcovic/flight-board" class="project-link" target="_blank" rel="noopener noreferrer">View project on GitHub &rarr;</a>
+        <figure class="project-screenshot">
+          <a href="flight-board-departures.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-departures.png" alt="Flight Board showing Terminal 2 departures, flight numbers, check-in desks, boarding remarks and the last published data time." width="2354" height="1838" loading="lazy" decoding="async"></a>
+          <figcaption>Departure board captured 10 October 2026, including the last published timestamp and AeroDataBox attribution. Click the image for full size.</figcaption>
+        </figure>
+        <details class="project-subsection">
+          <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
+          <figure class="project-screenshot">
+            <a href="flight-board-first-deployment.jpg" target="_blank" rel="noopener noreferrer"><img src="flight-board-first-deployment.jpg" alt="GitHub Actions showing three passed CI runs and a Deploy run in progress; k9s shows backend, frontend, MongoDB and operator pods running on GKE." width="2366" height="1682" loading="lazy" decoding="async"></a>
+            <figcaption>First deployment snapshot: CI runs passed and the backend, frontend, MongoDB replica set and operator pods are Running. The Deploy workflow is still in progress in this capture.</figcaption>
+          </figure>
+        </details>
+      </div>
+    </div>
+
+
 
     <div class="project-card project-featured project-current fade-in" id="aix-project">
       <div class="project-card-header">
