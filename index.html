@@ -445,6 +445,17 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 @media(max-width:700px){.az-chapter h3{font-size:21px}.az-lead{font-size:16px}.az-gallery{padding:12px}}
 /* END AZURE CASE STUDY */
 
+/* Individual project disclosures */
+.project-disclosure { margin: 0 0 14px; min-width: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.project-disclosure > summary { display: flex; align-items: baseline; gap: 12px; padding: 18px 20px; cursor: pointer; list-style: none; font: 13px/1.6 var(--mono); color: var(--accent2); overflow-wrap: anywhere; }
+.project-disclosure > summary::-webkit-details-marker { display: none; }
+.project-disclosure > summary::before { content: '\25B6'; flex: 0 0 auto; color: var(--accent); font-size: 10px; }
+.project-disclosure[open] > summary::before { content: '\25BC'; }
+.project-disclosure > summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: -3px; }
+.project-disclosure > .project-card { border: 0; border-top: 1px solid var(--border); border-radius: 0; transform: none; }
+.project-disclosure > .section-content { padding: 0 20px 20px; }
+@media(max-width:700px) { .project-disclosure > summary { padding: 14px; } .project-disclosure > .section-content { padding: 0 14px 14px; } }
+
 </style>
 </head>
 <body>
@@ -453,7 +464,6 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
   <div class="nav-logo">peter@lab:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
   <div class="nav-links">
     <a class="nav-button" href="#projects">Projects</a>
-    <a class="nav-button" href="#labs">More Labs</a>
     <a class="nav-button" href="#playbooks">Project Thinking</a>
     <a class="nav-button" href="#experience">Where I have built</a>
     <a class="nav-button" href="#stack">Stack</a>
@@ -497,9 +507,54 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
   <details class="section-disclosure">
     <summary><span class="section-eyebrow">Projects</span></summary>
     <div class="section-content">
-      <h2 class="section-title">Engineering Projects</h2>
+<details class="project-disclosure" id="flight-board-project">
+<summary>Flight Board — Leading Two AI Agents to GKE</summary>
+<div class="project-card project-featured fade-in">
+      <div class="project-card-header">
+        <div class="project-icon" aria-hidden="true">&#9992;&#65039;</div>
+        <span class="project-badge badge-infra">AI AGENT COLLABORATION &middot; GKE</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">Flight Board &mdash; Leading Two AI Agents to GKE</div>
+        <div class="project-architecture" style="margin-top:0;margin-bottom:16px">AeroDataBox &rarr; Spring Boot &rarr; MongoDB replica set &rarr; React departure board</div>
+        <div class="project-desc">
+          <strong>Leading two AI coding agents from specification to first deployment.</strong> I acted as tech lead: defined the project requirements, assigned verifiable tasks through GitHub issues, coordinated the application and infrastructure work, reviewed diffs and CI results, and approved every merge.
+          <br><br>
+          <strong>Codex</strong> owned the Spring Boot backend, React + TypeScript frontend, application tests and Dockerfiles. <strong>Claude Code</strong> owned Terraform, Kubernetes and Helm, GitHub Actions, the local Docker Compose setup and documentation. Each agent worked in a separate git worktree and reviewed the other agent's pull requests. A shared application/infrastructure contract defined ports, configuration, images and health checks; CI enforced directory ownership. Changes followed issue &rarr; branch &rarr; PR &rarr; CI &rarr; peer review &rarr; my merge approval &rarr; deployment &rarr; verification. The agents explained each change and its verification so I could understand and assess it before merging.
+          <br><br>
+          <strong>The result:</strong> an airport departure board using real Prague Airport data from AeroDataBox, with a Spring Boot API, React frontend and MongoDB replica set on GKE. Terraform provisions the Google Cloud infrastructure; Helm and GitHub Actions deliver the application. The screenshots below show the board and the first deployment in the cluster.
+        </div>
+        <div class="project-tags">
+          <span class="tag">AI Agent Coordination</span><span class="tag">Codex</span><span class="tag">Claude Code</span><span class="tag">Code Review</span><span class="tag">Google Cloud</span><span class="tag">GKE</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">GitHub Actions</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">AeroDataBox</span>
+        </div>
+        <a href="https://github.com/PeterHudcovic/flight-board" class="project-link" target="_blank" rel="noopener noreferrer">View project on GitHub &rarr;</a>
+        <figure class="project-screenshot">
+          <a href="flight-board-departures.png?v=20261010-065354" target="_blank" rel="noopener noreferrer"><img src="flight-board-departures.png?v=20261010-065354" alt="Flight Board showing Terminal 2 departures, flight numbers, check-in desks, boarding remarks and the last published data time." width="2573" height="1527" loading="lazy" decoding="async"></a>
+          <figcaption>Departure board captured 10 October 2026, showing the updated Terminal 2 layout, boarding remarks, last update time and AeroDataBox attribution. Click the image for full size.</figcaption>
+        </figure>
+        <details class="project-subsection">
+          <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
+          <figure class="project-screenshot">
+            <a href="flight-board-first-deployment.jpg" target="_blank" rel="noopener noreferrer"><img src="flight-board-first-deployment.jpg" alt="GitHub Actions showing three passed CI runs and a Deploy run in progress; k9s shows backend, frontend, MongoDB and operator pods running on GKE." width="2366" height="1682" loading="lazy" decoding="async"></a>
+            <figcaption>First deployment snapshot: CI runs passed and the backend, frontend, MongoDB replica set and operator pods are Running. The Deploy workflow is still in progress in this capture.</figcaption>
+          </figure>
+        </details>
+        <details class="project-subsection">
+          <summary>Leading two AI agents &mdash; worktrees &amp; pull request review</summary>
+          <figure class="project-screenshot">
+            <a href="flight-board-agent-worktrees.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-agent-worktrees.png" alt="Sublime Merge showing separate Codex and Claude worktrees, agent branches, merged pull requests and diffs in AGENTS.md, CLAUDE.md and the shared application-infrastructure contract." width="2382" height="1915" loading="lazy" decoding="async"></a>
+            <figcaption>Coordinating the agents in Sublime Merge: separate worktrees and branches, pull request history, and review of the shared rules and application/infrastructure contract.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <a href="flight-board-peer-review.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-peer-review.png" alt="Open pull request 25 for the destination mapping contract, with an app-owner review comment, one successful check, four skipped checks and no merge conflicts." width="1324" height="892" loading="lazy" decoding="async"></a>
+            <figcaption>Peer review before author approval: PR #25 aligns the destination mapping contract with the application. The capture shows the app-owner review, one successful check, four skipped checks and no conflicts; the pull request is still open.</figcaption>
+          </figure>
+        </details>
+      </div>
+    </div>
+</details>
 
-<div class="project-subsection" id="new-azure-project" style="margin-bottom:28px"><details class="section-disclosure"><summary><span class="section-eyebrow">Azure Platform Case Study - Dev / Test / Prod</span></summary><div class="section-content">
+<details class="project-disclosure" id="new-azure-project"><summary><span class="section-eyebrow">Azure App Service Platform Lab - Dev / Test / Prod</span></summary><div class="section-content">
 <p class="az-lead">A private Azure application platform, deployed across three environments with Terraform, federated CI/CD identities and controlled production access.</p>
 <div class="az-actions"><a class="btn-primary" href="output/pdf/Azure-Lab-Guide.pdf?v=20261007-contents" download>Download Azure Lab Guide PDF</a><a class="btn-secondary" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/tree/8def9469500372b739faaf2b005bd804c3b0a9d6" target="_blank" rel="noopener">Project source</a></div>
 <p class="az-caption">Evidence captured October 2026. Educational lab. Configuration, runtime tests and build records are identified separately.</p>
@@ -693,59 +748,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <h4>Prod log analytics overview</h4><figure class="az-evidence"><a href="azure-case-study/images/prod-log-analytics-overview.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-log-analytics-overview.png" width="2208" height="703" alt="Prod log analytics overview" loading="lazy"></a><figcaption>The production Log Analytics workspace log-sits-prod-swc is Active in Sweden Central under rg-sits-prod-foundation-swc and the production subscription. It uses Pay-as-you-go pricing and the access control mode Use resource or workspace permissions. Operational issues are reported as OK. This documents workspace configuration and status; diagnostic source connections and actual log ingestion are separate evidence.</figcaption></figure>
 <h4>Prod monitor enabled alert rules</h4><figure class="az-evidence"><a href="azure-case-study/images/prod-monitor-enabled-alert-rules.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-monitor-enabled-alert-rules.png" width="2185" height="693" alt="Prod monitor enabled alert rules" loading="lazy"></a><figcaption>Filtered to sub-app-prod and Enabled status, Azure Monitor lists five production rules: App Service HealthCheckStatus below 100 and Application Gateway UnhealthyHostCount above zero at severity 1 (Error); Key Vault access-denied log search results above zero at severity 2 (Warning); WAF request-match log search results above zero at severity 3 (Informational); and Application Insights Failure Anomalies at severity 3. The log search rules target log-sits-prod-swc. This is a configured rule inventory, not a list of fired alert instances.</figcaption></figure>
 </details>
-</article></div></details></div>
+</article></div></details>
 
-
-
-  <div class="projects-grid">
-
-    <div class="project-card project-featured fade-in" id="flight-board-project">
-      <div class="project-card-header">
-        <div class="project-icon" aria-hidden="true">&#9992;&#65039;</div>
-        <span class="project-badge badge-infra">AI AGENT COLLABORATION &middot; GKE</span>
-      </div>
-      <div class="project-card-body">
-        <div class="project-title">Flight Board &mdash; Leading Two AI Agents to GKE</div>
-        <div class="project-architecture" style="margin-top:0;margin-bottom:16px">AeroDataBox &rarr; Spring Boot &rarr; MongoDB replica set &rarr; React departure board</div>
-        <div class="project-desc">
-          <strong>Leading two AI coding agents from specification to first deployment.</strong> I acted as tech lead: defined the project requirements, assigned verifiable tasks through GitHub issues, coordinated the application and infrastructure work, reviewed diffs and CI results, and approved every merge.
-          <br><br>
-          <strong>Codex</strong> owned the Spring Boot backend, React + TypeScript frontend, application tests and Dockerfiles. <strong>Claude Code</strong> owned Terraform, Kubernetes and Helm, GitHub Actions, the local Docker Compose setup and documentation. Each agent worked in a separate git worktree and reviewed the other agent's pull requests. A shared application/infrastructure contract defined ports, configuration, images and health checks; CI enforced directory ownership. Changes followed issue &rarr; branch &rarr; PR &rarr; CI &rarr; peer review &rarr; my merge approval &rarr; deployment &rarr; verification. The agents explained each change and its verification so I could understand and assess it before merging.
-          <br><br>
-          <strong>The result:</strong> an airport departure board using real Prague Airport data from AeroDataBox, with a Spring Boot API, React frontend and MongoDB replica set on GKE. Terraform provisions the Google Cloud infrastructure; Helm and GitHub Actions deliver the application. The screenshots below show the board and the first deployment in the cluster.
-        </div>
-        <div class="project-tags">
-          <span class="tag">AI Agent Coordination</span><span class="tag">Codex</span><span class="tag">Claude Code</span><span class="tag">Code Review</span><span class="tag">Google Cloud</span><span class="tag">GKE</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">GitHub Actions</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">AeroDataBox</span>
-        </div>
-        <a href="https://github.com/PeterHudcovic/flight-board" class="project-link" target="_blank" rel="noopener noreferrer">View project on GitHub &rarr;</a>
-        <figure class="project-screenshot">
-          <a href="flight-board-departures.png?v=20261010-065354" target="_blank" rel="noopener noreferrer"><img src="flight-board-departures.png?v=20261010-065354" alt="Flight Board showing Terminal 2 departures, flight numbers, check-in desks, boarding remarks and the last published data time." width="2573" height="1527" loading="lazy" decoding="async"></a>
-          <figcaption>Departure board captured 10 October 2026, showing the updated Terminal 2 layout, boarding remarks, last update time and AeroDataBox attribution. Click the image for full size.</figcaption>
-        </figure>
-        <details class="project-subsection">
-          <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
-          <figure class="project-screenshot">
-            <a href="flight-board-first-deployment.jpg" target="_blank" rel="noopener noreferrer"><img src="flight-board-first-deployment.jpg" alt="GitHub Actions showing three passed CI runs and a Deploy run in progress; k9s shows backend, frontend, MongoDB and operator pods running on GKE." width="2366" height="1682" loading="lazy" decoding="async"></a>
-            <figcaption>First deployment snapshot: CI runs passed and the backend, frontend, MongoDB replica set and operator pods are Running. The Deploy workflow is still in progress in this capture.</figcaption>
-          </figure>
-        </details>
-        <details class="project-subsection">
-          <summary>Leading two AI agents &mdash; worktrees &amp; pull request review</summary>
-          <figure class="project-screenshot">
-            <a href="flight-board-agent-worktrees.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-agent-worktrees.png" alt="Sublime Merge showing separate Codex and Claude worktrees, agent branches, merged pull requests and diffs in AGENTS.md, CLAUDE.md and the shared application-infrastructure contract." width="2382" height="1915" loading="lazy" decoding="async"></a>
-            <figcaption>Coordinating the agents in Sublime Merge: separate worktrees and branches, pull request history, and review of the shared rules and application/infrastructure contract.</figcaption>
-          </figure>
-          <figure class="project-screenshot">
-            <a href="flight-board-peer-review.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-peer-review.png" alt="Open pull request 25 for the destination mapping contract, with an app-owner review comment, one successful check, four skipped checks and no merge conflicts." width="1324" height="892" loading="lazy" decoding="async"></a>
-            <figcaption>Peer review before author approval: PR #25 aligns the destination mapping contract with the application. The capture shows the app-owner review, one successful check, four skipped checks and no conflicts; the pull request is still open.</figcaption>
-          </figure>
-        </details>
-      </div>
-    </div>
-
-
-
-    <div class="project-card project-featured project-current fade-in" id="aix-project">
+<details class="project-disclosure" id="aix-project">
+<summary>Old School AIX</summary>
+<div class="project-card project-featured project-current fade-in">
       <div class="project-card-header">
         <div class="project-icon">🖥️</div>
         <span class="project-badge badge-current">CURRENT PROJECT · AIX LAB</span>
@@ -807,8 +814,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         </figure>
       </div>
     </div>
+</details>
 
-    <div class="project-card project-featured fade-in" id="openshift-project">
+<details class="project-disclosure" id="openshift-project">
+<summary>OpenShift + JBoss/WildFly Application Administration &amp; Troubleshooting Lab</summary>
+<div class="project-card project-featured fade-in">
       <div class="project-card-header">
         <div class="project-icon">🔓</div>
         <span class="project-badge badge-infra">OPENSHIFT LAB</span>
@@ -844,8 +854,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         </figure>
       </div>
     </div>
+</details>
 
-    <div class="project-card project-featured fade-in" id="azure-project">
+<details class="project-disclosure" id="azure-project">
+<summary>Azure Migration Lab - AKS Platform &amp; Operations Console</summary>
+<div class="project-card project-featured fade-in">
       <div class="project-card-header">
         <div class="project-icon">☁️</div>
         <span class="project-badge badge-infra">AZURE LAB</span>
@@ -1025,20 +1038,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 </div>
 </div>
     </div>
+</details>
 
-    </div>
-
-    </div>
-  </details>
-</section>
-
-<!-- MORE LABS -->
-<section id="labs">
-  <details class="section-disclosure">
-    <summary><span class="section-eyebrow">More Labs</span></summary>
-    <div class="section-content">
-      <div class="projects-grid">
-<div class="project-card fade-in" id="migration-project">
+<details class="project-disclosure" id="migration-project">
+<summary>Azure → Google Cloud Migration Lab</summary>
+<div class="project-card fade-in">
       <div class="project-card-header">
         <div class="project-icon">☁️↔️</div>
         <span class="project-badge badge-infra">MIGRATION</span>
@@ -1062,8 +1066,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <a class="project-link" href="https://github.com/PeterHudcovic/azure-migration-lab/tree/gcp-exact-clone" target="_blank" rel="noopener noreferrer">View migration branch →</a>
       </div>
     </div>
+</details>
 
-    <div class="project-card fade-in">
+<details class="project-disclosure" id="gcp-sre-project">
+<summary>GCP SRE Platform Lab - Jenkins CI/CD &amp; GitOps</summary>
+<div class="project-card fade-in">
       <div class="project-card-header">
         <div class="project-icon">🔁</div>
         <span class="project-badge badge-infra">GCP · CI/CD</span>
@@ -1083,8 +1090,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <a class="project-link" href="https://github.com/PeterHudcovic/gcp-sre-platform-lab" target="_blank" rel="noopener noreferrer">View GitHub repository →</a>
       </div>
     </div>
+</details>
 
-    <div class="project-card fade-in">
+<details class="project-disclosure" id="sip-project">
+<summary>Self-Hosted SIP / VoIP Server</summary>
+<div class="project-card fade-in">
       <div class="project-card-header">
         <div class="project-icon">📞</div>
         <span class="project-badge badge-infra">INFRA</span>
@@ -1101,8 +1111,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         </div>
       </div>
     </div>
+</details>
 
-    <div class="project-card fade-in">
+<details class="project-disclosure" id="kubernetes-failover-project">
+<summary>Kubernetes Failover Lab</summary>
+<div class="project-card fade-in">
       <div class="project-card-header">
         <div class="project-icon">🔁</div>
         <span class="project-badge badge-infra">INFRA</span>
@@ -1118,8 +1131,32 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         <button onclick="document.getElementById('failover-modal').style.display='flex'" style="margin-top:16px;background:transparent;border:1px solid var(--border);color:var(--accent2);font-family:var(--mono);font-size:12px;padding:8px 16px;border-radius:6px;cursor:pointer;">View failover test</button>
       </div>
     </div>
+</details>
 
-<!-- FAILOVER MODAL -->
+<details class="project-disclosure" id="digitalocean-project">
+<summary>GuacAlert / DigitalOcean Kubernetes Platform</summary>
+<div class="project-card fade-in">
+      <div class="project-card-header">
+        <div class="project-icon">🥑</div>
+        <span class="project-badge badge-legacy">LEGACY · KUBERNETES PLATFORM</span>
+      </div>
+      <div class="project-card-body">
+        <div class="project-title">GuacAlert / DigitalOcean Kubernetes Platform</div>
+        <div class="project-desc">
+          An earlier multi-service application platform on a multi-node DigitalOcean Kubernetes cluster - not just a single scraper. Two independent backends ran as separate Kubernetes Deployments behind NGINX Ingress with hostname-based routing: a Python API built with FastAPI, and a Java API built with Spring Boot (historically routed as api.amaterix.com and java-api.amaterix.com). PostgreSQL 16 ran as a StatefulSet with persistent volume storage shared across the platform's services.
+          <br><br>
+          Scheduled Kubernetes CronJobs handled price-data automation: a Billa scraper and a Tesco scraper parsed retailer price data with Python and stored results in PostgreSQL, served through a dedicated API (historically ceny-api.amaterix.com) under the GuacAlert name. The same cluster was also used for hands-on multi-node Kubernetes operations - node drain, pod rescheduling, and recovery testing (see Kubernetes Failover Lab).
+          <br><br>
+          This platform is no longer actively maintained and its historical hostnames are not currently online - it remains here to show earlier hands-on experience running multiple real services, scheduled automation, and stateful storage on Kubernetes.
+        </div>
+        <div class="project-tags">
+          <span class="tag">DigitalOcean Kubernetes</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span>
+          <span class="tag">PostgreSQL 16</span><span class="tag">StatefulSet</span><span class="tag">Billa scraper</span>
+          <span class="tag">Tesco scraper</span><span class="tag">K8s CronJob</span><span class="tag">NGINX Ingress</span>
+        </div>
+      </div>
+    </div>
+</details>
 <div id="failover-modal" style="display:none;position:fixed;inset:0;background:#000000cc;z-index:999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#0a0e1a;border:1px solid var(--border);border-radius:12px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--border);">
@@ -1177,33 +1214,12 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
     </div>
   </div>
 </div>
-
-    <div class="project-card fade-in" id="digitalocean-project">
-      <div class="project-card-header">
-        <div class="project-icon">🥑</div>
-        <span class="project-badge badge-legacy">LEGACY · KUBERNETES PLATFORM</span>
-      </div>
-      <div class="project-card-body">
-        <div class="project-title">GuacAlert / DigitalOcean Kubernetes Platform</div>
-        <div class="project-desc">
-          An earlier multi-service application platform on a multi-node DigitalOcean Kubernetes cluster - not just a single scraper. Two independent backends ran as separate Kubernetes Deployments behind NGINX Ingress with hostname-based routing: a Python API built with FastAPI, and a Java API built with Spring Boot (historically routed as api.amaterix.com and java-api.amaterix.com). PostgreSQL 16 ran as a StatefulSet with persistent volume storage shared across the platform's services.
-          <br><br>
-          Scheduled Kubernetes CronJobs handled price-data automation: a Billa scraper and a Tesco scraper parsed retailer price data with Python and stored results in PostgreSQL, served through a dedicated API (historically ceny-api.amaterix.com) under the GuacAlert name. The same cluster was also used for hands-on multi-node Kubernetes operations - node drain, pod rescheduling, and recovery testing (see Kubernetes Failover Lab).
-          <br><br>
-          This platform is no longer actively maintained and its historical hostnames are not currently online - it remains here to show earlier hands-on experience running multiple real services, scheduled automation, and stateful storage on Kubernetes.
-        </div>
-        <div class="project-tags">
-          <span class="tag">DigitalOcean Kubernetes</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span>
-          <span class="tag">PostgreSQL 16</span><span class="tag">StatefulSet</span><span class="tag">Billa scraper</span>
-          <span class="tag">Tesco scraper</span><span class="tag">K8s CronJob</span><span class="tag">NGINX Ingress</span>
-        </div>
-      </div>
-    </div>
-
-        </div>
     </div>
   </details>
 </section>
+
+<!-- MORE LABS -->
+
 
 <!-- PROJECT THINKING -->
 <section aria-label="How I approach delivery" class="takeover-section" id="playbooks">
@@ -1309,9 +1325,10 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   function reveal(hash) {
     let id;
     try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
-    id = ({ takeover: 'playbooks', platforms: 'experience', connect: 'contact' })[id] || id;
+    id = ({ labs: 'projects', takeover: 'playbooks', platforms: 'experience', connect: 'contact' })[id] || id;
     const target = document.getElementById(id);
     if (!target) return;
+    if (target.tagName === 'DETAILS') target.open = true;
     const ancestors = [];
     for (let parent = target.parentElement; parent; parent = parent.parentElement) {
       if (parent.tagName === 'DETAILS') ancestors.push(parent);
