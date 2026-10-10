@@ -456,6 +456,22 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .project-disclosure > .section-content { padding: 0 20px 20px; }
 @media(max-width:700px) { .project-disclosure > summary { padding: 14px; } .project-disclosure > .section-content { padding: 0 14px 14px; } }
 
+/* Hero live demos */
+.hero .hero-cta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+.hero .lab-cta { min-width: 0; }
+.hero .hero-demo-button { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 62px; padding: 15px 12px; color: var(--text); font-family: var(--mono); font-size: 14px; background: rgba(0,0,0,0.2); }
+.hero-demo-badge { flex: 0 0 auto; padding: 3px 8px; border: 1px solid; border-radius: 8px; font-size: 10px; font-weight: 500; line-height: 1.5; letter-spacing: 0.04em; }
+.hero-new-badge { color: #22d3ee; border-color: #22d3ee; }
+.hero-alive-badge { color: #4ade80; border-color: #16a34a; }
+.hero-alive-dot { flex: 0 0 auto; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+.hero .hero-demo-new { border-color: #22d3ee; animation: hero-demo-pulse 3s ease-in-out infinite; }
+.hero-demo-new .hero-new-badge { animation: hero-badge-pulse 3s ease-in-out infinite; }
+@keyframes hero-demo-pulse { 0%,100% { box-shadow: 0 0 6px #22d3ee14; } 50% { box-shadow: 0 0 18px #22d3ee38, inset 0 0 12px #22d3ee0a; } }
+@keyframes hero-badge-pulse { 0%,100% { background: transparent; } 50% { background: #22d3ee18; } }
+@media(max-width:600px) { .hero .hero-cta { grid-template-columns: minmax(0, 1fr); gap: 14px; } }
+@media(prefers-reduced-motion:reduce) { .hero .hero-demo-new, .hero-demo-new .hero-new-badge { animation: none; } }
+/* End hero live demos */
+
 </style>
 </head>
 <body>
@@ -485,16 +501,12 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
     </p>
     <div class="hero-cta">
       <div class="lab-cta">
-        <a href="https://github.com/PeterHudcovic/azure-appservice-platform-lab" class="btn-secondary" target="_blank" rel="noopener noreferrer">Azure Project</a>
+        <a href="https://flights.peterhudcovic.tech/" class="btn-secondary hero-demo-button hero-demo-new" target="_blank" rel="noopener noreferrer"><span>Flight Board</span><span class="hero-demo-badge hero-new-badge">NEW</span></a>
       </div>
       <div class="lab-cta">
-        <a href="https://flights.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Flight Board</a>
-      </div>
-      <div class="lab-cta">
-        <a href="https://aix.peterhudcovic.tech/" class="btn-secondary" target="_blank" rel="noopener noreferrer">AIX Live Lab</a>
+        <a href="https://aix.peterhudcovic.tech/" class="btn-secondary hero-demo-button" target="_blank" rel="noopener noreferrer"><span>AIX Live Lab</span><span class="hero-alive-dot" aria-hidden="true"></span><span class="hero-demo-badge hero-alive-badge">STILL ALIVE</span></a>
       </div>
     </div>
-    <p class="project-note" style="margin-top:16px">Screenshots and project documentation remain available below.</p>
   </div>
 
 
