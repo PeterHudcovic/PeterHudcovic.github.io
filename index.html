@@ -595,6 +595,36 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
             </figure>
           </details>
         </details>
+        <details open data-default-open class="project-subsection" id="flight-board-security-gap">
+          <summary>Known security gap: the origin can be reached without Cloudflare</summary>
+          <div style="margin:16px 0"><span class="project-badge badge-warn">Known issue &ndash; fix planned</span></div>
+          <div class="project-desc">
+            <strong>Intended request path:</strong> Browser &rarr; Cloudflare &rarr; Google Cloud Load Balancer &rarr; GKE. The DNS record for <code>flights.peterhudcovic.tech</code> is proxied in Cloudflare, so DNS queries return only Cloudflare IP addresses and do not reveal the Load Balancer's real IP address (the origin). Cloudflare provides WAF, DDoS protection and security headers in front of the origin: <code>HSTS</code> and <code>X-Content-Type-Options</code>.
+            <br><br>
+            <strong>What I verified:</strong> the origin also responds to requests that did not pass through Cloudflare. I tested it directly with the command below; <code>&lt;origin-ip&gt;</code> represents the origin, shown here as <code>35.190.x.x</code>.
+          </div>
+          <pre style="padding:16px;font-family:var(--mono);font-size:11px;line-height:1.8;color:var(--muted);overflow-x:auto;margin:16px 0;white-space:pre-wrap;overflow-wrap:anywhere"><code>curl.exe -skI --resolve flights.peterhudcovic.tech:443:&lt;origin-ip&gt; https://flights.peterhudcovic.tech/</code></pre>
+          <div class="project-desc">
+            The response was <code>HTTP 200 OK</code> directly from nginx, without Cloudflare headers, without <code>HSTS</code> or <code>X-Content-Type-Options</code>, and with <code>Server: nginx/1.30.5</code> disclosing the exact server version.
+            <br><br>
+            <strong>How the origin can be found:</strong> no access is required. DNS hides the IP, but during a TLS connection the Load Balancer presents a Cloudflare Origin Certificate naming <code>flights.peterhudcovic.tech</code>. Censys connected to the IP and indexed the certificate. Searching for <code>flights.peterhudcovic.tech</code> in Censys returned <code>35.190.x.x:443</code> in less than a second, with a match in <code>web.cert.names</code> and <code>Browser Trust: Untrusted</code> &mdash; an Origin Certificate trusted only by Cloudflare.
+            <br><br>
+            <strong>Why it matters:</strong> anyone who knows the origin IP can bypass Cloudflare entirely &mdash; its WAF, DDoS protection and security headers &mdash; and attack the Load Balancer directly. Hiding an IP in DNS is not protection; the origin must actively reject traffic that does not come from Cloudflare.
+            <br><br>
+            <strong>Planned fix &mdash; not yet implemented:</strong>
+            <ul style="margin:12px 0;padding-left:20px">
+              <li>The proposed Google Cloud Armor security policy on the Load Balancer, managed through Terraform, would allow only official Cloudflare IP ranges and block everything else, for example with <code>403</code>. I have a limited budget for Cloud Armor and will not apply this policy because the application will be shut down soon. This protection is not in place.</li>
+              <li>As an alternative or additional protection, Cloudflare Authenticated Origin Pulls (mTLS): Cloudflare presents a client certificate to the origin, and the origin rejects connections without it.</li>
+              <li><code>server_tokens off</code> in nginx to stop disclosing the server version.</li>
+              <li>Verification after the fix: the same curl request directly to the origin must be rejected, while the page at <code>https://flights.peterhudcovic.tech</code> must continue to work normally through Cloudflare.</li>
+            </ul>
+            I found this gap through my own reconnaissance from an attacker's perspective. I am documenting it openly because knowing where a system is weak and having a plan to fix it is part of operating it.
+          </div>
+          <figure class="project-screenshot">
+            <a href="flight-board-censys-origin-masked.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-censys-origin-masked.png" alt="Censys search results showing the masked origin 35.190.x.x:443, Browser Trust: Untrusted, and a certificate name match for flights.peterhudcovic.tech above the Cloudflare-protected hostname." width="1605" height="980" loading="lazy" decoding="async"></a>
+            <figcaption>Censys search capture: the origin certificate matches flights.peterhudcovic.tech and shows Browser Trust: Untrusted. Origin IP masked as 35.190.x.x using AI-assisted image redaction. Click the image for full size.</figcaption>
+          </figure>
+        </details>
         <details class="project-subsection">
           <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
           <figure class="project-screenshot">
