@@ -472,6 +472,30 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 @media(prefers-reduced-motion:reduce) { .hero .hero-demo-new, .hero-demo-new .hero-new-badge { animation: none; } }
 /* End hero live demos */
 
+/* AIX middleware project: scoped architecture and copy */
+#aix-project .aix-middleware-description { color: #94a3b8; }
+#aix-project .aix-middleware-description strong { color: var(--text); }
+#aix-project .aix-middleware-description p + p { margin-top: 14px; }
+#aix-project .aix-middleware-description ul { margin: 14px 0 16px; padding-left: 21px; }
+#aix-project .aix-middleware-description li + li { margin-top: 9px; }
+#aix-project .aix-ha-architecture { margin-top: 24px; min-width: 0; }
+#aix-project .aix-ha-diagram-scroll { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); }
+#aix-project .aix-ha-diagram-scroll:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+#aix-project .aix-ha-diagram { display: block; width: 100%; min-width: 640px; height: auto; }
+#aix-project .aix-ha-architecture figcaption { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 12px; color: #94a3b8; font-size: 12px; line-height: 1.6; }
+#aix-project .aix-ha-legend { display: inline-flex; align-items: center; gap: 8px; }
+#aix-project .aix-ha-line { width: 28px; flex-shrink: 0; border-top: 2px solid; }
+#aix-project .aix-ha-line-failover { border-color: var(--accent2); border-top-style: dashed; }
+#aix-project .aix-ha-line-hadr { border-color: var(--green); }
+#aix-project .aix-ha-mobile-hint { display: none; width: 100%; }
+@media(max-width:700px) {
+  #aix-project .project-card-header { padding: 20px 16px 0; gap: 12px; }
+  #aix-project .project-card-body { padding: 16px; }
+  #aix-project .project-title { font-size: 20px; }
+  #aix-project .aix-ha-mobile-hint { display: block; }
+}
+/* End AIX middleware project */
+
 </style>
 </head>
 <body>
@@ -844,69 +868,88 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 </article></div></details>
 
 <details class="project-disclosure" id="aix-project">
-<summary>Old School AIX</summary>
-<div class="project-card project-featured project-current fade-in">
-      <div class="project-card-header">
-        <div class="project-icon">🖥️</div>
-        <span class="project-badge badge-current">CURRENT PROJECT · AIX LAB</span>
-      </div>
-      <div class="project-card-body">
-        <div class="project-title">Old School AIX</div>
-        <div class="project-architecture" style="margin-top:0;margin-bottom:16px">IBM AIX 7.3 · PowerHA SystemMirror 7.2.10 SP1 · IBM PowerVS</div>
-        <div class="project-desc">
-          A real two-node IBM AIX high-availability lab provisioned with Terraform on IBM Cloud PowerVS. Built <code>old_school_cluster</code> across <code>aix01</code> and <code>aix02</code> with dedicated heartbeat networking, shared repository and application disks, a movable service IP, shared VG / JFS2 filesystem and a PowerHA application controller.
-          <br><br>
-          <strong>Failover validated:</strong> Moved <code>old_school_rg</code> from aix01 to aix02 and back. The service IP, shared VG, filesystem and application controller followed correctly, with data preserved and clean final cluster health. Both nodes passed AIX TL/SP, PowerHA version, <code>lppchk -v</code>, disk and heartbeat checks. Includes a rolling maintenance / patching runbook.
-          <br><br>
-          <strong>Troubleshooting:</strong> Resolved storage-pool and anti-affinity placement issues, Terraform state/import recovery, root filesystem sizing, PowerHA Automation / IAM configuration, Windows CRLF contamination and clcomd issues.
-          <br><br>
-          <strong>Live demo:</strong> A separate public interface provides nine allowlisted read-only commands against aix01, live PowerHA status, a REAL MODE indicator and shared output over WebSocket. Access uses a restricted demo account, a forced-command SSH wrapper, strict host-key verification and rate limiting, with no interactive shell or arbitrary commands.
-        </div>
-        <div class="project-tags">
-          <span class="tag">IBM AIX 7.3</span><span class="tag">PowerHA SystemMirror</span><span class="tag">IBM PowerVS</span>
-          <span class="tag">UNIX</span><span class="tag">High Availability</span><span class="tag">Terraform</span>
-          <span class="tag">LVM</span><span class="tag">JFS2</span><span class="tag">SSH</span><span class="tag">Infrastructure</span>
-        </div>
-        <div style="margin-top:20px">
-          <a href="https://aix.peterhudcovic.tech/" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a>
-        </div>
-        <p class="project-note">Public read-only demo over HTTPS.</p>
-        <figure class="project-screenshot">
-          <a href="https://aix.peterhudcovic.tech/" target="_blank" rel="noopener noreferrer"><img src="aix-lab.jpg" alt="Old School AIX Live Lab showing REAL MODE, read-only command buttons, PowerHA node status and real terminal output" width="1518" height="1130" loading="lazy"></a>
-          <figcaption>AIX lab snapshot: PowerHA cluster status and shared terminal output.</figcaption>
-        </figure>
-        <figure class="project-screenshot">
-          <a href="aix-powervs-evidence.png" target="_blank" rel="noopener noreferrer">
-            <img src="aix-powervs-evidence.png" alt="IBM Cloud Power Virtual Server console showing aix01 and aix02 as active AIX instances, each with 0.5 cores and 4 GiB of memory." width="3440" height="1138" loading="lazy">
-          </a>
-          <figcaption>Infrastructure evidence: aix01 and aix02 active in IBM Cloud PowerVS. Click the image to view the full-size screenshot.</figcaption>
-        </figure>
-        <figure class="project-screenshot">
-          <a href="aix-powerha-releasing.png" target="_blank" rel="noopener noreferrer">
-            <img src="aix-powerha-releasing.png" alt="PowerHA live output showing old_school_rg releasing on aix01 while aix02 is offline." width="2388" height="1144" loading="lazy" decoding="async">
-          </a>
-          <figcaption>1. Resource group move: old_school_rg enters RELEASING on aix01. Click the image to view it full size.</figcaption>
-        </figure>
-        <figure class="project-screenshot">
-          <a href="aix-powerha-acquiring.png" target="_blank" rel="noopener noreferrer">
-            <img src="aix-powerha-acquiring.png" alt="PowerHA live output showing old_school_rg offline on aix01 and acquiring on aix02." width="2431" height="1154" loading="lazy" decoding="async">
-          </a>
-          <figcaption>2. Resource group move: aix02 enters ACQUIRING after the group goes offline on aix01. Click the image to view it full size.</figcaption>
-        </figure>
-        <figure class="project-screenshot">
-          <a href="aix-powerha-online.png" target="_blank" rel="noopener noreferrer">
-            <img src="aix-powerha-online.png" alt="PowerHA terminal output showing old_school_rg online on aix02 and both cluster nodes in the stable state." width="2407" height="1152" loading="lazy" decoding="async">
-          </a>
-          <figcaption>3. Resource group move: terminal output confirms ONLINE on aix02 and stable cluster nodes. The status panel still shows the previous snapshot. Click the image to view it full size.</figcaption>
-        </figure>
-        <figure class="project-screenshot">
-          <a href="aix-powerha-move-success.png" target="_blank" rel="noopener noreferrer">
-            <img src="aix-powerha-move-success.png" alt="AIX command output confirming a successful move of old_school_rg to aix02, with aix01 offline and aix02 online for this resource group." width="1253" height="632" loading="lazy" decoding="async">
-          </a>
-          <figcaption>4. Command confirmation: resource group movement successful; old_school_rg is online on aix02. Click the image to view it full size.</figcaption>
-        </figure>
-      </div>
+  <summary>Old School AIX HA Lab – Db2 HADR &amp; WebSphere on PowerHA</summary>
+  <div class="project-card project-featured project-current fade-in">
+    <div class="project-card-header">
+      <div class="project-icon" aria-hidden="true">🖥️</div>
+      <span class="project-badge badge-current">CURRENT PROJECT · AIX HA LAB</span>
     </div>
+    <div class="project-card-body">
+      <h3 class="project-title">Old School AIX HA Lab – Db2 HADR &amp; WebSphere on PowerHA</h3>
+      <div class="project-architecture" style="margin-top:0;margin-bottom:16px">IBM AIX 7.3 · PowerHA SystemMirror 7.2 · IBM Power Virtual Server</div>
+      <div class="project-desc aix-middleware-description">
+        <p>A two-node IBM AIX 7.3 cluster on IBM Power Virtual Server with PowerHA SystemMirror 7.2, extended with a classic enterprise middleware stack.</p>
+        <ul>
+          <li><strong>IBM Db2 11.5:</strong> HADR replication in NEARSYNC mode, primary/standby across both nodes, with archive logging.</li>
+          <li><strong>IBM WebSphere Application Server 9.0.5:</strong> a PowerHA application inside <code>old_school_rg</code>. Binaries are local on both nodes; the profile lives on a shared volume group and binds to the service IP. Start, stop and monitor scripts manage <code>was_app</code>.</li>
+          <li><strong>Failover tested in both directions:</strong> the VIP, shared volume groups, file systems and WebSphere move together in approximately 4–6 minutes.</li>
+          <li><strong>Database connectivity:</strong> a JDBC type 4 data source with Automatic Client Reroute to the Db2 standby. HADR takeover is currently manual; reroute does not promote the standby.</li>
+          <li><strong>Infrastructure as code:</strong> LPARs, data and shared volumes managed with Terraform, with every change documented in a step-by-step runbook.</li>
+        </ul>
+        <p><strong>Lessons learned:</strong> resizing both LPARs at once leaves the resource group nowhere to go — rolling maintenance exists for a reason. Hostnames must not contain underscores. Untested failover is no failover.</p>
+        <p><strong>Next:</strong> automated Db2 HADR takeover via PowerHA, rolling fix pack updates, and IBM HTTP Server in front of WebSphere.</p>
+      </div>
+      <figure class="aix-ha-architecture">
+        <div class="aix-ha-diagram-scroll" tabindex="0" role="region" aria-label="AIX high availability architecture diagram; scroll horizontally on small screens">
+          <svg class="aix-ha-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 625" width="800" height="625" role="img" aria-labelledby="aix-ha-diagram-title aix-ha-diagram-desc">
+            <title id="aix-ha-diagram-title">PowerHA resource group failover and Db2 HADR replication</title>
+            <desc id="aix-ha-diagram-desc">A client connects to the service IP on aix01, the active node. PowerHA automatically moves resource group old_school_rg, including the service IP, shared volume groups and file systems, monitored WebSphere was_app and the demo app, to aix02 on failure. Separately, Db2 primary on aix01 ships HADR logs to Db2 standby on aix02 in NEARSYNC mode. Db2 takeover is currently manual.</desc>
+            <defs>
+              <marker id="aix-ha-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker>
+              <marker id="aix-hadr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+            </defs>
+            <g font-family="Inter, sans-serif" fill="#e2e8f0">
+              <rect x="290" y="16" width="220" height="64" rx="12" fill="#0f1526" stroke="#22d3ee" stroke-width="2"/>
+              <text x="400" y="56" text-anchor="middle" font-size="22" font-weight="600">Client</text>
+              <rect x="20" y="126" width="350" height="478" rx="14" fill="#0a0e1a" stroke="#3b82f6" stroke-width="2"/>
+              <rect x="430" y="126" width="350" height="478" rx="14" fill="#0a0e1a" stroke="#64748b" stroke-width="2"/>
+              <text x="195" y="160" text-anchor="middle" font-size="22" font-weight="600" fill="#22d3ee">aix01 (active)</text>
+              <text x="605" y="160" text-anchor="middle" font-size="22" font-weight="600">aix02 (standby)</text>
+              <rect x="40" y="182" width="310" height="238" rx="10" fill="#0f1526" stroke="#22d3ee" stroke-width="2"/>
+              <rect x="450" y="182" width="310" height="238" rx="10" fill="#0f1526" stroke="#22d3ee" stroke-width="2" stroke-dasharray="8 6"/>
+              <g font-size="18" text-anchor="middle">
+                <text x="195" y="211" font-weight="600">Resource group</text><text x="195" y="236" fill="#22d3ee">old_school_rg</text>
+                <text x="605" y="211" font-weight="600">Resource group</text><text x="605" y="236" fill="#22d3ee">old_school_rg</text>
+              </g>
+              <g font-size="17">
+                <text x="68" y="274">Service IP (VIP)</text>
+                <text x="68" y="309">shared VGs + file systems</text>
+                <text x="68" y="344">WebSphere</text><text x="68" y="367" fill="#94a3b8">(was_app, monitored)</text>
+                <text x="68" y="401">demo app</text>
+                <text x="605" y="258" text-anchor="middle" font-size="15" fill="#94a3b8">takes over on failure</text>
+                <text x="478" y="286">Service IP (VIP)</text>
+                <text x="478" y="318">shared VGs + file systems</text>
+                <text x="478" y="350">WebSphere</text><text x="478" y="373" fill="#94a3b8">(was_app, monitored)</text>
+                <text x="478" y="401">demo app</text>
+              </g>
+              <path d="M400 80 V104 H54 V267 H64" fill="none" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#aix-ha-arrow)"/>
+              <path d="M195 444 H605" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#aix-ha-arrow)"/>
+              <rect x="230" y="452" width="340" height="29" rx="4" fill="#0a0e1a"/>
+              <text x="400" y="473" text-anchor="middle" font-size="18" fill="#22d3ee">PowerHA failover (automatic)</text>
+              <rect x="65" y="520" width="260" height="65" rx="10" fill="#0f1526" stroke="#4ade80" stroke-width="2"/>
+              <rect x="475" y="520" width="260" height="65" rx="10" fill="#0f1526" stroke="#4ade80" stroke-width="2"/>
+              <text x="195" y="559" text-anchor="middle" font-size="22" fill="#4ade80">Db2 primary</text>
+              <text x="605" y="559" text-anchor="middle" font-size="22" fill="#4ade80">Db2 standby</text>
+              <path d="M325 552 H475" fill="none" stroke="#4ade80" stroke-width="2.5" marker-end="url(#aix-hadr-arrow)"/>
+              <rect x="327" y="490" width="146" height="53" rx="4" fill="#0a0e1a"/>
+              <text x="400" y="515" text-anchor="middle" font-size="17" fill="#4ade80">HADR</text>
+              <text x="400" y="538" text-anchor="middle" font-size="17" fill="#4ade80">log shipping</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="aix-ha-legend"><span class="aix-ha-line aix-ha-line-failover" aria-hidden="true"></span>Automatic PowerHA failover</span>
+          <span class="aix-ha-legend"><span class="aix-ha-line aix-ha-line-hadr" aria-hidden="true"></span>HADR replication · manual Db2 takeover</span>
+          <span class="aix-ha-mobile-hint">Scroll the diagram horizontally to inspect both nodes.</span>
+        </figcaption>
+      </figure>
+      <div class="project-tags">
+        <span class="tag">AIX 7.3</span><span class="tag">PowerHA</span><span class="tag">Db2 HADR</span><span class="tag">WebSphere</span><span class="tag">IBM PowerVS</span><span class="tag">Terraform</span>
+      </div>
+      <div style="margin-top:20px"><a href="https://aix.peterhudcovic.tech" class="btn-primary" target="_blank" rel="noopener noreferrer">LIVE DEMO →</a></div>
+      <p class="project-note">Read-only live demo. WebSphere follows the PowerHA resource group; Db2 HADR takeover is currently manual.</p>
+    </div>
+  </div>
 </details>
 
 <details class="project-disclosure" id="openshift-project">
