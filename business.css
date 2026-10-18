@@ -189,6 +189,7 @@ body.business-site .work-meta span:last-child { color: #8b99a4; }
 body.business-site .work-item h3 { max-width: 280px; margin-bottom: 16px; font: 550 25px/1.25 var(--sans); letter-spacing: -0.035em; }
 body.business-site .work-item p { margin-bottom: 27px; color: var(--muted); font-size: 13px; line-height: 1.8; }
 body.business-site .work-link { padding-top: 21px; margin-top: auto; border-top: 1px solid #e0e5e9; width: 100%; color: var(--accent); font-size: 12px; font-weight: 600; }
+body.business-site .work-actions { display: flex; flex-wrap: wrap; gap: 12px 20px; }
 body.business-site .work-note { margin-top: 18px; color: #647380; font-size: 11px; }
 
 /* Keep the complete original technical record accessible below the overview. */
