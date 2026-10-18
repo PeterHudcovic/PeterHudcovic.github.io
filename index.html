@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peter Hudcovic - Cloud, Kubernetes &amp; DevOps</title>
-<meta property="og:title" content="Peter Hudcovic | Platform Operations" />
-<meta property="og:description" content="Hands-on infrastructure engineering across IBM AIX, PowerHA, Azure and Kubernetes - featuring the Old School AIX Live Lab on IBM PowerVS and the Azure Migration Lab." />
+<title>Peter Hudcovic | Infrastructure &amp; Platform Services</title>
+<meta property="og:title" content="Peter Hudcovic | Infrastructure &amp; Platform Services" />
+<meta property="og:description" content="Practical infrastructure support across AIX, cloud platforms, automation and application operations. Explore the work and discuss your environment." />
 <meta property="og:url" content="https://peterhudcovic.tech" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://peterhudcovic.tech/preview.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:       #0a0e1a;
@@ -402,6 +400,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .platform-disclosure > summary, .section-disclosure > summary { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
 .platform-disclosure > summary::before, .section-disclosure > summary::before { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--accent); flex-shrink: 0; }
 .platform-disclosure[open] > summary::before, .section-disclosure[open] > summary::before { transform: rotate(90deg); }
+
 /* Azure build progress */
 .build-progress { margin: 28px 0; }
 .build-next { padding: 18px 22px; border: 1px solid var(--accent); border-radius: 10px; background: #3b82f610; margin-bottom: 18px; }
@@ -420,6 +419,10 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 .build-checklist li::before { content: '☐'; position: absolute; left: 0; color: var(--accent); }
 .done .build-checklist li::before { content: '☑'; color: #4ade80; }
 .open-items .build-checklist li::before { color: #fbbf24; }
+
+
+
+
 
 /* AZURE CASE STUDY */
 #new-azure-project .section-disclosure{max-width:1100px}
@@ -497,61 +500,119 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 /* End AIX middleware project */
 
 </style>
+<link rel="stylesheet" href="business.css">
 </head>
-<body>
+<body class="business-site">
 
-<nav>
-  <div class="nav-logo">peter@lab:~$&nbsp;<span id="visitor-count"></span><span class="cursor"></span></div>
+<nav class="business-nav" aria-label="Main navigation">
+  <a class="nav-brand" href="#top"><span class="brand-mark" aria-hidden="true">PH</span><span><strong>Peter Hudcovic</strong><small>Infrastructure &amp; platform engineering</small></span></a>
   <div class="nav-links">
-    <a class="nav-button" href="#projects">Projects</a>
-    <a class="nav-button" href="#playbooks">Project Thinking</a>
-    <a class="nav-button" href="#experience">Where I have built</a>
-    <a class="nav-button" href="#stack">Stack</a>
-    <a class="nav-button" href="#contact">Contact</a>
+    <a class="nav-button" href="#services">Services</a>
+    <a class="nav-button" href="#work">Selected work</a>
+    <a class="nav-button" href="#approach">Approach</a>
+    <a class="nav-button nav-contact-cta" href="#contact">Contact</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <canvas id="matrix-canvas"></canvas>
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">CLOUD · KUBERNETES · DEVOPS · SRE</div>
-    <h1 class="hero-name">Peter Hudcovic</h1>
-    <p class="hero-title">Linux · Docker · Kubernetes · Terraform · GitHub Actions · CI/CD</p>
-    <p class="hero-desc">
-      Hands-on infrastructure engineering across cloud, Kubernetes, automation, Linux, databases and production-style troubleshooting.
-    </p>
-    <div class="hero-cta">
-      <div class="lab-cta">
-        <a href="https://flights.peterhudcovic.tech/" class="btn-secondary hero-demo-button hero-demo-new" target="_blank" rel="noopener noreferrer"><span>Flight Board</span><span class="hero-demo-badge hero-new-badge">NEW</span></a>
-      </div>
-      <div class="lab-cta">
-        <a href="https://aix.peterhudcovic.tech/" class="btn-secondary hero-demo-button" target="_blank" rel="noopener noreferrer"><span>AIX Live Lab</span><span class="hero-alive-dot" aria-hidden="true"></span><span class="hero-demo-badge hero-alive-badge">REBUILDING<br>WAS · AIX · DB2</span></a>
-      </div>
+<section class="business-hero" id="top" aria-labelledby="business-title">
+  <div class="business-hero-copy">
+    <p class="business-kicker">IT infrastructure &amp; operations</p>
+    <h1 id="business-title">Reliable systems.<br><span>Clear delivery.</span></h1>
+    <p class="business-lead">I help businesses build, operate and improve the platforms their applications rely on, from established IBM systems to cloud infrastructure and automated delivery.</p>
+    <div class="business-actions">
+      <a class="btn-primary" href="#contact">Discuss your infrastructure</a>
+      <a class="business-text-link" href="#work">Explore my work <span aria-hidden="true">→</span></a>
     </div>
+    <p class="business-credentials">Former IBM professional · AIX, cloud &amp; application platforms</p>
   </div>
-
-
+  <aside class="hero-proof" aria-labelledby="proof-heading">
+    <div class="proof-topline"><span>Live technical lab</span><span>IBM PowerVS</span></div>
+    <h2 id="proof-heading">A working IBM environment.</h2>
+    <p>Explore a real cluster, follow its services and see how controlled recovery works.</p>
+    <div class="proof-diagram" role="img" aria-label="Two AIX nodes connected by Db2 HADR replication">
+      <div class="proof-node"><span>NODE 01</span><strong>AIX</strong></div>
+      <div class="proof-bridge"><span>HADR</span><i aria-hidden="true"></i></div>
+      <div class="proof-node"><span>NODE 02</span><strong>AIX</strong></div>
+    </div>
+    <p class="proof-stack">AIX · PowerHA · Db2 · WebSphere</p>
+    <a class="proof-link" href="https://aix.peterhudcovic.tech/" target="_blank" rel="noopener noreferrer">Explore the live environment <span aria-hidden="true">↗</span></a>
+    <p class="proof-footnote">Lab environment · controlled scenarios</p>
+  </aside>
 </section>
+
+<section class="business-services" id="services" aria-labelledby="services-heading">
+  <div class="business-section-heading">
+    <p class="business-kicker">How I can help</p>
+    <h2 id="services-heading">Support across your infrastructure.</h2>
+  </div>
+  <div class="service-grid">
+    <article class="service-item">
+      <span class="service-number" aria-hidden="true">01</span>
+      <h3>UNIX &amp; application operations</h3>
+      <p>Support for AIX, PowerHA, Db2 and WebSphere, from daily operations and incident investigation to high availability and recovery.</p>
+      <a class="business-text-link" href="#aix-project">See related work <span aria-hidden="true">→</span></a>
+    </article>
+    <article class="service-item">
+      <span class="service-number" aria-hidden="true">02</span>
+      <h3>Cloud platforms &amp; automation</h3>
+      <p>Repeatable infrastructure and application delivery with Terraform, Kubernetes and CI/CD, supported by clear configuration, access boundaries and operational checks.</p>
+      <a class="business-text-link" href="#new-azure-project">See related work <span aria-hidden="true">→</span></a>
+    </article>
+    <article class="service-item">
+      <span class="service-number" aria-hidden="true">03</span>
+      <h3>Troubleshooting &amp; service takeover</h3>
+      <p>Understand an unfamiliar environment, identify dependencies and risks, stabilise the service, and document the steps the next team will need.</p>
+      <a class="business-text-link" href="#playbooks">Explore my approach <span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+</section>
+
+<section class="business-work" id="work" aria-labelledby="work-heading">
+  <div class="business-section-heading">
+    <p class="business-kicker">Selected work</p>
+    <h2 id="work-heading">Practical work. Documented results.</h2>
+    <p>Independent labs showing how I design, deliver and investigate systems, with architecture, checks and technical evidence.</p>
+  </div>
+  <div class="work-grid">
+    <a class="work-item" href="#aix-project">
+      <div class="work-meta"><span>IBM · AIX &amp; middleware</span><span aria-hidden="true">01</span></div>
+      <h3>High availability on AIX</h3>
+      <p>A two-node PowerHA environment with Db2 HADR and WebSphere, live status, guarded recovery scenarios and incident write-ups.</p>
+      <span class="work-link">View case study <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="work-item" href="#new-azure-project">
+      <div class="work-meta"><span>Microsoft Azure</span><span aria-hidden="true">02</span></div>
+      <h3>A private application platform</h3>
+      <p>Separate Dev, Test and Production environments, Terraform layers, controlled delivery and documented network and identity boundaries.</p>
+      <span class="work-link">View case study <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="work-item" href="#flight-board-project">
+      <div class="work-meta"><span>Google Cloud · GKE</span><span aria-hidden="true">03</span></div>
+      <h3>From application to deployment</h3>
+      <p>A live departure board built through coordinated application and infrastructure work, with reviewed changes, CI checks and deployment evidence.</p>
+      <span class="work-link">View case study <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+  <p class="work-note">Each case study includes the implementation details and its supporting evidence.</p>
+</section>
+
 
 <!-- PROJECTS -->
 
 
 <section id="projects">
   <details class="section-disclosure">
-    <summary><span class="section-eyebrow">Projects</span></summary>
+    <summary><span class="section-eyebrow">All technical case studies</span></summary>
     <div class="section-content">
 <details class="project-disclosure" id="flight-board-project">
-<summary>Flight Board — Leading Two AI Agents to GKE</summary>
+<summary>Flight Board - Leading Two AI Agents to GKE</summary>
 <div class="project-card project-featured fade-in">
       <div class="project-card-header">
         <div class="project-icon" aria-hidden="true">&#9992;&#65039;</div>
         <span class="project-badge badge-infra">AI AGENT COLLABORATION &middot; GKE</span>
       </div>
       <div class="project-card-body">
-        <div class="project-title">Flight Board &mdash; Leading Two AI Agents to GKE</div>
+        <div class="project-title">Flight Board - Leading Two AI Agents to GKE</div>
         <div class="project-architecture" style="margin-top:0;margin-bottom:16px">AeroDataBox &rarr; Spring Boot &rarr; MongoDB replica set &rarr; React departure board</div>
         <div class="project-desc">
           <strong>Leading two AI coding agents from specification to first deployment.</strong> I acted as tech lead: defined the project requirements, assigned verifiable tasks through GitHub issues, coordinated the application and infrastructure work, reviewed diffs and CI results, and approved every merge.
@@ -573,7 +634,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <figcaption>Departure board captured 10 October 2026, showing the updated Terminal 2 layout, boarding remarks, last update time and AeroDataBox attribution. Click the image for full size.</figcaption>
         </figure>
         <details class="project-subsection" id="flight-board-architecture">
-          <summary>Architecture diagrams &mdash; runtime, delivery &amp; data flow</summary>
+          <summary>Architecture diagrams - runtime, delivery &amp; data flow</summary>
           <p style="margin:16px 0">Six views of Flight Board, based on application commit 8812e085. Open a diagram for full size.</p>
           <a class="btn-secondary" href="flight-board-diagrams/flight-board-diagrams.zip" download>Download all diagrams &amp; editable sources (ZIP)</a>
           <details class="project-subsection">
@@ -621,7 +682,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
         </details>
         <details class="project-subsection" id="flight-board-security-gap">
           <summary>Known security gap: the origin can be reached without Cloudflare</summary>
-          <div style="margin:16px 0"><span class="project-badge badge-warn">Known issue &ndash; fix planned</span></div>
+          <div style="margin:16px 0"><span class="project-badge badge-warn">Known issue - fix planned</span></div>
           <div class="project-desc">
             <strong>Intended request path:</strong> Browser &rarr; Cloudflare &rarr; Google Cloud Load Balancer &rarr; GKE. The DNS record for <code>flights.peterhudcovic.tech</code> is proxied in Cloudflare, so DNS queries return only Cloudflare IP addresses and do not reveal the Load Balancer's real IP address (the origin). Cloudflare provides WAF, DDoS protection and security headers in front of the origin: <code>HSTS</code> and <code>X-Content-Type-Options</code>.
             <br><br>
@@ -631,11 +692,11 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           <div class="project-desc">
             The response was <code>HTTP 200 OK</code> directly from nginx, without Cloudflare headers, without <code>HSTS</code> or <code>X-Content-Type-Options</code>, and with <code>Server: nginx/1.30.5</code> disclosing the exact server version.
             <br><br>
-            <strong>How the origin can be found:</strong> no access is required. DNS hides the IP, but during a TLS connection the Load Balancer presents a Cloudflare Origin Certificate naming <code>flights.peterhudcovic.tech</code>. Censys connected to the IP and indexed the certificate. Searching for <code>flights.peterhudcovic.tech</code> in Censys returned <code>35.190.x.x:443</code> in less than a second, with a match in <code>web.cert.names</code> and <code>Browser Trust: Untrusted</code> &mdash; an Origin Certificate trusted only by Cloudflare.
+            <strong>How the origin can be found:</strong> no access is required. DNS hides the IP, but during a TLS connection the Load Balancer presents a Cloudflare Origin Certificate naming <code>flights.peterhudcovic.tech</code>. Censys connected to the IP and indexed the certificate. Searching for <code>flights.peterhudcovic.tech</code> in Censys returned <code>35.190.x.x:443</code> in less than a second, with a match in <code>web.cert.names</code> and <code>Browser Trust: Untrusted</code> - an Origin Certificate trusted only by Cloudflare.
             <br><br>
-            <strong>Why it matters:</strong> anyone who knows the origin IP can bypass Cloudflare entirely &mdash; its WAF, DDoS protection and security headers &mdash; and attack the Load Balancer directly. Hiding an IP in DNS is not protection; the origin must actively reject traffic that does not come from Cloudflare.
+            <strong>Why it matters:</strong> anyone who knows the origin IP can bypass Cloudflare entirely - its WAF, DDoS protection and security headers - and attack the Load Balancer directly. Hiding an IP in DNS is not protection; the origin must actively reject traffic that does not come from Cloudflare.
             <br><br>
-            <strong>Planned fix &mdash; not yet implemented:</strong>
+            <strong>Planned fix - not yet implemented:</strong>
             <ul style="margin:12px 0;padding-left:20px">
               <li>The proposed Google Cloud Armor security policy on the Load Balancer, managed through Terraform, would allow only official Cloudflare IP ranges and block everything else, for example with <code>403</code>. I have a limited budget for Cloud Armor and will not apply this policy because the application will be shut down soon. This protection is not in place.</li>
               <li>As an alternative or additional protection, Cloudflare Authenticated Origin Pulls (mTLS): Cloudflare presents a client certificate to the origin, and the origin rejects connections without it.</li>
@@ -650,14 +711,14 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
           </figure>
         </details>
         <details class="project-subsection">
-          <summary>First deployment &mdash; GitHub Actions &amp; GKE</summary>
+          <summary>First deployment - GitHub Actions &amp; GKE</summary>
           <figure class="project-screenshot">
             <a href="flight-board-first-deployment.jpg" target="_blank" rel="noopener noreferrer"><img src="flight-board-first-deployment.jpg" alt="GitHub Actions showing three passed CI runs and a Deploy run in progress; k9s shows backend, frontend, MongoDB and operator pods running on GKE." width="2366" height="1682" loading="lazy" decoding="async"></a>
             <figcaption>First deployment snapshot: CI runs passed and the backend, frontend, MongoDB replica set and operator pods are Running. The Deploy workflow is still in progress in this capture.</figcaption>
           </figure>
         </details>
         <details class="project-subsection">
-          <summary>Leading two AI agents &mdash; worktrees &amp; pull request review</summary>
+          <summary>Leading two AI agents - worktrees &amp; pull request review</summary>
           <figure class="project-screenshot">
             <a href="flight-board-agent-worktrees.png" target="_blank" rel="noopener noreferrer"><img src="flight-board-agent-worktrees.png" alt="Sublime Merge showing separate Codex and Claude worktrees, agent branches, merged pull requests and diffs in AGENTS.md, CLAUDE.md and the shared application-infrastructure contract." width="2382" height="1915" loading="lazy" decoding="async"></a>
             <figcaption>Coordinating the agents in Sublime Merge: separate worktrees and branches, pull request history, and review of the shared rules and application/infrastructure contract.</figcaption>
@@ -678,7 +739,7 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <div class="az-toc"><a href="#az-overview">Overview and subscriptions</a><a href="#az-access">Users and access</a><a href="#az-identities">Managed identities and role boundaries</a><a href="#az-delivery">Shared CI/CD</a><a href="#az-terraform">Terraform layers and infrastructure delivery</a><a href="#az-network">Networking and private access</a><a href="#az-dev">Development</a><a href="#az-test">Testing</a><a href="#az-prod">Production</a><a href="#az-gateway">Gateway, WAF and TLS</a><a href="#az-bastion">Operations access through Bastion</a><a href="#az-validation">Runtime validation from the production VM</a><a href="#az-application">Application and identity</a><a href="#az-monitoring">Monitoring and diagnostics</a><a href="#az-alerts">Observed alerts</a><a href="#az-next">Limitations and next steps</a></div>
 <article class="az-chapter" id="az-overview"><h3>Overview and subscriptions</h3><p>I built a private Azure application platform in Sweden Central with separate development, testing and production environments. Dev and Test share the non-production subscription. Production has its own subscription, identities, network and Terraform state. The shared package store lives in the Dev foundation resource group.</p>
 <div class="az-table-wrap"><table><thead><tr><th></th><th>Development</th><th>Testing</th><th>Production</th></tr></thead><tbody><tr><td>Subscription</td><td>sub-app-nonprod</td><td>sub-app-nonprod</td><td>sub-app-prod</td></tr><tr><td>VNet CIDR</td><td>10.10.0.0/16</td><td>10.20.0.0/16</td><td>10.30.0.0/16</td></tr><tr><td>Gateway private IP</td><td>10.10.4.10</td><td>10.20.4.10</td><td>10.30.4.10</td></tr><tr><td>App Service plan</td><td>B1</td><td>P0v3</td><td>P0v3</td></tr><tr><td>Monitoring</td><td>Dev workspace</td><td>Shared Dev workspace</td><td>Own workspace</td></tr><tr><td>Bastion SKU</td><td>Developer</td><td>Developer</td><td>Basic</td></tr><tr><td>Application delivery</td><td>main completion trigger</td><td>main completion trigger</td><td>Manual approval</td></tr><tr><td>Privileged access</td><td>Lab bootstrap admin</td><td>Lab bootstrap admin</td><td>Reader + VM login, PIM roles</td></tr></tbody></table></div>
-<figure class="az-evidence"><img src="azure-case-study/images/architecture.svg" width="960" height="370" alt="Separate subscriptions and environment networks with shared package delivery"><figcaption>Architecture derived from Terraform and pipeline definitions at the linked source snapshot.</figcaption></figure>
+<figure class="az-evidence"><a href="azure-case-study/images/architecture.svg" target="_blank" rel="noopener"><img src="azure-case-study/images/architecture.svg" width="1800" height="800" alt="Environment architecture: HTTPS, target-specific private endpoints, separate DNS lookups, selected NAT subnets and two alert sources"></a><figcaption>Same network pattern per environment. Test shares Dev monitoring; Prod has its own. No VNet peering. Open the diagram for full resolution.</figcaption></figure>
 <figure class="az-evidence"><a href="azure-case-study/images/subscriptions.png" target="_blank" rel="noopener"><img src="azure-case-study/images/subscriptions.png" width="2033" height="647" alt="Subscriptions" loading="lazy"></a><figcaption>Development and testing share sub-app-nonprod. Production uses sub-app-prod, creating a separate subscription boundary for management access, policy and cost tracking.</figcaption></figure>
 <a class="az-source" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/blob/8def9469500372b739faaf2b005bd804c3b0a9d6/README.md" target="_blank" rel="noopener">Source: README.md</a></article>
 <article class="az-chapter" id="az-access"><h3>Users and access</h3><p>Application sign-in and infrastructure administration use separate grants. Lab Admin bootstraps the lab and belongs to the app-user groups. Prod Admin has permanent Reader and Virtual Machine User Login, with privileged resource and secret roles available through PIM. PIM activation requires justification and MFA and lasts at most two hours. Conditional Access policies evaluate non-production NAT locations and device-code sign-in in report-only mode.</p>
@@ -719,13 +780,15 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 <article class="az-chapter" id="az-application"><h3>Application and identity</h3><p>The Python demo runs on Linux App Service with Entra Easy Auth. An assigned application group controls protected routes. The application managed identity reads the application vault, while a federation credential supports the sign-in configuration without an app-registration client secret. The /health route deliberately allows anonymous probing from network-authorized clients. Application access and Key Vault RBAC remain separate checks.</p>
 <figure class="az-evidence"><a href="azure-case-study/images/prod-demo-application.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-demo-application.png" width="1129" height="739" alt="Prod demo application" loading="lazy"></a><figcaption>The production demo application provides a browser view of the deployed application and its identity and Key Vault checks. This is application evidence, separate from infrastructure configuration.</figcaption></figure>
 <a class="az-source" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/blob/8def9469500372b739faaf2b005bd804c3b0a9d6/infra/environments/production/layer-2-application/appservice.tf" target="_blank" rel="noopener">Source: infra/environments/production/layer-2-application/appservice.tf</a></article>
-<article class="az-chapter" id="az-monitoring"><h3>Monitoring and diagnostics</h3><p>Gateway allLogs and AllMetrics stream to the production Log Analytics workspace using AzureDiagnostics tables. Dev and Test share the non-production workspace. Four custom alert rules per environment cover application health, unhealthy gateway backends, denied application-vault access and WAF matches. Production also has a Failure Anomalies smart detector. The Application Insights overview had no request telemetry in its selected one-hour window, so it does not prove active application instrumentation.</p>
+<article class="az-chapter" id="az-monitoring"><h3>Monitoring and diagnostics</h3><p>Gateway allLogs and AllMetrics stream to the production Log Analytics workspace using AzureDiagnostics tables. Dev and Test share the non-production workspace. Four custom alert rules per environment cover application health, unhealthy gateway backends, denied application-vault access and WAF matches. Production also has a Failure Anomalies smart detector.</p>
 <figure class="az-evidence"><a href="azure-case-study/images/prod-gateway-diagnostic-settings-details.png" target="_blank" rel="noopener"><img src="azure-case-study/images/prod-gateway-diagnostic-settings-details.png" width="1467" height="946" alt="Prod gateway diagnostic settings details" loading="lazy"></a><figcaption>Diagnostic setting diag-log-sits-prod-swc selects the allLogs category group and AllMetrics for Application Gateway. The destination is Log Analytics workspace log-sits-prod-swc in sub-app-prod, with Azure diagnostics selected rather than resource-specific tables. Storage account archiving, Event Hub streaming and partner solution destinations are unchecked. This documents collection configuration; actual log ingestion requires query evidence.</figcaption></figure>
 <a class="az-source" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/blob/8def9469500372b739faaf2b005bd804c3b0a9d6/infra/environments/production/layer-2-application/alerts.tf" target="_blank" rel="noopener">Source: infra/environments/production/layer-2-application/alerts.tf</a></article>
 <article class="az-chapter" id="az-alerts"><h3>Observed alerts</h3><p>The captured Azure Monitor view lists 16 fired instances across the selected subscriptions: 13 warnings and three informational alerts. These include repeated Key Vault access-denied results and WAF matches. WAF is in Detection, so a matched request does not establish prevention-mode blocking. The alert inventory and fired instances show configuration and observed events separately.</p>
 <figure class="az-evidence"><a href="azure-case-study/images/azure-monitor-fired-alerts-all-environments.png" target="_blank" rel="noopener"><img src="azure-case-study/images/azure-monitor-fired-alerts-all-environments.png" width="2339" height="1426" alt="Azure monitor fired alerts all environments" loading="lazy"></a><figcaption>With two subscriptions selected, a Past 24 hours time range and Fired condition filter, Azure Monitor lists 16 alert instances: 13 Warning and three Informational, with zero Critical or Error instances. Visible alerts include WAF request matches for Dev, Test and Prod and repeated Key Vault access-denied alerts across the three environments. Production alerts target log-sits-prod-swc, while Dev and Test alerts target log-sits-dev-swc. User response is New. This demonstrates fired monitoring alerts; it does not establish malicious activity, the reason for each denied request, WAF blocking or successful Application Insights request telemetry.</figcaption></figure>
 <a class="az-source" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/blob/8def9469500372b739faaf2b005bd804c3b0a9d6/docs/build-log/12-monitoring-alerts-and-infrastructure-pipelines.md" target="_blank" rel="noopener">Source: docs/build-log/12-monitoring-alerts-and-infrastructure-pipelines.md</a><figure class="az-evidence"><a href="azure-case-study/images/monitoring-fired-alerts-2026-10-07.png" target="_blank" rel="noopener"><img src="azure-case-study/images/monitoring-fired-alerts-2026-10-07.png" alt="Two Azure Monitor alerts fired on October 7, 2026" loading="lazy"></a><figcaption>On October 7, 2026, Azure Monitor shows two Fired alert instances in the selected past-24-hours window: alert-sits-test-keyvault-access-denied (Warning, targeting log-sits-dev-swc) and alert-sits-prod-waf-request-matched (Informational, targeting log-sits-prod-swc). This demonstrates that monitoring evaluated collected events and generated alerts. The screenshot does not establish notification delivery, the cause of the denied access, or WAF request blocking.</figcaption></figure></article>
-<article class="az-chapter" id="az-next"><h3>Limitations and next steps</h3><p>The current lab is deployed and demonstrated. Next work includes Terraform modules, a destroy-and-rebuild exercise, removal of temporary administrator state grants after approval, WAF Prevention after tuning, Conditional Access enforcement after report review, and a certificate from a trusted CA. Developer and tester infrastructure groups and app-user/app-denied demonstration accounts are not implemented. Foundation vault public exposure, shared monitoring dependencies and broad built-in roles remain visible design limits.</p>
+<article class="az-chapter" id="az-next"><h3>Limitations and next steps</h3><p>The deployed lab provides a working baseline. These are deliberate choices within the lab scope and opportunities for the next iteration.</p>
+<h4>Next steps</h4><ul><li>Terraform modules</li><li>Destroy-and-rebuild exercise</li><li>Removal of temporary admin state grants</li><li>WAF Prevention after tuning</li><li>Conditional Access enforcement after report review</li><li>Certificate from a trusted CA</li><li>Developer/tester groups and app-user/app-denied demo accounts</li></ul>
+<h4>Known design limits</h4><ul><li>Foundation vaults keep public access with restrictions</li><li>Test shares the Dev monitoring workspace</li><li>Some built-in roles are broader than a single operation</li></ul>
 <a class="az-source" href="https://github.com/PeterHudcovic/azure-appservice-platform-lab/blob/8def9469500372b739faaf2b005bd804c3b0a9d6/README.md" target="_blank" rel="noopener">Source: README.md</a></article>
 <article class="az-chapter" id="az-evidence"><h3>Complete evidence gallery</h3><p>121 original screenshots, grouped by topic. Open a topic and click an image for its original resolution. Each caption describes the observed result and its limits.</p>
 <details class="az-gallery"><summary>Overview (2 screenshots)</summary>
@@ -868,25 +931,25 @@ section:has(> .section-disclosure) { padding-top: 28px; padding-bottom: 28px; }
 </article></div></details>
 
 <details class="project-disclosure" id="aix-project">
-  <summary>Old School AIX HA Lab – Db2 HADR &amp; WebSphere on PowerHA</summary>
+  <summary>Old School AIX HA Lab - Db2 HADR &amp; WebSphere on PowerHA</summary>
   <div class="project-card project-featured project-current fade-in">
     <div class="project-card-header">
       <div class="project-icon" aria-hidden="true">🖥️</div>
       <span class="project-badge badge-current">CURRENT PROJECT · AIX HA LAB</span>
     </div>
     <div class="project-card-body">
-      <h3 class="project-title">Old School AIX HA Lab – Db2 HADR &amp; WebSphere on PowerHA</h3>
+      <h3 class="project-title">Old School AIX HA Lab - Db2 HADR &amp; WebSphere on PowerHA</h3>
       <div class="project-architecture" style="margin-top:0;margin-bottom:16px">IBM AIX 7.3 · PowerHA SystemMirror 7.2 · IBM Power Virtual Server</div>
       <div class="project-desc aix-middleware-description">
         <p>A two-node IBM AIX 7.3 cluster on IBM Power Virtual Server with PowerHA SystemMirror 7.2, extended with a classic enterprise middleware stack.</p>
         <ul>
           <li><strong>IBM Db2 11.5:</strong> HADR replication in NEARSYNC mode, primary/standby across both nodes, with archive logging.</li>
           <li><strong>IBM WebSphere Application Server 9.0.5:</strong> a PowerHA application inside <code>old_school_rg</code>. Binaries are local on both nodes; the profile lives on a shared volume group and binds to the service IP. Start, stop and monitor scripts manage <code>was_app</code>.</li>
-          <li><strong>Failover tested in both directions:</strong> the VIP, shared volume groups, file systems and WebSphere move together in approximately 4–6 minutes.</li>
+          <li><strong>Failover tested in both directions:</strong> the VIP, shared volume groups, file systems and WebSphere move together in approximately 4-6 minutes.</li>
           <li><strong>Database connectivity:</strong> a JDBC type 4 data source with Automatic Client Reroute to the Db2 standby. HADR takeover is currently manual; reroute does not promote the standby.</li>
           <li><strong>Infrastructure as code:</strong> LPARs, data and shared volumes managed with Terraform, with every change documented in a step-by-step runbook.</li>
         </ul>
-        <p><strong>Lessons learned:</strong> resizing both LPARs at once leaves the resource group nowhere to go — rolling maintenance exists for a reason. Hostnames must not contain underscores. Untested failover is no failover.</p>
+        <p><strong>Lessons learned:</strong> resizing both LPARs at once leaves the resource group nowhere to go - rolling maintenance exists for a reason. Hostnames must not contain underscores. Untested failover is no failover.</p>
         <p><strong>Next:</strong> automated Db2 HADR takeover via PowerHA, rolling fix pack updates, and IBM HTTP Server in front of WebSphere.</p>
       </div>
       <figure class="aix-ha-architecture">
@@ -1357,6 +1420,21 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 <!-- MORE LABS -->
 
 
+<section class="business-approach" id="approach" aria-labelledby="approach-heading">
+  <div class="business-section-heading">
+    <p class="business-kicker">How I work</p>
+    <h2 id="approach-heading">A clear path from discovery to handover.</h2>
+  </div>
+  <ol class="approach-grid">
+    <li><span aria-hidden="true">01</span><h3>Understand</h3><p>Start with the service, its dependencies, people and constraints.</p></li>
+    <li><span aria-hidden="true">02</span><h3>Build</h3><p>Make changes through versioned configuration and a reviewable delivery plan.</p></li>
+    <li><span aria-hidden="true">03</span><h3>Verify</h3><p>Check behaviour, failure paths and recovery against observable results.</p></li>
+    <li><span aria-hidden="true">04</span><h3>Hand over</h3><p>Document the system, the decisions and the steps needed to operate it.</p></li>
+  </ol>
+  <a class="business-text-link" href="#playbooks">Explore delivery playbooks <span aria-hidden="true">→</span></a>
+</section>
+
+
 <!-- PROJECT THINKING -->
 <section aria-label="How I approach delivery" class="takeover-section" id="playbooks">
   <span id="takeover" aria-hidden="true"></span>
@@ -1415,15 +1493,16 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
 
 <section id="contact">
   <span id="connect" aria-hidden="true"></span>
-  <details class="section-disclosure">
+  <details class="section-disclosure" open data-default-open>
     <summary><span class="section-eyebrow">Contact</span></summary>
     <div class="section-content">
-      <h2 class="section-title">Get in Touch</h2>
+      <h2 class="section-title">Let’s discuss your infrastructure.</h2>
 
 
   <p style="color:var(--muted);max-width:480px;margin-bottom:32px;font-size:15px">
-    Open to DevOps, SRE, Cloud Infrastructure, Kubernetes, Linux, Application Support (L2/L3) and application/platform operations roles.
+    Tell me what you run, what needs to change and where you need support. We can start with your current environment and the outcome you want to achieve.
   </p>
+  <div class="business-email"><span class="business-email-address">peter.hudcovic@gmail.com</span><button class="btn-primary" id="business-copy-email" type="button">Copy email</button></div><p class="business-copy-status" id="business-copy-status" role="status"></p>
   <div style="display:flex;gap:14px;flex-wrap:wrap">
     <button type="button" class="btn-secondary" id="cv-open">Download CV</button>
     <a href="https://www.linkedin.com/in/peter-hudcovic" class="btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -1482,6 +1561,7 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   // Every page visit starts with the disclosures collapsed, including history restores.
   function collapseSections() {
     document.querySelectorAll('details').forEach(details => { details.open = details.hasAttribute('data-default-open'); });
+    if (location.hash) reveal(location.hash);
   }
   collapseSections();
   window.addEventListener('pageshow', collapseSections);
@@ -1547,36 +1627,6 @@ api-678z4               1/1     <span style="color:#4ade80">Running</span>      
   });
 })();
 
-// Typewriter nav intro (no external API dependency)
-(function() {
-  const el = document.getElementById('visitor-count');
-  const lines = [
-    'welcome to my lab...',
-    'session initialized...',
-    'aix :: latest lab',
-  ];
-
-  function typeText(text, callback) {
-    let i = 0;
-    el.textContent = '';
-    const interval = setInterval(() => {
-      el.textContent += text[i];
-      i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-        if (callback) setTimeout(callback, 400);
-      }
-    }, 38);
-  }
-
-  function runLine(index) {
-    if (index >= lines.length) return;
-    typeText(lines[index], () => setTimeout(() => runLine(index + 1), 600));
-  }
-
-  setTimeout(() => runLine(0), 800);
-})();
-
 // The lab is intentionally sleeping between scheduled demonstrations.
 // A cross-origin reachability check cannot reliably establish its health.
 
@@ -1585,83 +1635,18 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-// Matrix rain
-(function() {
-  const canvas = document.getElementById('matrix-canvas');
-  const ctx = canvas.getContext('2d');
-  const hero = canvas.parentElement;
+</script>
 
-  function resize() {
-    canvas.width  = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
+<script>
+document.getElementById('business-copy-email').addEventListener('click', async () => {
+  const status = document.getElementById('business-copy-status');
+  try {
+    await navigator.clipboard.writeText(document.querySelector('.business-email-address').textContent.trim());
+    status.textContent = 'Email copied.';
+  } catch {
+    status.textContent = 'Copy unavailable. Select and copy the email address.';
   }
-  resize();
-  window.addEventListener('resize', () => { resize(); drops.length = 0; init(); });
-
-  // Tech stack words + binary + hex fragments
-  const wordPool = [
-    'AZURE','AKS','TERRAFORM','KUBERNETES','HELM','DOCKER','GITHUB ACTIONS','JENKINS','ANSIBLE',
-    'KEY VAULT','WORKLOAD IDENTITY','OIDC','ACR','NGINX','CERT-MANAGER','CLOUDFLARE',
-    'POSTGRESQL','PYTHON','FASTAPI','LINUX','GIT','RBAC','STATEFULSET','INGRESS','ROLLOUT',
-    'GKE','GCP','ARGOCD','PROMETHEUS','GITOPS','DIGITALOCEAN','TLS','SSH','PVC',
-    '0','1','0','1','1','0','0','1','1','0','1','0',
-    'FF','00','A3','4E','B2','7F','C0','DE','AD','BE','EF',
-    '>_','{}','[]','//','/*','*/','&&','||','!=','==',
-  ];
-  // Flatten into single char/token array weighted toward short items
-  const chars = [];
-  wordPool.forEach(w => {
-    // Short tokens repeat more - keeps density reasonable
-    const reps = w.length <= 2 ? 6 : w.length <= 4 ? 3 : 1;
-    for (let r = 0; r < reps; r++) chars.push(w);
-  });
-  const fontSize = 12;
-  let cols, drops;
-
-  function init() {
-    cols = Math.floor(canvas.width / (fontSize * 1.1));
-    drops = Array(cols).fill(0).map(() => Math.random() * -canvas.height / fontSize);
-  }
-  init();
-
-  function draw() {
-    // Black fade trail - slower fade = longer green tails
-    ctx.fillStyle = 'rgba(0,0,0,0.055)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.font = fontSize + 'px JetBrains Mono, monospace';
-
-    for (let i = 0; i < drops.length; i++) {
-      const word = chars[Math.floor(Math.random() * chars.length)];
-      const y = drops[i] * fontSize;
-      const x = i * (fontSize * 1.1);
-
-      // Classic Matrix: bright white head, #00ff41 body
-      if (drops[i] > 0 && drops[i] < 3) {
-        ctx.fillStyle = '#ffffff'; // bright white leading char
-      } else {
-        ctx.fillStyle = '#00ff41'; // classic terminal green
-      }
-
-      ctx.fillText(word, x, y);
-
-      if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      // Slower - was 0.35-0.6, now 0.18-0.28
-      drops[i] += 0.18 + Math.random() * 0.10;
-    }
-  }
-
-  // Only animate when hero is visible
-  let animId;
-  const heroObs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      animId = setInterval(draw, 50);
-    } else {
-      clearInterval(animId);
-    }
-  }, { threshold: 0.1 });
-  heroObs.observe(hero);
-})();
+});
 </script>
 </body>
 </html>
